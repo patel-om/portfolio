@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Om Patel | Design Verification Engineer</title>
+    <meta name="description" content="Portfolio of Om Patel, Design Verification Engineer specializing in RISC-V, SystemVerilog, and UVM.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="pcb-background"></div>
+    
+    <nav class="sticky-nav">
+        <div class="nav-content">
+            <span class="logo">patel_om.v</span>
+            <ul class="nav-links">
+                <li><a href="#experience">// experience</a></li>
+                <li><a href="#projects">// projects</a></li>
+                <li><a href="#skills">// skills</a></li>
+                <li><a href="#education">// education</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="about" class="hero-section">
+            <div class="chip-container">
+                <div class="chip-package">
+                    <div class="pins top-pins"></div>
+                    <div class="pins bottom-pins"></div>
+                    <div class="pins left-pins"></div>
+                    <div class="pins right-pins"></div>
+                    <div class="chip-label">
+                        <h1 class="name">Om Patel</h1>
+                        <h2 class="title">Design Verification Engineer</h2>
+                        <div class="tech-stack">
+                            <span>RISC-V</span> &middot; <span>SystemVerilog</span> &middot; <span>UVM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-intro">
+                <p class="blinking-cursor-container">
+                    <span class="prompt">&gt;_</span> ~2 years verifying RISC-V CPUs at SiFive &mdash; AXI4 protocol verification, coverage closure, and C++ VIP development.<span class="cursor"></span>
+                </p>
+            </div>
+            <div class="contact-links">
+                <a href="mailto:patel2om002@gmail.com" class="contact-btn">Email</a>
+                <a href="tel:+919104509083" class="contact-btn">Phone</a>
+                <a href="https://linkedin.com/in/om-patel-0369" target="_blank" class="contact-btn">LinkedIn</a>
+                <a href="https://github.com/patel-om" target="_blank" class="contact-btn">GitHub</a>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section id="experience" class="content-section">
+            <h2 class="section-title">module experience #();</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-content">
+                        <h3>SiFive <span class="role">&mdash; Design Verification Engineer</span></h3>
+                        <div class="date">// July 2024 &ndash; Present | RISC-V based semiconductor company</div>
+                        <ul>
+                            <li>Contributed to both horizontal and vertical verification teams for RISC-V CPU designs across multiple programs and configurations: Moray, Shark, Majestic, STING.</li>
+                            <li>Owned end-to-end verification of Control Port and Core Local Port (CLP) modules based on AXI4 protocol &mdash; developed comprehensive testplans, designed and implemented 13 functional tests (C, Python, YAML, Ruby), and drove 100% coverage closure (branch, toggle, line, assertion, functional).</li>
+                            <li>Achieved CLP coverage improvement from 50% to 100% by identifying untested scenarios, adding targeted tests, and collaborating with designers for meaningful closure.</li>
+                            <li>Developed and enhanced AXI4 VIP using C++ (GDI VIP driver) to handle uncovered scenarios, fixed functional issues, and improved protocol-level validation across configurations, strengthening VIP reusability.</li>
+                            <li>Executed tests in simulation, performed RTL debugging, and identified 5 RTL bugs (2 in Control Port, 2 in vertical projects, 1 generator bug) through systematic regression analysis and failure triaging.</li>
+                            <li>Independently architected and developed an HTML-based Functional Coverage Reporting system &mdash; automated VDB-to-HTML conversion flow and built a dashboard for management visibility, reducing manual effort and standardizing coverage reporting across IPs.</li>
+                            <li>Managed weekly and nightly regressions for Moray and Shark, performed initial triaging of compilation, Slurm, and functional failures, and created detailed JIRA tickets ensuring smooth targeted releases and regression stability.</li>
+                            <li>Extended testplans with performance-specific scenarios, contributed to Majestic configuration enablement, and supported Level 0 coverage closure across project phases.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects" class="content-section">
+            <h2 class="section-title">module projects #();</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Stock Trend Prediction Using Deep Learning</h3>
+                        <span class="project-date">Aug 2024 &ndash; May 2025</span>
+                    </div>
+                    <div class="project-context">M.Tech Research</div>
+                    <p>Reproduced LSTM-based stock prediction with Artificial Rabbits Optimization (ARO) for hyperparameter tuning; improved base model accuracy from 90% to 93% via Bollinger Band-based initialization.</p>
+                    <div class="tech-tags">
+                        <span>Python</span><span>TensorFlow/Keras</span><span>LSTM</span><span>ARO</span><span>NumPy</span><span>Pandas</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Liquid Neural Networks</h3>
+                        <span class="project-date">Jan 2024 &ndash; May 2024</span>
+                    </div>
+                    <div class="project-context">M.Tech Minor</div>
+                    <p>Reproduced MIT's "Liquid Time-Constant Networks," implementing architecture for autonomous-systems decision-making with as few as 19 neurons. Received direct guidance and a 150GB autonomous driving dataset from paper authors Ramin Hasani & Mathias Lechner. Models: Worm Pilot, LTC, LTC-RK, LTC-EX, CNN, RNN, LSTM.</p>
+                    <div class="tech-tags">
+                        <span>Python</span><span>TensorFlow</span><span>NumPy</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Silent On Location</h3>
+                        <span class="project-date">Nov 2020</span>
+                    </div>
+                    <div class="project-context">B.Tech Android App</div>
+                    <p>Java Android app with geofencing to automate silent mode by location, using Google Maps API and Android location services with cross-version permission handling.</p>
+                    <div class="tech-tags">
+                        <span>Android Studio</span><span>Java</span><span>Google Maps API</span><span>Geofencing</span><span>SQLite</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills" class="content-section">
+            <h2 class="section-title">module skills #();</h2>
+            <div class="register-map">
+                <div class="register-group">
+                    <div class="register-header">Verification &amp; VLSI</div>
+                    <div class="register-bits">
+                        <span class="bit">AXI4/APB Bus Protocols</span>
+                        <span class="bit">RTL Debugging</span>
+                        <span class="bit">Coverage Closure (Branch/Line/Toggle/Assertion/Functional)</span>
+                        <span class="bit">CPU Design Verification</span>
+                        <span class="bit">VIP Development (C++)</span>
+                        <span class="bit">Functional Coverage Reporting</span>
+                        <span class="bit">Synopsys VCS</span>
+                        <span class="bit">Regression Management</span>
+                        <span class="bit">JIRA</span>
+                    </div>
+                </div>
+
+                <div class="register-group">
+                    <div class="register-header">Programming</div>
+                    <div class="register-bits">
+                        <span class="bit">C/C++</span>
+                        <span class="bit">Python</span>
+                        <span class="bit">Java</span>
+                        <span class="bit">Ruby</span>
+                        <span class="bit">YAML</span>
+                        <span class="bit">SQL</span>
+                        <span class="bit">JavaScript</span>
+                        <span class="bit">HTML/CSS</span>
+                    </div>
+                </div>
+
+                <div class="register-group">
+                    <div class="register-header">Developer Tools</div>
+                    <div class="register-bits">
+                        <span class="bit">Git</span>
+                        <span class="bit">GitHub</span>
+                        <span class="bit">Visual Studio</span>
+                        <span class="bit">PyCharm</span>
+                        <span class="bit">IntelliJ</span>
+                        <span class="bit">AWS</span>
+                        <span class="bit">Wireshark</span>
+                        <span class="bit">Google Colab</span>
+                        <span class="bit">Jupyter Notebook</span>
+                        <span class="bit">Android Studio</span>
+                    </div>
+                </div>
+
+                <div class="register-group">
+                    <div class="register-header">ML &amp; Data Science</div>
+                    <div class="register-bits">
+                        <span class="bit">TensorFlow</span>
+                        <span class="bit">PyTorch</span>
+                        <span class="bit">Keras</span>
+                        <span class="bit">NumPy</span>
+                        <span class="bit">Pandas</span>
+                        <span class="bit">Scikit-learn</span>
+                        <span class="bit">LSTM</span>
+                        <span class="bit">CNN</span>
+                        <span class="bit">RNN</span>
+                        <span class="bit">Deep Learning</span>
+                        <span class="bit">Feature Engineering</span>
+                        <span class="bit">Model Evaluation</span>
+                    </div>
+                </div>
+
+                <div class="register-group">
+                    <div class="register-header">Business Intelligence &amp; CS</div>
+                    <div class="register-bits">
+                        <span class="bit">Microsoft Power BI</span>
+                        <span class="bit">Data Modeling</span>
+                        <span class="bit">ETL</span>
+                        <span class="bit">Dashboard Design</span>
+                        <span class="bit">Data Structures</span>
+                        <span class="bit">Algorithms</span>
+                        <span class="bit">OOP</span>
+                        <span class="bit">DBMS</span>
+                        <span class="bit">Operating Systems</span>
+                        <span class="bit">Computer Networks</span>
+                        <span class="bit">Computer Architecture</span>
+                        <span class="bit">High Performance Computing</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION & CERTIFICATIONS & ACHIEVEMENTS -->
+        <section id="education" class="content-section">
+            <h2 class="section-title">module education_and_more #();</h2>
+            
+            <div class="two-col-grid">
+                <div class="col">
+                    <h3 class="subsection-title">// Education</h3>
+                    <div class="ed-item">
+                        <div class="ed-header">
+                            <h4>Nirma University</h4>
+                            <span class="ed-date">Aug 2023 &ndash; May 2025</span>
+                        </div>
+                        <div class="ed-degree">M.Tech in Computer Science and Engineering (8.23/10.00)</div>
+                    </div>
+                    <div class="ed-item">
+                        <div class="ed-header">
+                            <h4>Gujarat Technological University</h4>
+                            <span class="ed-date">Aug 2019 &ndash; May 2023</span>
+                        </div>
+                        <div class="ed-degree">B.E. in Computer Engineering (8.37/10.00)</div>
+                    </div>
+
+                    <h3 class="subsection-title" style="margin-top: 3rem;">// Achievements</h3>
+                    <ul class="achievements-list">
+                        <li><strong>GATE 2023:</strong> Qualified in Computer Science and IT with score 389.</li>
+                        <li><strong>Academic Excellence:</strong> Consistently maintained 8+ CGPA across B.Tech and M.Tech.</li>
+                    </ul>
+                </div>
+
+                <div class="col">
+                    <h3 class="subsection-title">// Certifications</h3>
+                    <div class="ed-item">
+                        <div class="ed-header">
+                            <h4>IIT Madras (Online)</h4>
+                            <span class="ed-date">Dec 2020 &ndash; March 2022</span>
+                        </div>
+                        <div class="ed-degree">Foundation Level in Programming and Data Science</div>
+                        <p class="cert-desc">CGPA 7.0. Coursework: Statistics I &amp; II, Mathematics I &amp; II, Python Programming, Computational Thinking.</p>
+                    </div>
+                    <div class="ed-item">
+                        <div class="ed-header">
+                            <h4>Coursera (issued by Microsoft)</h4>
+                            <span class="ed-date">Dec 2023 &ndash; Jan 2024</span>
+                        </div>
+                        <div class="ed-degree">Microsoft Power BI Data Analyst Professional Certificate</div>
+                        <p class="cert-desc">6-course specialization in data analytics, transformation, modeling, and dashboard creation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="clock-signal-container">
+                <div class="clock-line"></div>
+            </div>
+            <p>// endmodule : om_patel_portfolio</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
