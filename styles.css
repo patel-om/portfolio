@@ -342,11 +342,11 @@ main { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 .project-card:hover .tech-tags span { background: rgba(212, 160, 23, 0.2); border-color: rgba(212, 160, 23, 0.4); }
 
 /* Skills */
-.register-map { display: flex; flex-direction: column; gap: 2.5rem; }
-.register-group { background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); }
-.register-group:hover { box-shadow: 0 8px 30px rgba(57, 208, 216, 0.15); border-color: rgba(57, 208, 216, 0.4); }
-.register-header { background: rgba(57, 208, 216, 0.08); padding: 1rem 1.5rem; font-family: var(--font-mono); color: var(--accent-cyan); font-weight: 700; font-size: 1.05rem; border-bottom: 1px solid var(--glass-border); text-shadow: 0 0 5px rgba(57, 208, 216, 0.3); }
-.register-bits { display: flex; flex-wrap: wrap; padding: 1.5rem; gap: 1rem; }
+.register-map { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2.5rem; }
+.register-group { background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 2.5rem 2rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); overflow: hidden; }
+.register-group:hover { box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 25px rgba(57, 208, 216, 0.15); border-color: rgba(57, 208, 216, 0.4); }
+.register-header { font-family: var(--font-mono); color: #fff; font-size: 1.35rem; margin-bottom: 1.5rem; font-weight: 700; }
+.register-bits { display: flex; flex-wrap: wrap; gap: 0.8rem; }
 .bit { font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-main); background: rgba(10, 14, 20, 0.8); padding: 0.5rem 1rem; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 4px; position: relative; }
 .bit:hover { border-color: var(--accent-amber); color: #fff; box-shadow: 0 5px 15px rgba(255, 158, 44, 0.2); background: rgba(255, 158, 44, 0.1); }
 .bit::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--accent-cyan); border-radius: 50%; margin-right: 10px; box-shadow: 0 0 8px var(--accent-cyan); transition: all 0.3s ease; }
