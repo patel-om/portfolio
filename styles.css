@@ -302,9 +302,9 @@ main { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 .contact-btn:hover::before { transform: scaleX(1); }
 
 /* Timeline / Experience */
-.timeline { position: relative; padding-left: 2.5rem; }
+.timeline { position: relative; padding-left: 3rem; }
 .timeline::before {
-    content: ''; position: absolute; top: 0; left: 8px; height: 100%; width: 3px;
+    content: ''; position: absolute; top: 0; left: 14px; height: 100%; width: 3px;
     background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-amber), transparent); border-radius: 3px; box-shadow: 0 0 10px rgba(57, 208, 216, 0.3);
 }
 .timeline-item {
@@ -313,7 +313,7 @@ main { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 }
 .timeline-item:hover { border-color: rgba(57, 208, 216, 0.4); box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 20px rgba(57, 208, 216, 0.1); }
 .timeline-node {
-    position: absolute; left: -3rem; top: 3rem; width: 18px; height: 18px; border-radius: 50%;
+    position: absolute; left: -2.6rem; top: 3rem; width: 18px; height: 18px; border-radius: 50%;
     background: var(--bg-color); border: 3px solid var(--accent-cyan); box-shadow: 0 0 15px rgba(57, 208, 216, 0.6); transition: all 0.3s ease;
 }
 .timeline-item:hover .timeline-node { background: var(--accent-cyan); transform: scale(1.3); box-shadow: 0 0 25px rgba(57, 208, 216, 0.9); }
