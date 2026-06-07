@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ========================================= */
     const bootLines = [
         "Initializing boot sequence...",
-        "Loading SiFive RISC-V Core Configuration...",
+        "Loading Custom RISC-V Core Configuration...",
         "Elaborating RTL hierarchy... OK",
         "Loading AXI4 Bus Drivers... OK",
         "Starting UVM Environment...",
