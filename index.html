@@ -3,55 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Om Patel | Design Verification Engineer</title>
-    <meta name="description" content="Portfolio of Om Patel, Design Verification Engineer specializing in RISC-V, SystemVerilog, and UVM.">
+    <title>Om Patel | Design Verification Engineer — RISC-V, SystemVerilog, UVM</title>
+    <meta name="description" content="Portfolio of Om Patel, Design Verification Engineer at SiFive specializing in RISC-V CPU verification, AXI4 protocol, SystemVerilog, UVM, and AI-driven verification methodologies.">
+    <meta name="keywords" content="Om Patel, Design Verification, RISC-V, SystemVerilog, UVM, SiFive, CPU Verification, AXI4">
+    <meta name="author" content="Om Patel">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="is-booting">
-    <!-- Custom Scrollbar Track/Thumb via CSS, but we can also use a custom div if needed -->
-    <div id="scroll-progress"></div>
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress" aria-hidden="true"></div>
 
     <!-- Terminal Boot Sequence Overlay -->
-    <div id="boot-screen">
+    <div id="boot-screen" role="presentation">
         <div class="terminal-content">
             <div id="boot-text"></div>
             <div class="boot-cursor"></div>
         </div>
-        <button id="skip-boot" class="skip-btn">[ Skip Boot Sequence ]</button>
+        <button id="skip-boot" class="skip-btn" aria-label="Skip boot animation">[ Skip Boot Sequence ]</button>
     </div>
 
     <!-- Custom Cursor -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-outline" aria-hidden="true"></div>
 
     <!-- Interactive Canvas Background -->
-    <canvas id="circuit-canvas"></canvas>
-    <div class="ambient-glow"></div>
-    
-    <!-- CRT Scanline Overlay -->
-    <div class="scanlines"></div>
+    <canvas id="circuit-canvas" aria-hidden="true"></canvas>
+    <div class="ambient-glow" aria-hidden="true"></div>
 
-    <!-- Main Site Wrapper (hidden during boot) -->
+    <!-- CRT Scanline Overlay -->
+    <div class="scanlines" aria-hidden="true"></div>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay" id="mobile-nav" aria-label="Mobile navigation">
+        <a href="#about" class="mobile-nav-link">About</a>
+        <a href="#experience" class="mobile-nav-link">Experience</a>
+        <a href="#projects" class="mobile-nav-link">Projects</a>
+        <a href="#skills" class="mobile-nav-link">Skills</a>
+        <a href="#education" class="mobile-nav-link">Education</a>
+    </div>
+
+    <!-- Main Site Wrapper -->
     <div id="main-content">
-        <nav class="sticky-nav">
-            <div class="nav-content">
-                <span class="logo scramble-text" data-value="patel_om.v">patel_om.v</span>
-                <ul class="nav-links">
-                    <li><a href="#experience" class="magnetic scramble-text" data-value="Experience" data-strength="20">Experience</a></li>
-                    <li><a href="#projects" class="magnetic scramble-text" data-value="Projects" data-strength="20">Projects</a></li>
-                    <li><a href="#skills" class="magnetic scramble-text" data-value="Skills" data-strength="20">Skills</a></li>
-                    <li><a href="#education" class="magnetic scramble-text" data-value="Education" data-strength="20">Education</a></li>
-                </ul>
-            </div>
-        </nav>
+        <header>
+            <nav class="sticky-nav" aria-label="Main navigation">
+                <div class="nav-content">
+                    <a href="#about" class="logo scramble-text" data-value="patel_om.v">patel_om.v</a>
+                    <ul class="nav-links" id="nav-links">
+                        <li><a href="#about" class="magnetic scramble-text" data-value="About" data-strength="20" data-section="about">About</a></li>
+                        <li><a href="#experience" class="magnetic scramble-text" data-value="Experience" data-strength="20" data-section="experience">Experience</a></li>
+                        <li><a href="#projects" class="magnetic scramble-text" data-value="Projects" data-strength="20" data-section="projects">Projects</a></li>
+                        <li><a href="#skills" class="magnetic scramble-text" data-value="Skills" data-strength="20" data-section="skills">Skills</a></li>
+                        <li><a href="#education" class="magnetic scramble-text" data-value="Education" data-strength="20" data-section="education">Education</a></li>
+                    </ul>
+                    <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </nav>
+        </header>
 
         <main>
             <!-- HERO SECTION -->
-            <section id="about" class="hero-section">
+            <section id="about" class="hero-section" aria-label="About Om Patel">
+                <div class="profile-photo-wrapper">
+                    <img src="profile.jpg" alt="Om Patel — Design Verification Engineer" class="profile-photo" width="160" height="160" loading="eager">
+                </div>
                 <div class="chip-container">
                     <div class="chip-package glitch-hover">
                         <div class="pins top-pins"></div>
@@ -64,27 +87,52 @@
                             <div class="tech-stack">
                                 <span class="hl-keyword">RISC-V</span> &middot; <span class="hl-keyword">SystemVerilog</span> &middot; <span class="hl-keyword">UVM</span> &middot; <span class="hl-keyword">AI</span>
                             </div>
+                            <div class="status-led">Available for opportunities</div>
                         </div>
                     </div>
                 </div>
-                <div class="hero-intro parallax" data-speed="0.05">
+
+                <div class="hero-intro parallax" data-speed="0.03">
                     <p class="typewriter-para">
                         <span class="prompt">&gt;_</span> ~<span class="hl-number">2</span> years verifying <span class="hl-keyword">RISC-V CPUs</span> at <span class="hl-string">SiFive</span> &mdash; <span class="hl-function">AXI4 protocol verification</span>, <span class="hl-function">coverage closure</span>, <span class="hl-keyword">C++ VIP development</span>, and <span class="hl-function">AI implementations in Verification</span>.<span class="cursor"></span>
                     </p>
                 </div>
-                <div class="contact-links parallax" data-speed="0.1">
-                    <a href="mailto:patel2om002@gmail.com" class="contact-btn magnetic scramble-text" data-value="Email" data-strength="40">Email</a>
-                    <a href="tel:+919104509083" class="contact-btn magnetic scramble-text" data-value="Phone" data-strength="40">Phone</a>
-                    <a href="https://linkedin.com/in/om-patel-0369" target="_blank" class="contact-btn magnetic scramble-text" data-value="LinkedIn" data-strength="40">LinkedIn</a>
-                    <a href="https://github.com/patel-om" target="_blank" class="contact-btn magnetic scramble-text" data-value="GitHub" data-strength="40">GitHub</a>
+
+                <div class="contact-links parallax" data-speed="0.06">
+                    <a href="mailto:patel2om002@gmail.com" class="contact-btn magnetic scramble-text" data-value="✉ Email" data-strength="40" id="contact-email" aria-label="Send email">✉ Email</a>
+                    <a href="https://linkedin.com/in/om-patel-0369" target="_blank" rel="noopener noreferrer" class="contact-btn magnetic scramble-text" data-value="⇥ LinkedIn" data-strength="40" id="contact-linkedin" aria-label="Visit LinkedIn profile">⇥ LinkedIn</a>
+                    <a href="https://github.com/patel-om" target="_blank" rel="noopener noreferrer" class="contact-btn magnetic scramble-text" data-value="⌥ GitHub" data-strength="40" id="contact-github" aria-label="Visit GitHub profile">⌥ GitHub</a>
+                    <a href="Om Patel.pdf" download class="contact-btn resume-btn magnetic scramble-text" data-value="⤓ Resume" data-strength="40" id="contact-resume" aria-label="Download resume">⤓ Resume</a>
+                </div>
+
+                <!-- Animated Stats -->
+                <div class="stats-section" aria-label="Key statistics">
+                    <div class="stat-card spotlight-card">
+                        <div class="stat-number"><span class="counter" data-target="2">0</span><span class="stat-suffix">+</span></div>
+                        <div class="stat-label">Years at SiFive</div>
+                    </div>
+                    <div class="stat-card spotlight-card">
+                        <div class="stat-number"><span class="counter" data-target="5">0</span></div>
+                        <div class="stat-label">RTL Bugs Found</div>
+                    </div>
+                    <div class="stat-card spotlight-card">
+                        <div class="stat-number"><span class="counter" data-target="100">0</span><span class="stat-suffix">%</span></div>
+                        <div class="stat-label">Coverage Closure</div>
+                    </div>
+                    <div class="stat-card spotlight-card">
+                        <div class="stat-number"><span class="counter" data-target="17">0</span></div>
+                        <div class="stat-label">Functional Tests</div>
+                    </div>
                 </div>
             </section>
 
+            <div class="section-divider" aria-hidden="true"></div>
+
             <!-- EXPERIENCE -->
-            <section id="experience" class="content-section">
+            <section id="experience" class="content-section" aria-label="Professional experience">
                 <h2 class="section-title scramble-text" data-value="Experience">Experience</h2>
                 <div class="timeline">
-                    <div class="timeline-item spotlight-card glitch-hover">
+                    <article class="timeline-item spotlight-card glitch-hover gradient-border">
                         <div class="timeline-node"></div>
                         <div class="timeline-content">
                             <h3 class="scramble-text" data-value="SiFive">SiFive <span class="role">&mdash; Design Verification Engineer</span></h3>
@@ -102,15 +150,17 @@
                                 <li>Leveraged <span class="hl-function">AI-driven methodologies</span> to accelerate verification workflows, enhancing efficiency in testbench development and <span class="hl-string">waveform debugging</span>.</li>
                             </ul>
                         </div>
-                    </div>
+                    </article>
                 </div>
             </section>
 
+            <div class="section-divider" aria-hidden="true"></div>
+
             <!-- PROJECTS -->
-            <section id="projects" class="content-section">
+            <section id="projects" class="content-section" aria-label="Projects">
                 <h2 class="section-title scramble-text" data-value="Projects">Projects</h2>
                 <div class="projects-grid">
-                    <div class="project-card spotlight-card glitch-hover">
+                    <article class="project-card spotlight-card glitch-hover gradient-border" id="project-riscv-alu">
                         <div class="project-header">
                             <h3 class="scramble-text" data-value="RISC-V ALU UVM Verification">RISC-V ALU UVM Verification</h3>
                         </div>
@@ -121,10 +171,10 @@
                             <span class="hl-function">UVM</span>
                             <span class="hl-string">RISC-V ISA</span>
                         </div>
-                        <a href="https://github.com/patel-om/riscv-alu-uvm" target="_blank" class="magnetic" style="color: var(--accent-cyan); display: inline-block; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.9rem;">[View Source on GitHub]</a>
-                    </div>
+                        <a href="https://github.com/patel-om/riscv-alu-uvm" target="_blank" rel="noopener noreferrer" class="project-link magnetic">View Source on GitHub</a>
+                    </article>
 
-                    <div class="project-card spotlight-card glitch-hover">
+                    <article class="project-card spotlight-card glitch-hover gradient-border" id="project-axi4-lite">
                         <div class="project-header">
                             <h3 class="scramble-text" data-value="AXI4-Lite Slave UVM VIP">AXI4-Lite Slave UVM VIP</h3>
                         </div>
@@ -135,10 +185,10 @@
                             <span class="hl-function">UVM</span>
                             <span class="hl-string">AMBA AXI4</span>
                         </div>
-                        <a href="https://github.com/patel-om/axi4-lite-uvm-vip" target="_blank" class="magnetic" style="color: var(--accent-cyan); display: inline-block; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.9rem;">[View Source on GitHub]</a>
-                    </div>
+                        <a href="https://github.com/patel-om/axi4-lite-uvm-vip" target="_blank" rel="noopener noreferrer" class="project-link magnetic">View Source on GitHub</a>
+                    </article>
                     
-                    <div class="project-card spotlight-card glitch-hover">
+                    <article class="project-card spotlight-card glitch-hover gradient-border" id="project-sync-fifo">
                         <div class="project-header">
                             <h3 class="scramble-text" data-value="Synchronous FIFO UVM Verification">Synchronous FIFO UVM Verification</h3>
                         </div>
@@ -149,10 +199,10 @@
                             <span class="hl-function">UVM</span>
                             <span class="hl-string">SVA</span>
                         </div>
-                        <a href="https://github.com/patel-om/sync-fifo-uvm" target="_blank" class="magnetic" style="color: var(--accent-cyan); display: inline-block; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.9rem;">[View Source on GitHub]</a>
-                    </div>
+                        <a href="https://github.com/patel-om/sync-fifo-uvm" target="_blank" rel="noopener noreferrer" class="project-link magnetic">View Source on GitHub</a>
+                    </article>
 
-                    <div class="project-card spotlight-card glitch-hover">
+                    <article class="project-card spotlight-card glitch-hover gradient-border" id="project-stock-prediction">
                         <div class="project-header">
                             <h3 class="scramble-text" data-value="Stock Trend Prediction Using Deep Learning">Stock Trend Prediction Using Deep Learning</h3>
                         </div>
@@ -161,10 +211,10 @@
                         <div class="tech-tags">
                             <span>Python</span><span>TensorFlow/Keras</span><span>LSTM</span><span>ARO</span><span>NumPy</span><span>Pandas</span>
                         </div>
-                        <a href="https://github.com/patel-om/stock-trend-prediction" target="_blank" class="magnetic" style="color: var(--accent-cyan); display: inline-block; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.9rem;">[View Source on GitHub]</a>
-                    </div>
+                        <a href="https://github.com/patel-om/stock-trend-prediction" target="_blank" rel="noopener noreferrer" class="project-link magnetic">View Source on GitHub</a>
+                    </article>
                     
-                    <div class="project-card spotlight-card glitch-hover">
+                    <article class="project-card spotlight-card glitch-hover gradient-border" id="project-liquid-nn">
                         <div class="project-header">
                             <h3 class="scramble-text" data-value="Liquid Neural Networks">Liquid Neural Networks</h3>
                         </div>
@@ -173,10 +223,10 @@
                         <div class="tech-tags">
                             <span>Python</span><span>TensorFlow</span><span>NumPy</span>
                         </div>
-                        <a href="https://github.com/patel-om/liquid-neural-networks" target="_blank" class="magnetic" style="color: var(--accent-cyan); display: inline-block; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.9rem;">[View Source on GitHub]</a>
-                    </div>
+                        <a href="https://github.com/patel-om/liquid-neural-networks" target="_blank" rel="noopener noreferrer" class="project-link magnetic">View Source on GitHub</a>
+                    </article>
 
-                    <div class="project-card spotlight-card glitch-hover">
+                    <article class="project-card spotlight-card glitch-hover gradient-border" id="project-silent-location">
                         <div class="project-header">
                             <h3 class="scramble-text" data-value="Silent On Location">Silent On Location</h3>
                         </div>
@@ -185,17 +235,19 @@
                         <div class="tech-tags">
                             <span>Android Studio</span><span>Java</span><span>Google Maps API</span><span>Geofencing</span><span>SQLite</span>
                         </div>
-                        <a href="https://github.com/patel-om/silent-on-location" target="_blank" class="magnetic" style="color: var(--accent-cyan); display: inline-block; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.9rem;">[View Source on GitHub]</a>
-                    </div>
+                        <a href="https://github.com/patel-om/silent-on-location" target="_blank" rel="noopener noreferrer" class="project-link magnetic">View Source on GitHub</a>
+                    </article>
                 </div>
             </section>
 
+            <div class="section-divider" aria-hidden="true"></div>
+
             <!-- SKILLS -->
-            <section id="skills" class="content-section">
+            <section id="skills" class="content-section" aria-label="Technical skills">
                 <h2 class="section-title scramble-text" data-value="Skills">Skills</h2>
                 <div class="register-map">
-                    <div class="register-group spotlight-card glitch-hover">
-                        <h3 class="register-header scramble-text" data-value="Verification &amp; VLSI">Verification &amp; VLSI</h3>
+                    <div class="register-group spotlight-card glitch-hover gradient-border">
+                        <h3 class="register-header scramble-text" data-value="Verification & VLSI">Verification &amp; VLSI</h3>
                         <div class="register-bits">
                             <span class="bit magnetic hl-keyword" data-strength="15">AXI4/APB Bus Protocols</span>
                             <span class="bit magnetic" data-strength="15">RTL Debugging</span>
@@ -209,7 +261,7 @@
                         </div>
                     </div>
 
-                    <div class="register-group spotlight-card glitch-hover">
+                    <div class="register-group spotlight-card glitch-hover gradient-border">
                         <h3 class="register-header scramble-text" data-value="Programming">Programming</h3>
                         <div class="register-bits">
                             <span class="bit magnetic hl-keyword" data-strength="15">C/C++</span>
@@ -223,7 +275,7 @@
                         </div>
                     </div>
 
-                    <div class="register-group spotlight-card glitch-hover">
+                    <div class="register-group spotlight-card glitch-hover gradient-border">
                         <h3 class="register-header scramble-text" data-value="Developer Tools">Developer Tools</h3>
                         <div class="register-bits">
                             <span class="bit magnetic hl-function" data-strength="15">Git</span>
@@ -239,8 +291,8 @@
                         </div>
                     </div>
 
-                    <div class="register-group spotlight-card glitch-hover">
-                        <h3 class="register-header scramble-text" data-value="ML &amp; Data Science">ML &amp; Data Science</h3>
+                    <div class="register-group spotlight-card glitch-hover gradient-border">
+                        <h3 class="register-header scramble-text" data-value="ML & Data Science">ML &amp; Data Science</h3>
                         <div class="register-bits">
                             <span class="bit magnetic hl-keyword" data-strength="15">TensorFlow</span>
                             <span class="bit magnetic hl-keyword" data-strength="15">PyTorch</span>
@@ -257,8 +309,8 @@
                         </div>
                     </div>
 
-                    <div class="register-group spotlight-card glitch-hover">
-                        <h3 class="register-header scramble-text" data-value="Business Intelligence &amp; CS">Business Intelligence &amp; CS</h3>
+                    <div class="register-group spotlight-card glitch-hover gradient-border">
+                        <h3 class="register-header scramble-text" data-value="Business Intelligence & CS">Business Intelligence &amp; CS</h3>
                         <div class="register-bits">
                             <span class="bit magnetic" data-strength="15">Microsoft Power BI</span>
                             <span class="bit magnetic" data-strength="15">Data Modeling</span>
@@ -277,12 +329,14 @@
                 </div>
             </section>
 
+            <div class="section-divider" aria-hidden="true"></div>
+
             <!-- EDUCATION & CERTIFICATIONS & ACHIEVEMENTS -->
-            <section id="education" class="content-section">
+            <section id="education" class="content-section" aria-label="Education and certifications">
                 <h2 class="section-title scramble-text" data-value="Education & Certifications">Education & Certifications</h2>
                 
                 <div class="two-col-grid">
-                    <div class="col spotlight-card glitch-hover">
+                    <div class="col spotlight-card glitch-hover gradient-border">
                         <h3 class="subsection-title scramble-text" data-value="Education">Education</h3>
                         <div class="ed-item">
                             <div class="ed-header">
@@ -299,14 +353,14 @@
                             <div class="ed-degree">B.E. in <span class="hl-string">Computer Engineering</span> (<span class="hl-number">8.37</span>/10.00)</div>
                         </div>
 
-                        <h3 class="subsection-title scramble-text" data-value="Achievements" style="margin-top: 3rem;">Achievements</h3>
+                        <h3 class="subsection-title scramble-text" data-value="Achievements" style="margin-top: 2.5rem;">Achievements</h3>
                         <ul class="achievements-list stagger-children">
                             <li><strong>GATE <span class="hl-number">2023</span>:</strong> Qualified in Computer Science and IT with score <span class="hl-number">389</span>.</li>
                             <li><strong>Academic Excellence:</strong> Consistently maintained <span class="hl-number">8+ CGPA</span> across B.Tech and M.Tech.</li>
                         </ul>
                     </div>
 
-                    <div class="col spotlight-card glitch-hover">
+                    <div class="col spotlight-card glitch-hover gradient-border">
                         <h3 class="subsection-title scramble-text" data-value="Certifications">Certifications</h3>
                         <div class="ed-item">
                             <div class="ed-header">
@@ -329,12 +383,18 @@
             </section>
         </main>
 
-        <footer>
+        <footer aria-label="Footer">
             <div class="footer-content">
-                <div class="clock-signal-container">
+                <div class="footer-links">
+                    <a href="mailto:patel2om002@gmail.com">Email</a>
+                    <a href="https://linkedin.com/in/om-patel-0369" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="https://github.com/patel-om" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+                <div class="clock-signal-container" aria-hidden="true">
                     <div class="clock-line"></div>
                 </div>
-                <p class="scramble-text" data-value="Om Patel &copy; 2026">Om Patel &copy; 2026</p>
+                <p class="copyright scramble-text" data-value="Om Patel &copy; 2026">Om Patel &copy; 2026</p>
+                <p class="footer-tagline">Built with ♥ and SystemVerilog</p>
             </div>
         </footer>
     </div>
