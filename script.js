@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "Elaborating RTL hierarchy... OK",
         "Loading AXI4 Bus Drivers... OK",
         "Starting UVM Environment...",
-        "Checking coverage closure... 100% achieved.",
+        "Running regression suite... PASS",
         "System Ready. Powering on UI..."
     ];
 
