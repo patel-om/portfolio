@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(57, 208, 216, 0.3)';
+                ctx.fillStyle = 'rgba(0, 217, 255, 0.3)';
                 ctx.fill();
             }
         }
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ctx.moveTo(this.n1.x, this.n1.y);
                 ctx.lineTo(this.midX, this.midY);
                 ctx.lineTo(this.n2.x, this.n2.y);
-                ctx.strokeStyle = 'rgba(57, 208, 216, 0.04)';
+                ctx.strokeStyle = 'rgba(0, 217, 255, 0.04)';
                 ctx.lineWidth = 0.5;
                 ctx.stroke();
             }
@@ -168,10 +168,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.progress = 0;
                 this.speed = Math.random() * 0.008 + 0.003;
                 this.color = Math.random() > 0.6
-                    ? 'rgba(157, 114, 255, 0.7)'
+                    ? 'rgba(0, 166, 196, 0.7)'
                     : Math.random() > 0.5
-                        ? 'rgba(57, 208, 216, 0.7)'
-                        : 'rgba(255, 158, 44, 0.7)';
+                        ? 'rgba(0, 217, 255, 0.7)'
+                        : 'rgba(255, 107, 0, 0.7)';
                 if (Math.random() > 0.5) {
                     this.midX = startNode.x;
                     this.midY = endNode.y;
