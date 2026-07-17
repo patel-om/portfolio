@@ -700,4 +700,304 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+
+    /* =========================================
+       13. INTERACTIVE ARCHITECTURE (AXI4)
+    ========================================= */
+    (function initArchitecture() {
+        // Block chain: hover highlights the access path down to the hovered block
+        const chainSvg = document.getElementById('arch-chain');
+        if (chainSvg) {
+            const blocks = Array.from(chainSvg.querySelectorAll('.arch-block'));
+            const conns = Array.from(chainSvg.querySelectorAll('.arch-conn'));
+            blocks.forEach((block, idx) => {
+                block.addEventListener('mouseenter', () => {
+                    chainSvg.classList.add('dimmed');
+                    blocks.forEach((b, i) => b.classList.toggle('hi', i <= idx));
+                    conns.forEach((c, i) => c.classList.toggle('hi', i < idx));
+                });
+                block.addEventListener('mouseleave', () => {
+                    chainSvg.classList.remove('dimmed');
+                    blocks.forEach(b => b.classList.remove('hi'));
+                    conns.forEach(c => c.classList.remove('hi'));
+                });
+            });
+        }
+
+        // Transaction visualizer
+        const lanesSvg = document.getElementById('axi-lanes');
+        const packetLayer = document.getElementById('axi-packets');
+        const logEl = document.getElementById('axi-log');
+        const btnRead = document.getElementById('axi-read-btn');
+        const btnWrite = document.getElementById('axi-write-btn');
+        if (!lanesSvg || !packetLayer || !logEl || !btnRead || !btnWrite) return;
+
+        const X_M = 90, X_S = 550;
+        const LANE_Y = { AW: 90, W: 150, B: 210, AR: 290, R: 350 };
+        const LANE_COLOR = { AW: '#00d9ff', W: '#ff8a1e', B: '#a6ff00', AR: '#00d9ff', R: '#a6ff00' };
+        let axiBusy = false;
+
+        const wait = ms => new Promise(r => setTimeout(r, ms));
+
+        function setLog(html) { logEl.innerHTML = html; }
+
+        function laneActive(ch, on) {
+            lanesSvg.querySelectorAll(`[data-ch="${ch}"]`).forEach(el => el.classList.toggle('active', on));
+        }
+
+        function sendPacket(ch, reverse) {
+            return new Promise(resolve => {
+                const from = reverse ? X_S : X_M;
+                const to = reverse ? X_M : X_S;
+                const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                c.setAttribute('cy', LANE_Y[ch]);
+                c.setAttribute('cx', from);
+                c.setAttribute('r', 6);
+                c.setAttribute('fill', LANE_COLOR[ch]);
+                c.setAttribute('class', 'axi-packet');
+                c.style.color = LANE_COLOR[ch]; // drives drop-shadow via currentColor
+                packetLayer.appendChild(c);
+                laneActive(ch, true);
+                const D = 700;
+                const t0 = performance.now();
+                function step(t) {
+                    const p = Math.min((t - t0) / D, 1);
+                    const e = 1 - Math.pow(1 - p, 3); // ease-out cubic
+                    c.setAttribute('cx', from + (to - from) * e);
+                    if (p < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        setTimeout(() => { c.remove(); laneActive(ch, false); resolve(); }, 150);
+                    }
+                }
+                requestAnimationFrame(step);
+            });
+        }
+
+        async function runTxn(kind) {
+            if (axiBusy) return;
+            axiBusy = true;
+            btnRead.disabled = true;
+            btnWrite.disabled = true;
+            if (kind === 'write') {
+                setLog('<span class="t-cyan">AWVALID ↑ … AWREADY ↑</span> — write address <span class="t-cyan">0x0200_1000</span> accepted');
+                await sendPacket('AW', false);
+                setLog('<span class="t-orange">WVALID ↑ … WLAST</span> — data beat transferred');
+                await sendPacket('W', false);
+                setLog('<span class="t-lime">BVALID ↑</span> — BRESP = <span class="t-lime">OKAY ✓</span> write complete');
+                await sendPacket('B', true);
+            } else {
+                setLog('<span class="t-cyan">ARVALID ↑ … ARREADY ↑</span> — read address <span class="t-cyan">0x0200_1000</span> accepted');
+                await sendPacket('AR', false);
+                setLog('<span class="t-lime">RVALID ↑</span> — RDATA returned, RRESP = <span class="t-lime">OKAY ✓</span>');
+                await sendPacket('R', true);
+            }
+            await wait(300);
+            setLog('idle — fire a READ or WRITE to watch the handshake');
+            btnRead.disabled = false;
+            btnWrite.disabled = false;
+            axiBusy = false;
+        }
+
+        btnRead.addEventListener('click', () => runTxn('read'));
+        btnWrite.addEventListener('click', () => runTxn('write'));
+    })();
+
+
+    /* =========================================
+       14. INTERACTIVE TERMINAL
+    ========================================= */
+    (function initTerminal() {
+        const overlay = document.getElementById('terminal-overlay');
+        const toggle = document.getElementById('terminal-toggle');
+        const closeBtn = document.getElementById('terminal-close');
+        const bodyEl = document.getElementById('term-body');
+        const input = document.getElementById('term-input');
+        if (!overlay || !toggle || !closeBtn || !bodyEl || !input) return;
+
+        const history = [];
+        let histIdx = -1;
+        let welcomed = false;
+        let regBusy = false;
+
+        const wait = ms => new Promise(r => setTimeout(r, ms));
+        const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+        function print(html, cls) {
+            const line = document.createElement('div');
+            line.className = 'term-line' + (cls ? ' ' + cls : '');
+            line.innerHTML = html;
+            bodyEl.appendChild(line);
+            bodyEl.scrollTop = bodyEl.scrollHeight;
+            return line;
+        }
+
+        function openTerm() {
+            overlay.classList.add('open');
+            toggle.setAttribute('aria-expanded', 'true');
+            if (!welcomed) {
+                welcomed = true;
+                print('Om Patel — verification shell <span class="t-dim">(build v2.1-verdi)</span>', 't-cyan');
+                print('Type <span class="t-lime">help</span> to list commands.', 't-dim');
+            }
+            input.focus();
+        }
+
+        function closeTerm() {
+            overlay.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+        }
+
+        const SECTIONS = ['about', 'now', 'experience', 'architecture', 'projects', 'skills', 'education'];
+
+        function gotoSection(id) {
+            const target = document.getElementById(id);
+            if (!target) return false;
+            closeTerm();
+            const top = target.getBoundingClientRect().top + window.scrollY - 80;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+            return true;
+        }
+
+        async function makeRegression() {
+            if (regBusy) { print('make: regression already running', 't-rose'); return; }
+            regBusy = true;
+            print('[VCS] Compiling RTL + testbench ...', 't-dim');
+            await wait(450);
+            print('[VCS] Elaboration complete — 0 errors, 0 warnings', 't-dim');
+            print('[SIM] Dispatching 17 tests to Slurm ...', 't-dim');
+            const bar = print('', 't-lime');
+            for (let i = 0; i <= 20; i++) {
+                bar.textContent = '█'.repeat(i) + '░'.repeat(20 - i) + '  ' + (i * 5) + '%';
+                bodyEl.scrollTop = bodyEl.scrollHeight;
+                await wait(65);
+            }
+            print('[RESULT] 17/17 PASS · 0 FAIL · coverage merged ✓', 't-lime');
+            regBusy = false;
+        }
+
+        const COMMANDS = {
+            help() {
+                print('Available commands:');
+                print('  <span class="t-lime">whoami</span>        who is Om?');
+                print('  <span class="t-lime">experience</span>    SiFive highlights');
+                print('  <span class="t-lime">projects</span>      selected work');
+                print('  <span class="t-lime">skills</span>        tech stack');
+                print('  <span class="t-lime">goto</span> &lt;sec&gt;    jump to a section (' + SECTIONS.join(', ') + ')');
+                print('  <span class="t-lime">resume</span>        open resume PDF');
+                print('  <span class="t-lime">contact</span>       reach me');
+                print('  <span class="t-lime">clear</span>         clear terminal');
+                print('Hint: DV engineers also try <span class="t-orange">make regression</span>, <span class="t-orange">coverage</span>, <span class="t-orange">promotion</span>', 't-dim');
+            },
+            whoami() {
+                print('Om Patel', 't-cyan');
+                print('Design Verification Engineer @ SiFive');
+                print('RISC-V · SystemVerilog · UVM · AXI4 · AI workflows');
+                print('Ahmedabad, India', 't-dim');
+            },
+            experience() {
+                print('SiFive — Design Verification Engineer <span class="t-dim">(Jul 2024 → present)</span>', 't-cyan');
+                print('· Control Port & CLP owner — 17 functional tests, 100% coverage closure');
+                print('· CLP coverage driven <span class="t-orange">50%</span> → <span class="t-lime">100%</span>');
+                print('· 5 RTL bugs found via regression analysis & triage');
+                print('· SiFive Intelligence™ vertical — 2 FR programs, 10+ core configs');
+                print('· VDB→HTML coverage pipeline (self-built, in production)');
+                print('· NoC verification — <span class="t-cyan">ongoing</span>');
+            },
+            projects() {
+                print('Control Port / CLP Verification   <span class="t-dim">AXI4 · SiFive</span>');
+                print('AXI4-Lite Slave UVM VIP           <span class="t-dim">100% coverage</span>');
+                print('RISC-V ALU UVM Testbench          <span class="t-dim">constrained-random</span>');
+                print('Synchronous FIFO UVM + SVA        <span class="t-dim">corner cases</span>');
+                print('VDB→HTML Coverage Pipeline        <span class="t-dim">Python</span>');
+                print('Try <span class="t-lime">goto projects</span> for details.', 't-dim');
+            },
+            skills() {
+                print('<span class="t-cyan">hardware</span>    : SystemVerilog · UVM · AXI4 · RISC-V · SVA · NoC');
+                print('<span class="t-cyan">programming</span> : C/C++ · Python · Ruby · YAML · SQL');
+                print('<span class="t-cyan">tools</span>       : VCS · Verdi · Git · Slurm · JIRA · Jenkins-style regression');
+                print('<span class="t-cyan">ml</span>          : TensorFlow · PyTorch · LSTM · Liquid NN');
+            },
+            contact() {
+                print('email    : <a href="mailto:patel2om002@gmail.com">patel2om002@gmail.com</a>');
+                print('linkedin : <a href="https://linkedin.com/in/om-patel-0369" target="_blank" rel="noopener noreferrer">linkedin.com/in/om-patel-0369</a>');
+                print('github   : <a href="https://github.com/patel-om" target="_blank" rel="noopener noreferrer">github.com/patel-om</a>');
+            },
+            resume() {
+                print('Opening resume ...', 't-dim');
+                window.open('Om Patel.pdf', '_blank');
+            },
+            clear() {
+                bodyEl.innerHTML = '';
+            },
+            coverage() {
+                print('── Coverage Report (CLP) ─────────────', 't-dim');
+                print('functional : <span class="t-lime">100% ████████████████████</span>');
+                print('line       : <span class="t-lime">100%</span>   branch  : <span class="t-lime">100%</span>');
+                print('toggle     : <span class="t-lime">100%</span>   assert  : <span class="t-lime">100%</span>');
+                print('status     : <span class="t-lime">CLOSED ✓</span>  <span class="t-dim">(was 50% at handoff)</span>');
+            },
+            promotion() {
+                print('Checking promotion.status ...', 't-dim');
+                print('Current status: waiting for next review :)', 't-orange');
+            }
+        };
+
+        function runCommand(raw) {
+            const cmd = raw.trim();
+            print('<span class="tf-prompt">om@verif</span><span class="t-dim">:</span><span class="tf-path">~</span><span class="t-dim">$</span> ' + esc(cmd));
+            if (!cmd) return;
+            const parts = cmd.split(/\s+/);
+            const name = parts[0].toLowerCase();
+            const arg = parts.slice(1).join(' ').toLowerCase();
+
+            if (name === 'make') {
+                if (arg === 'regression') { makeRegression(); }
+                else { print("make: *** No rule to make target '" + esc(arg || '') + "'.  Stop.", 't-rose'); }
+            } else if (name === 'goto') {
+                if (!gotoSection(arg)) print('goto: unknown section. Try: ' + SECTIONS.join(', '), 't-rose');
+            } else if (name === 'sudo') {
+                print('Permission denied. This incident will be reported to the DV lead.', 't-rose');
+            } else if (name === 'ls') {
+                print(SECTIONS.join('/  ') + '/', 't-cyan');
+            } else if (COMMANDS[name]) {
+                COMMANDS[name]();
+            } else {
+                print('command not found: ' + esc(name) + ' — try <span class="t-lime">help</span>', 't-rose');
+            }
+        }
+
+        toggle.addEventListener('click', openTerm);
+        closeBtn.addEventListener('click', closeTerm);
+        overlay.addEventListener('click', (e) => { if (e.target === overlay) closeTerm(); });
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const value = input.value;
+                input.value = '';
+                if (value.trim()) { history.push(value); }
+                histIdx = history.length;
+                runCommand(value);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (histIdx > 0) { histIdx--; input.value = history[histIdx] || ''; }
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (histIdx < history.length - 1) { histIdx++; input.value = history[histIdx] || ''; }
+                else { histIdx = history.length; input.value = ''; }
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('open')) {
+                closeTerm();
+            } else if (e.key === '`' && !overlay.classList.contains('open')) {
+                const t = e.target;
+                if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+                e.preventDefault();
+                openTerm();
+            }
+        });
+    })();
+
 });

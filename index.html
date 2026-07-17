@@ -42,6 +42,7 @@
     <div class="mobile-nav-overlay" id="mobile-nav" aria-label="Mobile navigation">
         <a href="#about" class="mobile-nav-link">About</a>
         <a href="#experience" class="mobile-nav-link">Experience</a>
+        <a href="#architecture" class="mobile-nav-link">Architecture</a>
         <a href="#projects" class="mobile-nav-link">Projects</a>
         <a href="#skills" class="mobile-nav-link">Skills</a>
         <a href="#education" class="mobile-nav-link">Education</a>
@@ -56,6 +57,7 @@
                     <ul class="nav-links" id="nav-links">
                         <li><a href="#about" class="magnetic scramble-text" data-value="About" data-strength="20" data-section="about">About</a></li>
                         <li><a href="#experience" class="magnetic scramble-text" data-value="Experience" data-strength="20" data-section="experience">Experience</a></li>
+                        <li><a href="#architecture" class="magnetic scramble-text" data-value="Architecture" data-strength="20" data-section="architecture">Architecture</a></li>
                         <li><a href="#projects" class="magnetic scramble-text" data-value="Projects" data-strength="20" data-section="projects">Projects</a></li>
                         <li><a href="#skills" class="magnetic scramble-text" data-value="Skills" data-strength="20" data-section="skills">Skills</a></li>
                         <li><a href="#education" class="magnetic scramble-text" data-value="Education" data-strength="20" data-section="education">Education</a></li>
@@ -206,6 +208,48 @@
 
             <div class="section-divider" aria-hidden="true"></div>
 
+            <!-- CURRENTLY BUILDING -->
+            <section id="now" class="content-section" aria-label="Currently building">
+                <h2 class="section-title scramble-text" data-value="Currently Building">Currently Building</h2>
+                <div class="now-grid stagger-children">
+                    <article class="now-card spotlight-card gradient-border">
+                        <div class="now-head">
+                            <h3>NoC Verification</h3>
+                            <span class="status-pill st-active"><span class="led"></span>ACTIVE</span>
+                        </div>
+                        <p>Initiating verification for <span class="hl-keyword">Network-on-Chip</span> architectures &mdash; reliable, high-performance on-chip communication for next-gen core complexes.</p>
+                        <div class="now-meta">
+                            <span><b>Focus</b>Testplan &amp; protocol study</span>
+                            <span><b>Stack</b>SystemVerilog &middot; NoC</span>
+                        </div>
+                    </article>
+                    <article class="now-card spotlight-card gradient-border">
+                        <div class="now-head">
+                            <h3>Coverage Reporting Pipeline</h3>
+                            <span class="status-pill st-prod"><span class="led"></span>PRODUCTION</span>
+                        </div>
+                        <p>Self-built <span class="hl-function">VDB&rarr;HTML</span> functional-coverage flow powering management dashboards, standardizing reporting across IPs.</p>
+                        <div class="now-meta">
+                            <span><b>Stack</b>Python &middot; HTML dashboards</span>
+                            <span><b>Impact</b>Manual VDB review &rarr; one dashboard</span>
+                        </div>
+                    </article>
+                    <article class="now-card spotlight-card gradient-border">
+                        <div class="now-head">
+                            <h3>SiFive Intelligence&trade; FR Programs</h3>
+                            <span class="status-pill st-shipped"><span class="led"></span>SHIPPED</span>
+                        </div>
+                        <p><span class="hl-number">2</span> Full Release programs across <span class="hl-number">10+</span> core configurations &mdash; NPD milestones met ahead of schedule under tight timelines.</p>
+                        <div class="now-meta">
+                            <span><b>Role</b>Regressions &middot; coverage &middot; triage</span>
+                            <span><b>Scope</b>AI / Data Center vertical</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <div class="section-divider" aria-hidden="true"></div>
+
             <!-- EXPERIENCE -->
             <section id="experience" class="content-section" aria-label="Professional experience">
                 <h2 class="section-title scramble-text" data-value="Experience">Experience</h2>
@@ -280,6 +324,96 @@
                             </div>
                         </div>
                     </article>
+                </div>
+            </section>
+
+            <div class="section-divider" aria-hidden="true"></div>
+
+            <!-- INTERACTIVE ARCHITECTURE -->
+            <section id="architecture" class="content-section" aria-label="Interactive architecture">
+                <h2 class="section-title scramble-text" data-value="Architecture">Architecture</h2>
+                <p class="arch-lede">The path I verify every day &mdash; an <span class="hl-keyword">AXI4 Control Port</span> giving SoC masters access to core-local resources.
+                    <span class="arch-hint">↳ hover the blocks to trace the access path &middot; fire a transaction to watch the AXI channels handshake</span>
+                </p>
+                <div class="arch-wrap">
+                    <div class="arch-panel spotlight-card gradient-border">
+                        <h3 class="arch-panel-title">Access Path</h3>
+                        <svg id="arch-chain" viewBox="0 0 300 420" role="img" aria-label="Block diagram: SoC master through AXI4 interconnect and Control Port to the CPU core complex">
+                            <g class="arch-block" data-idx="0">
+                                <rect x="30" y="30" width="240" height="70" rx="8"/>
+                                <text class="arch-title" x="150" y="60">SoC Master</text>
+                                <text class="arch-sub" x="150" y="80">DMA &middot; Debug &middot; Fabric</text>
+                            </g>
+                            <g class="arch-conn">
+                                <line x1="150" y1="100" x2="150" y2="124"/>
+                                <polygon points="150,130 145,121 155,121"/>
+                            </g>
+                            <g class="arch-block" data-idx="1">
+                                <rect x="30" y="130" width="240" height="70" rx="8"/>
+                                <text class="arch-title" x="150" y="160">AXI4 Interconnect</text>
+                                <text class="arch-sub" x="150" y="180">AMBA AXI4 bus fabric</text>
+                            </g>
+                            <g class="arch-conn">
+                                <line x1="150" y1="200" x2="150" y2="224"/>
+                                <polygon points="150,230 145,221 155,221"/>
+                            </g>
+                            <g class="arch-block" data-idx="2">
+                                <rect x="30" y="230" width="240" height="70" rx="8"/>
+                                <text class="arch-title" x="150" y="260">Control Port</text>
+                                <text class="arch-sub" x="150" y="280">AXI4 slave &middot; MMIO &middot; CLP</text>
+                                <text class="arch-badge" x="262" y="248">&#9679; my scope</text>
+                            </g>
+                            <g class="arch-conn">
+                                <line x1="150" y1="300" x2="150" y2="324"/>
+                                <polygon points="150,330 145,321 155,321"/>
+                            </g>
+                            <g class="arch-block" data-idx="3">
+                                <rect x="30" y="330" width="240" height="70" rx="8"/>
+                                <text class="arch-title" x="150" y="360">CPU Core Complex</text>
+                                <text class="arch-sub" x="150" y="380">Core-local registers</text>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="arch-panel spotlight-card gradient-border">
+                        <h3 class="arch-panel-title">AXI4 Transaction Visualizer</h3>
+                        <div class="axi-controls">
+                            <button id="axi-read-btn" class="axi-btn" type="button">&#9654; READ &nbsp;AR &rarr; R</button>
+                            <button id="axi-write-btn" class="axi-btn" type="button">&#9654; WRITE &nbsp;AW &rarr; W &rarr; B</button>
+                        </div>
+                        <svg id="axi-lanes" viewBox="0 0 600 400" role="img" aria-label="AXI4 channel lanes between master and slave: AW, W, B, AR, R">
+                            <text class="rail-label" x="90" y="30">MASTER</text>
+                            <text class="rail-sub" x="90" y="45">interconnect</text>
+                            <text class="rail-label" x="550" y="30">SLAVE</text>
+                            <text class="rail-sub" x="550" y="45">control port</text>
+                            <line class="rail" x1="90" y1="58" x2="90" y2="360"/>
+                            <line class="rail" x1="550" y1="58" x2="550" y2="360"/>
+
+                            <line class="lane-line" data-ch="AW" x1="90" y1="90" x2="550" y2="90"/>
+                            <text class="lane-label" data-ch="AW" x="100" y="82" fill="#00d9ff">AW</text>
+                            <text class="lane-desc" x="540" y="82">write address &#9654;</text>
+
+                            <line class="lane-line" data-ch="W" x1="90" y1="150" x2="550" y2="150"/>
+                            <text class="lane-label" data-ch="W" x="100" y="142" fill="#ff8a1e">W</text>
+                            <text class="lane-desc" x="540" y="142">write data &#9654;</text>
+
+                            <line class="lane-line" data-ch="B" x1="90" y1="210" x2="550" y2="210"/>
+                            <text class="lane-label" data-ch="B" x="100" y="202" fill="#a6ff00">B</text>
+                            <text class="lane-desc" x="540" y="202">&#9664; write response</text>
+
+                            <line class="lane-sep" x1="90" y1="245" x2="550" y2="245"/>
+
+                            <line class="lane-line" data-ch="AR" x1="90" y1="290" x2="550" y2="290"/>
+                            <text class="lane-label" data-ch="AR" x="100" y="282" fill="#00d9ff">AR</text>
+                            <text class="lane-desc" x="540" y="282">read address &#9654;</text>
+
+                            <line class="lane-line" data-ch="R" x1="90" y1="350" x2="550" y2="350"/>
+                            <text class="lane-label" data-ch="R" x="100" y="342" fill="#a6ff00">R</text>
+                            <text class="lane-desc" x="540" y="342">&#9664; read data</text>
+
+                            <g id="axi-packets"></g>
+                        </svg>
+                        <div id="axi-log" class="axi-log" role="status">idle &mdash; fire a READ or WRITE to watch the handshake</div>
+                    </div>
                 </div>
             </section>
 
@@ -571,13 +705,32 @@
                     <pre class="tf-body"><span class="tf-line"><span class="tf-prompt">om@verif</span>:<span class="tf-path">~</span>$ cat build.info</span>
 <span class="tf-line"><span class="tf-key">author</span>      : Om Patel <span class="tf-c">© 2026</span></span>
 <span class="tf-line"><span class="tf-key">built_with</span>  : <span class="tf-pink">♥</span> and SystemVerilog</span>
-<span class="tf-line"><span class="tf-key">last_verified</span>: <span class="tf-lime">2026-06-17</span>  |  build: <span class="tf-lime">v2.0-verdi</span></span>
+<span class="tf-line"><span class="tf-key">last_verified</span>: <span class="tf-lime">2026-07-17</span>  |  build: <span class="tf-lime">v2.1-verdi</span></span>
 <span class="tf-line"><span class="tf-key">toolchain</span>   : HTML5 · CSS3 · JavaScript</span>
 <span class="tf-line"><span class="tf-key">status</span>      : <span class="tf-lime">[ ALL CHECKS PASSED ]</span></span>
 <span class="tf-line"><span class="tf-prompt">om@verif</span>:<span class="tf-path">~</span>$ <span class="tf-cursor"></span></span></pre>
                 </div>
             </div>
         </footer>
+    </div>
+
+    <!-- Interactive Terminal -->
+    <button id="terminal-toggle" type="button" aria-label="Open interactive terminal" aria-expanded="false">&gt;_ terminal</button>
+    <div id="terminal-overlay" role="dialog" aria-modal="true" aria-label="Interactive terminal">
+        <div class="term-window">
+            <div class="tf-bar">
+                <span class="tf-dot tf-red"></span>
+                <span class="tf-dot tf-yellow"></span>
+                <span class="tf-dot tf-green"></span>
+                <span class="tf-title">om@verif — interactive shell</span>
+                <button id="terminal-close" type="button" aria-label="Close terminal">&#10005;</button>
+            </div>
+            <div id="term-body" class="term-body" aria-live="polite"></div>
+            <div class="term-input-row">
+                <span class="tf-prompt">om@verif</span><span class="t-dim">:</span><span class="tf-path">~</span><span class="t-dim">$</span>
+                <input id="term-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command input">
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
