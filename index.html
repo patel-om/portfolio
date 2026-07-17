@@ -62,6 +62,9 @@
                         <li><a href="#projects" class="magnetic scramble-text" data-value="Projects" data-strength="20" data-section="projects">Projects</a></li>
                         <li><a href="#education" class="magnetic scramble-text" data-value="Education" data-strength="20" data-section="education">Education</a></li>
                     </ul>
+                    <button id="recruiter-toggle" type="button" aria-pressed="false" title="Content-first view: fewer animations, everything visible, resume pinned">
+                        <span class="rm-led" aria-hidden="true"></span>Recruiter Mode
+                    </button>
                     <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
                         <span></span>
                         <span></span>
@@ -646,6 +649,63 @@
 
             <div class="section-divider" aria-hidden="true"></div>
 
+            <!-- VERIFICATION DASHBOARD -->
+            <section id="dashboard" class="content-section" aria-label="Verification dashboard">
+                <h2 class="section-title">Verification Dashboard</h2>
+                <div class="dash-wrap">
+                    <div class="dash-tiles stagger-children">
+                        <div class="dash-tile spotlight-card">
+                            <div class="dash-num"><span class="counter" data-target="17">0</span></div>
+                            <div class="dash-label">Functional Tests</div>
+                        </div>
+                        <div class="dash-tile spotlight-card">
+                            <div class="dash-num"><span class="counter" data-target="5">0</span></div>
+                            <div class="dash-label">RTL Bugs Found</div>
+                        </div>
+                        <div class="dash-tile spotlight-card">
+                            <div class="dash-num"><span class="counter" data-target="2">0</span></div>
+                            <div class="dash-label">FR Programs Shipped</div>
+                        </div>
+                        <div class="dash-tile spotlight-card">
+                            <div class="dash-num"><span class="counter" data-target="10">0</span><span class="dash-suffix">+</span></div>
+                            <div class="dash-label">Core Configurations</div>
+                        </div>
+                        <div class="dash-tile spotlight-card">
+                            <div class="dash-num"><span class="counter" data-target="5">0</span><span class="dash-suffix">+</span></div>
+                            <div class="dash-label">Automation Flows</div>
+                        </div>
+                        <div class="dash-tile spotlight-card">
+                            <div class="dash-num"><span class="counter" data-target="100">0</span><span class="dash-suffix">%</span></div>
+                            <div class="dash-label">CLP Coverage Closed</div>
+                        </div>
+                    </div>
+                    <div class="dash-panels">
+                        <div class="dash-panel spotlight-card gradient-border">
+                            <h3 class="arch-panel-title">CLP Coverage Closure</h3>
+                            <div class="cov-rows">
+                                <div class="cov-row"><span class="cov-name">functional</span><div class="cov-bar"><div class="cov-bar-fill" data-value="100"></div></div><span class="cov-val">100%</span></div>
+                                <div class="cov-row"><span class="cov-name">line</span><div class="cov-bar"><div class="cov-bar-fill" data-value="100"></div></div><span class="cov-val">100%</span></div>
+                                <div class="cov-row"><span class="cov-name">branch</span><div class="cov-bar"><div class="cov-bar-fill" data-value="100"></div></div><span class="cov-val">100%</span></div>
+                                <div class="cov-row"><span class="cov-name">toggle</span><div class="cov-bar"><div class="cov-bar-fill" data-value="100"></div></div><span class="cov-val">100%</span></div>
+                                <div class="cov-row"><span class="cov-name">assertion</span><div class="cov-bar"><div class="cov-bar-fill" data-value="100"></div></div><span class="cov-val">100%</span></div>
+                            </div>
+                            <div class="cov-note">was 50% at handoff &mdash; closed via targeted tests + designer collaboration</div>
+                        </div>
+                        <div class="dash-panel spotlight-card gradient-border">
+                            <h3 class="arch-panel-title">Nightly Regression</h3>
+                            <div class="reg-row">
+                                <span class="reg-name">moray &middot; shark &middot; 17 tests</span>
+                                <span id="reg-status" class="reg-status">QUEUED</span>
+                            </div>
+                            <div class="reg-track"><div id="reg-progress" class="reg-fill"></div></div>
+                            <div class="cov-note">weekly + nightly regressions &mdash; triage, JIRA, targeted releases</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-divider" aria-hidden="true"></div>
+
             <!-- EDUCATION & CERTIFICATIONS & ACHIEVEMENTS -->
             <section id="education" class="content-section" aria-label="Education and certifications">
                 <div class="stage-tag-wrap"><span class="stage-tag">MEM &middot; MEMORY &mdash; cache hierarchy access</span></div>
@@ -742,6 +802,13 @@
                     </article>
                 </div>
             </section>
+
+            <!-- FINALE -->
+            <section id="finale" class="finale-section" aria-label="Closing">
+                <div id="finale-die" class="finale-die" aria-hidden="true"></div>
+                <p class="finale-msg">Reliable silicon isn't built by chance.<br><span>It's verified.</span></p>
+                <p class="finale-sig">Designed and engineered by <b>Om Patel</b></p>
+            </section>
         </main>
 
         <footer aria-label="Footer">
@@ -766,7 +833,7 @@
                     <pre class="tf-body"><span class="tf-line"><span class="tf-prompt">om@verif</span>:<span class="tf-path">~</span>$ cat build.info</span>
 <span class="tf-line"><span class="tf-key">author</span>      : Om Patel <span class="tf-c">© 2026</span></span>
 <span class="tf-line"><span class="tf-key">designed_by</span> : Om Patel &mdash; engineered end to end</span>
-<span class="tf-line"><span class="tf-key">last_verified</span>: <span class="tf-lime">2026-07-17</span>  |  build: <span class="tf-lime">v3.1-pipeline</span></span>
+<span class="tf-line"><span class="tf-key">last_verified</span>: <span class="tf-lime">2026-07-17</span>  |  build: <span class="tf-lime">v3.2-experience</span></span>
 <span class="tf-line"><span class="tf-key">toolchain</span>   : HTML5 · CSS3 · JavaScript</span>
 <span class="tf-line"><span class="tf-key">status</span>      : <span class="tf-lime">[ ALL CHECKS PASSED ]</span></span>
 <span class="tf-line"><span class="tf-prompt">om@verif</span>:<span class="tf-path">~</span>$ <span class="tf-cursor"></span></span></pre>
@@ -774,6 +841,9 @@
             </div>
         </footer>
     </div>
+
+    <!-- Pinned resume (recruiter mode only) -->
+    <a href="Om Patel.pdf" download id="resume-pin" aria-label="Download resume">&#10515; Resume</a>
 
     <!-- CPU Pipeline HUD -->
     <nav id="pipeline-hud" aria-label="CPU pipeline scroll indicator">

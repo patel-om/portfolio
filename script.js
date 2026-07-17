@@ -4,13 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
        1. TERMINAL BOOT SEQUENCE (Session-aware)
     ========================================= */
     const bootLines = [
-        "Initializing boot sequence...",
-        "Loading Custom RISC-V Core Configuration...",
-        "Elaborating RTL hierarchy... OK",
-        "Loading AXI4 Bus Drivers... OK",
-        "Starting UVM Environment...",
-        "Running regression suite... PASS",
-        "System Ready. Powering on UI..."
+        "> Initializing Processor...",
+        "> Loading Verification Environment...",
+        "> Compiling UVM Components...",
+        "> Running Regression...",
+        "> PASS ✓"
     ];
 
     const bootTextEl = document.getElementById('boot-text');
@@ -24,8 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
         isBooting = false;
         clearTimeout(typeTimeout);
 
-        // Mark this session as booted
-        try { sessionStorage.setItem('portfolio_booted', 'true'); } catch(e) {}
+        // First visit only — subsequent visits skip straight to content
+        try { localStorage.setItem('om_booted', '1'); } catch(e) {}
 
         document.body.classList.add('power-on-flash');
 
@@ -40,8 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 250);
     }
 
-    // v3 premium: CRT boot sequence retired — content fades in immediately
-    let hasBooted = true;
+    // Cinematic silicon bring-up on first visit only (≤2s, skippable);
+    // localStorage and recruiter mode both bypass it
+    let hasBooted = false;
+    try {
+        hasBooted = localStorage.getItem('om_booted') === '1' ||
+                    localStorage.getItem('om_recruiter') === '1';
+    } catch(e) { hasBooted = true; }
 
     if (hasBooted) {
         // Skip boot entirely
@@ -57,8 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let lineIndex = 0;
         let charIndex = 0;
 
-        // Auto-skip after 4 seconds
-        const autoSkipTimer = setTimeout(endBootSequence, 4000);
+        // Hard cap: boot never exceeds 2 seconds
+        const autoSkipTimer = setTimeout(endBootSequence, 2000);
 
         function typeLine() {
             if (!isBooting) { clearTimeout(autoSkipTimer); return; }
@@ -67,16 +70,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (charIndex < currentLine.length) {
                     if (bootTextEl) bootTextEl.innerHTML += currentLine.charAt(charIndex);
                     charIndex++;
-                    typeTimeout = setTimeout(typeLine, Math.random() * 15 + 8);
+                    typeTimeout = setTimeout(typeLine, Math.random() * 5 + 5);
                 } else {
                     if (bootTextEl) bootTextEl.innerHTML += "<br>";
                     lineIndex++;
                     charIndex = 0;
-                    typeTimeout = setTimeout(typeLine, Math.random() * 150 + 80);
+                    typeTimeout = setTimeout(typeLine, Math.random() * 50 + 60);
                 }
             } else {
                 clearTimeout(autoSkipTimer);
-                typeTimeout = setTimeout(endBootSequence, 400);
+                typeTimeout = setTimeout(endBootSequence, 300);
             }
         }
 
@@ -266,7 +269,9 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx.clearRect(0, 0, width, height);
             lines.forEach(l => l.draw());
             nodes.forEach(n => n.draw());
-            packets.forEach(p => { p.update(); p.draw(); });
+            if (!document.body.classList.contains('recruiter-mode')) {
+                packets.forEach(p => { p.update(); p.draw(); });
+            }
             animationId = requestAnimationFrame(animateCircuit);
         }
 
@@ -486,6 +491,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (counter.dataset.animated) return;
 
             const target = parseInt(counter.dataset.target, 10);
+            if (document.body.classList.contains('recruiter-mode')) {
+                counter.textContent = target;
+                counter.dataset.animated = 'true';
+                return;
+            }
             const duration = 2000; // ms
             const startTime = performance.now();
 
@@ -635,6 +645,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ========================================= */
     function typewriteElement(el) {
         el.classList.add('typed');
+        if (document.body.classList.contains('recruiter-mode')) return;
         const htmlContent = el.innerHTML;
         el.innerHTML = '';
 
@@ -837,7 +848,7 @@ document.addEventListener("DOMContentLoaded", () => {
             toggle.setAttribute('aria-expanded', 'true');
             if (!welcomed) {
                 welcomed = true;
-                print('Om Patel — verification shell <span class="t-dim">(build v3.1-pipeline)</span>', 't-cyan');
+                print('Om Patel — verification shell <span class="t-dim">(build v3.2-experience)</span>', 't-cyan');
                 print('Type <span class="t-lime">help</span> to list commands.', 't-dim');
             }
             input.focus();
@@ -848,7 +859,7 @@ document.addEventListener("DOMContentLoaded", () => {
             toggle.setAttribute('aria-expanded', 'false');
         }
 
-        const SECTIONS = ['about', 'now', 'experience', 'architecture', 'projects', 'skills', 'education', 'achievements'];
+        const SECTIONS = ['about', 'now', 'skills', 'experience', 'architecture', 'projects', 'dashboard', 'education', 'achievements', 'finale'];
 
         function gotoSection(id) {
             const target = document.getElementById(id);
@@ -887,7 +898,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 print('  <span class="t-lime">resume</span>        open resume PDF');
                 print('  <span class="t-lime">contact</span>       reach me');
                 print('  <span class="t-lime">clear</span>         clear terminal');
-                print('Hint: DV engineers also try <span class="t-orange">make regression</span>, <span class="t-orange">coverage</span>, <span class="t-orange">promotion</span>, <span class="t-orange">pipeline</span>, <span class="t-orange">version</span>', 't-dim');
+                print('Hint: DV engineers also try <span class="t-orange">make regression</span>, <span class="t-orange">coverage</span>, <span class="t-orange">waveform</span>, <span class="t-orange">assert</span>, <span class="t-orange">pipeline</span>, <span class="t-orange">promotion</span>, <span class="t-orange">version</span>', 't-dim');
             },
             whoami() {
                 print('Om Patel', 't-cyan');
@@ -950,8 +961,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 print('instruction currently in: <span class="t-cyan">' + cur + '</span> stage');
                 print('Scroll the page — you are the instruction.', 't-dim');
             },
+            waveform() {
+                print('── waveform viewer ───────────────────', 't-dim');
+                print('clk   : <span class="t-cyan">▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔</span>');
+                print('awvalid: <span class="t-orange">▁▁▔▔▔▔▁▁▁▁▁▁▁▁▁▁</span>');
+                print('awready: <span class="t-orange">▁▁▁▁▔▔▁▁▁▁▁▁▁▁▁▁</span>');
+                print('bvalid : <span class="t-lime">▁▁▁▁▁▁▁▁▔▔▁▁▁▁▁▁</span>  BRESP=OKAY');
+                print('For the real trace: <span class="t-lime">goto about</span> — the hero is a live waveform.', 't-dim');
+            },
+            assert() {
+                print('── assertion monitor ─────────────────', 't-dim');
+                print('[SVA] aw_handshake_protocol : <span class="t-lime">PASS</span>');
+                print('[SVA] wlast_before_bvalid   : <span class="t-lime">PASS</span>');
+                print('[SVA] no_resp_without_req   : <span class="t-lime">PASS</span>');
+                print('[SVA] reset_clears_state    : <span class="t-lime">PASS</span>');
+                print('assertion monitor: <span class="t-lime">all green ✓</span> — 0 failures');
+            },
+            panic() {
+                print('Segmentation fault (core dumped)', 't-rose');
+                document.body.classList.add('panic-flash');
+                setTimeout(() => document.body.classList.remove('panic-flash'), 500);
+                setTimeout(() => print('...just kidding. This site is verified.', 't-dim'), 600);
+            },
             version() {
-                print('portfolio <span class="t-cyan">v3.1-pipeline</span>');
+                print('portfolio <span class="t-cyan">v3.2-experience</span>');
                 print('theme      : near-black · electric blue · glass', 't-dim');
                 print('toolchain  : HTML5 · CSS3 · vanilla JS — zero build step', 't-dim');
                 print('regression : <span class="t-lime">ALL CHECKS PASSED</span>');
@@ -1165,6 +1198,111 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         update();
+    })();
+
+
+    /* =========================================
+       18. RECRUITER MODE + DASHBOARD + FINALE
+    ========================================= */
+    (function initRecruiterMode() {
+        const toggle = document.getElementById('recruiter-toggle');
+        if (!toggle) return;
+
+        function apply(on) {
+            document.body.classList.toggle('recruiter-mode', on);
+            toggle.setAttribute('aria-pressed', String(on));
+            toggle.classList.toggle('rm-on', on);
+            if (on) {
+                // content-first: reveal everything that scroll choreography would stage
+                document.querySelectorAll('.fade-in-section, .stagger-children').forEach(el => el.classList.add('is-visible'));
+            }
+        }
+
+        let saved = false;
+        try { saved = localStorage.getItem('om_recruiter') === '1'; } catch(e) {}
+        apply(saved);
+
+        toggle.addEventListener('click', () => {
+            const on = !document.body.classList.contains('recruiter-mode');
+            try { localStorage.setItem('om_recruiter', on ? '1' : '0'); } catch(e) {}
+            apply(on);
+        });
+    })();
+
+    (function initDashboard() {
+        const dash = document.getElementById('dashboard');
+        if (!dash) return;
+        const bars = dash.querySelectorAll('.cov-bar-fill');
+        const regStatus = dash.querySelector('#reg-status');
+        const regBar = dash.querySelector('#reg-progress');
+        let played = false;
+
+        function play() {
+            if (played) return;
+            played = true;
+            animateCounters();
+            bars.forEach((bar, i) => {
+                setTimeout(() => { bar.style.width = bar.dataset.value + '%'; }, 150 + i * 120);
+            });
+            if (!regStatus || !regBar) return;
+            if (document.body.classList.contains('recruiter-mode')) {
+                regBar.style.width = '100%';
+                regStatus.textContent = 'PASS ✓';
+                regStatus.className = 'reg-status reg-pass';
+                return;
+            }
+            regStatus.textContent = 'RUNNING…';
+            regStatus.className = 'reg-status reg-running';
+            let p = 0;
+            const tick = setInterval(() => {
+                p += Math.random() * 14 + 6;
+                if (p >= 100) {
+                    p = 100;
+                    clearInterval(tick);
+                    regStatus.textContent = 'PASS ✓';
+                    regStatus.className = 'reg-status reg-pass';
+                }
+                regBar.style.width = p + '%';
+            }, 180);
+        }
+
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { play(); obs.disconnect(); }
+            });
+        }, { threshold: 0.25 });
+        obs.observe(dash);
+    })();
+
+    (function initFinale() {
+        const die = document.getElementById('finale-die');
+        const finale = document.getElementById('finale');
+        if (!die || !finale) return;
+
+        // build the die: cells fly in from scattered positions on reveal
+        const COLS = 10, ROWS = 6;
+        for (let i = 0; i < COLS * ROWS; i++) {
+            const cell = document.createElement('div');
+            cell.className = 'fd-cell';
+            const dx = (Math.random() * 160 - 80).toFixed(0);
+            const dy = (Math.random() * 160 - 80).toFixed(0);
+            const rot = (Math.random() * 90 - 45).toFixed(0);
+            cell.style.setProperty('--dx', dx + 'px');
+            cell.style.setProperty('--dy', dy + 'px');
+            cell.style.setProperty('--rot', rot + 'deg');
+            cell.style.transitionDelay = (Math.random() * 0.9).toFixed(2) + 's';
+            die.appendChild(cell);
+        }
+
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    finale.classList.add('assembled');
+                    obs.disconnect();
+                }
+            });
+        }, { threshold: 0.35 });
+        obs.observe(finale);
     })();
 
 });
