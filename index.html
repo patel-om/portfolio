@@ -84,37 +84,37 @@
                     <svg class="waveform-svg" viewBox="0 0 800 240" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Multi-signal verification waveform over time">
                         <defs>
                             <pattern id="wf-grid" width="40" height="28" patternUnits="userSpaceOnUse">
-                                <path d="M40 0 L0 0 0 28" fill="none" stroke="#383838" stroke-width="0.5"/>
+                                <path d="M40 0 L0 0 0 28" fill="none" stroke="#21252D" stroke-width="0.5"/>
                             </pattern>
                             <filter id="wf-glow" x="-20%" y="-20%" width="140%" height="140%">
                                 <feGaussianBlur stdDeviation="2.2" result="b"/>
                                 <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
                             </filter>
                             <linearGradient id="wf-cov-fill" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#a6ff00" stop-opacity="0.28"/>
-                                <stop offset="100%" stop-color="#a6ff00" stop-opacity="0"/>
+                                <stop offset="0%" stop-color="#30D158" stop-opacity="0.28"/>
+                                <stop offset="100%" stop-color="#30D158" stop-opacity="0"/>
                             </linearGradient>
                         </defs>
 
                         <rect x="140" y="0" width="660" height="240" fill="url(#wf-grid)"/>
 
                         <!-- signal-name gutter -->
-                        <line x1="140" y1="0" x2="140" y2="240" stroke="#4a4a4a" stroke-width="1"/>
+                        <line x1="140" y1="0" x2="140" y2="240" stroke="#333945" stroke-width="1"/>
                         <text class="wf-name" x="128" y="44"  text-anchor="end">clk</text>
                         <text class="wf-name" x="128" y="98"  text-anchor="end">rst_n</text>
                         <text class="wf-name wf-name-hi" x="128" y="172" text-anchor="end">cov_closure[%]</text>
 
                         <!-- row separators -->
-                        <line x1="140" y1="64"  x2="800" y2="64"  stroke="#2e2e2e" stroke-width="1"/>
-                        <line x1="140" y1="120" x2="800" y2="120" stroke="#2e2e2e" stroke-width="1"/>
-                        <line x1="140" y1="206" x2="800" y2="206" stroke="#2e2e2e" stroke-width="1"/>
+                        <line x1="140" y1="64"  x2="800" y2="64"  stroke="#1B1F26" stroke-width="1"/>
+                        <line x1="140" y1="120" x2="800" y2="120" stroke="#1B1F26" stroke-width="1"/>
+                        <line x1="140" y1="206" x2="800" y2="206" stroke="#1B1F26" stroke-width="1"/>
 
                         <!-- year gridlines + time axis -->
-                        <g class="wf-axis" font-family="'JetBrains Mono', monospace" font-size="10" fill="#7a7a7a">
-                            <line x1="215" y1="14" x2="215" y2="206" stroke="#333" stroke-dasharray="2 5"/>
-                            <line x1="360" y1="14" x2="360" y2="206" stroke="#333" stroke-dasharray="2 5"/>
-                            <line x1="510" y1="14" x2="510" y2="206" stroke="#333" stroke-dasharray="2 5"/>
-                            <line x1="640" y1="14" x2="640" y2="206" stroke="#333" stroke-dasharray="2 5"/>
+                        <g class="wf-axis" font-family="'JetBrains Mono', monospace" font-size="10" fill="#5C6675">
+                            <line x1="215" y1="14" x2="215" y2="206" stroke="#20242C" stroke-dasharray="2 5"/>
+                            <line x1="360" y1="14" x2="360" y2="206" stroke="#20242C" stroke-dasharray="2 5"/>
+                            <line x1="510" y1="14" x2="510" y2="206" stroke="#20242C" stroke-dasharray="2 5"/>
+                            <line x1="640" y1="14" x2="640" y2="206" stroke="#20242C" stroke-dasharray="2 5"/>
                             <text x="215" y="224" text-anchor="middle">2023</text>
                             <text x="360" y="224" text-anchor="middle">2024</text>
                             <text x="510" y="224" text-anchor="middle">2025</text>
@@ -122,33 +122,33 @@
                         </g>
 
                         <!-- clk -->
-                        <path class="wf-sig wf-clk" pathLength="100" fill="none" stroke="#00d9ff" stroke-width="1.6" stroke-linejoin="round"
+                        <path class="wf-sig wf-clk" pathLength="100" fill="none" stroke="#3D9BFF" stroke-width="1.6" stroke-linejoin="round"
                               d="M150,50 V26 H167 V50 H184 V26 H201 V50 H218 V26 H235 V50 H252 V26 H269 V50 H286 V26 H303 V50 H320 V26 H337 V50 H354 V26 H371 V50 H388 V26 H405 V50 H422 V26 H439 V50 H456 V26 H473 V50 H490 V26 H507 V50 H524 V26 H541 V50 H558 V26 H575 V50 H592 V26 H609 V50 H626 V26 H643 V50 H660 V26 H677 V50 H694 V26 H711 V50 H728 V26 H745 V50 H760"/>
 
                         <!-- rst_n (released early) -->
-                        <path class="wf-sig wf-rst" pathLength="100" fill="none" stroke="#ff6b00" stroke-width="1.8" stroke-linejoin="round"
+                        <path class="wf-sig wf-rst" pathLength="100" fill="none" stroke="#8A98AC" stroke-width="1.8" stroke-linejoin="round"
                               d="M150,104 H196 V80 H760"/>
 
                         <!-- coverage closure climb (the story) -->
                         <path class="wf-cov-area" d="M150,200 L215,200 L215,184 L300,184 L300,176 L360,176 L360,162 L455,162 L455,150 L545,150 L545,146 L620,146 L620,138 L760,138 L760,200 Z" fill="url(#wf-cov-fill)"/>
-                        <path class="wf-sig wf-cov" pathLength="100" filter="url(#wf-glow)" fill="none" stroke="#a6ff00" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"
+                        <path class="wf-sig wf-cov" pathLength="100" filter="url(#wf-glow)" fill="none" stroke="#30D158" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"
                               d="M150,200 L215,200 L215,184 L300,184 L300,176 L360,176 L360,162 L455,162 L455,150 L545,150 L545,146 L620,146 L620,138 L760,138"/>
 
                         <!-- milestone dots on the coverage track -->
-                        <circle class="wf-ms" cx="215" cy="184" r="3.5" fill="#a6ff00"/>
-                        <circle class="wf-ms" cx="455" cy="150" r="3.5" fill="#a6ff00"/>
+                        <circle class="wf-ms" cx="215" cy="184" r="3.5" fill="#30D158"/>
+                        <circle class="wf-ms" cx="455" cy="150" r="3.5" fill="#30D158"/>
 
                         <!-- value labels -->
                         <g font-family="'JetBrains Mono', monospace" font-size="10">
-                            <text class="wf-val" x="150" y="197" fill="#7a7a7a">0%</text>
-                            <text class="wf-val" x="368" y="159" fill="#a6ff00">50%</text>
+                            <text class="wf-val" x="150" y="197" fill="#5C6675">0%</text>
+                            <text class="wf-val" x="368" y="159" fill="#30D158">50%</text>
                         </g>
 
                         <!-- NOW cursor -->
-                        <line class="wf-now-line" x1="690" y1="14" x2="690" y2="206" stroke="#00d9ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.7"/>
-                        <circle class="wf-peak" cx="690" cy="138" r="5" fill="#a6ff00"/>
-                        <text class="wf-peak-label" x="700" y="132" fill="#a6ff00" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700">100%</text>
-                        <text class="wf-now-label" x="690" y="232" text-anchor="middle" fill="#00d9ff" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">▲ NOW</text>
+                        <line class="wf-now-line" x1="690" y1="14" x2="690" y2="206" stroke="#3D9BFF" stroke-width="1" stroke-dasharray="3 3" opacity="0.7"/>
+                        <circle class="wf-peak" cx="690" cy="138" r="5" fill="#30D158"/>
+                        <text class="wf-peak-label" x="700" y="132" fill="#30D158" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700">100%</text>
+                        <text class="wf-now-label" x="690" y="232" text-anchor="middle" fill="#3D9BFF" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">▲ NOW</text>
                     </svg>
                 </div>
 
@@ -179,10 +179,22 @@
                 </div>
 
                 <div class="contact-links parallax" data-speed="0.06">
+                    <a href="#projects" class="contact-btn cta-primary magnetic" data-strength="40" id="cta-view-work" aria-label="View work">View Work</a>
                     <a href="mailto:patel2om002@gmail.com" class="contact-btn magnetic scramble-text" data-value="✉ Email" data-strength="40" id="contact-email" aria-label="Send email">✉ Email</a>
                     <a href="https://linkedin.com/in/om-patel-0369" target="_blank" rel="noopener noreferrer" class="contact-btn magnetic scramble-text" data-value="⇥ LinkedIn" data-strength="40" id="contact-linkedin" aria-label="Visit LinkedIn profile">⇥ LinkedIn</a>
                     <a href="https://github.com/patel-om" target="_blank" rel="noopener noreferrer" class="contact-btn magnetic scramble-text" data-value="⌥ GitHub" data-strength="40" id="contact-github" aria-label="Visit GitHub profile">⌥ GitHub</a>
                     <a href="Om Patel.pdf" download class="contact-btn resume-btn magnetic scramble-text" data-value="⤓ Resume" data-strength="40" id="contact-resume" aria-label="Download resume">⤓ Resume</a>
+                </div>
+
+                <div class="hero-tags parallax" data-speed="0.05" aria-label="Keywords">
+                    <span class="hero-tag">SiFive</span>
+                    <span class="hero-tag">Ahmedabad</span>
+                    <span class="hero-tag">SystemVerilog</span>
+                    <span class="hero-tag">UVM</span>
+                    <span class="hero-tag">RISC-V</span>
+                    <span class="hero-tag">AXI4</span>
+                    <span class="hero-tag">Python</span>
+                    <span class="hero-tag">Coverage</span>
                 </div>
 
                 <!-- Animated Stats -->
@@ -389,25 +401,25 @@
                             <line class="rail" x1="550" y1="58" x2="550" y2="360"/>
 
                             <line class="lane-line" data-ch="AW" x1="90" y1="90" x2="550" y2="90"/>
-                            <text class="lane-label" data-ch="AW" x="100" y="82" fill="#00d9ff">AW</text>
+                            <text class="lane-label" data-ch="AW" x="100" y="82" fill="#3D9BFF">AW</text>
                             <text class="lane-desc" x="540" y="82">write address &#9654;</text>
 
                             <line class="lane-line" data-ch="W" x1="90" y1="150" x2="550" y2="150"/>
-                            <text class="lane-label" data-ch="W" x="100" y="142" fill="#ff8a1e">W</text>
+                            <text class="lane-label" data-ch="W" x="100" y="142" fill="#9AA7BA">W</text>
                             <text class="lane-desc" x="540" y="142">write data &#9654;</text>
 
                             <line class="lane-line" data-ch="B" x1="90" y1="210" x2="550" y2="210"/>
-                            <text class="lane-label" data-ch="B" x="100" y="202" fill="#a6ff00">B</text>
+                            <text class="lane-label" data-ch="B" x="100" y="202" fill="#30D158">B</text>
                             <text class="lane-desc" x="540" y="202">&#9664; write response</text>
 
                             <line class="lane-sep" x1="90" y1="245" x2="550" y2="245"/>
 
                             <line class="lane-line" data-ch="AR" x1="90" y1="290" x2="550" y2="290"/>
-                            <text class="lane-label" data-ch="AR" x="100" y="282" fill="#00d9ff">AR</text>
+                            <text class="lane-label" data-ch="AR" x="100" y="282" fill="#3D9BFF">AR</text>
                             <text class="lane-desc" x="540" y="282">read address &#9654;</text>
 
                             <line class="lane-line" data-ch="R" x1="90" y1="350" x2="550" y2="350"/>
-                            <text class="lane-label" data-ch="R" x="100" y="342" fill="#a6ff00">R</text>
+                            <text class="lane-label" data-ch="R" x="100" y="342" fill="#30D158">R</text>
                             <text class="lane-desc" x="540" y="342">&#9664; read data</text>
 
                             <g id="axi-packets"></g>
@@ -681,6 +693,50 @@
                     </div>
                 </div>
             </section>
+            <div class="section-divider" aria-hidden="true"></div>
+
+            <!-- ACHIEVEMENT WALL -->
+            <section id="achievements" class="content-section" aria-label="Achievements">
+                <h2 class="section-title" data-value="Milestones">Milestones</h2>
+                <div class="ach-grid stagger-children">
+                    <article class="ach-card spotlight-card gradient-border">
+                        <div class="ach-glyph" aria-hidden="true">&#9670;</div>
+                        <h3>Engineer @ SiFive</h3>
+                        <p>Design Verification Engineer on RISC-V CPU programs &mdash; owner of Control Port &amp; CLP verification.</p>
+                        <span class="ach-date">2024 &rarr; present</span>
+                    </article>
+                    <article class="ach-card spotlight-card gradient-border">
+                        <div class="ach-glyph" aria-hidden="true">&#9650;</div>
+                        <h3>100% Coverage Closure</h3>
+                        <p>Drove CLP functional coverage from 50% to 100% &mdash; branch, toggle, line, assertion, functional.</p>
+                        <span class="ach-date">SiFive</span>
+                    </article>
+                    <article class="ach-card spotlight-card gradient-border">
+                        <div class="ach-glyph" aria-hidden="true">&#9632;</div>
+                        <h3>M.Tech, CSE</h3>
+                        <p>Nirma University &mdash; 8.23/10 CGPA. Research on LSTM optimization and Liquid Neural Networks.</p>
+                        <span class="ach-date">2023 &ndash; 2025</span>
+                    </article>
+                    <article class="ach-card spotlight-card gradient-border">
+                        <div class="ach-glyph" aria-hidden="true">&#9679;</div>
+                        <h3>GATE CS 2023</h3>
+                        <p>Qualified in Computer Science &amp; IT with a score of 389.</p>
+                        <span class="ach-date">2023</span>
+                    </article>
+                    <article class="ach-card spotlight-card gradient-border">
+                        <div class="ach-glyph" aria-hidden="true">&#9671;</div>
+                        <h3>IIT Madras</h3>
+                        <p>Foundation Level in Programming and Data Science &mdash; statistics, mathematics, Python.</p>
+                        <span class="ach-date">2020 &ndash; 2022</span>
+                    </article>
+                    <article class="ach-card spotlight-card gradient-border">
+                        <div class="ach-glyph" aria-hidden="true">&#9633;</div>
+                        <h3>Microsoft Power BI</h3>
+                        <p>Data Analyst Professional Certificate &mdash; 6-course specialization via Coursera.</p>
+                        <span class="ach-date">2024</span>
+                    </article>
+                </div>
+            </section>
         </main>
 
         <footer aria-label="Footer">
@@ -704,8 +760,8 @@
                     </div>
                     <pre class="tf-body"><span class="tf-line"><span class="tf-prompt">om@verif</span>:<span class="tf-path">~</span>$ cat build.info</span>
 <span class="tf-line"><span class="tf-key">author</span>      : Om Patel <span class="tf-c">© 2026</span></span>
-<span class="tf-line"><span class="tf-key">built_with</span>  : <span class="tf-pink">♥</span> and SystemVerilog</span>
-<span class="tf-line"><span class="tf-key">last_verified</span>: <span class="tf-lime">2026-07-17</span>  |  build: <span class="tf-lime">v2.1-verdi</span></span>
+<span class="tf-line"><span class="tf-key">designed_by</span> : Om Patel &mdash; engineered end to end</span>
+<span class="tf-line"><span class="tf-key">last_verified</span>: <span class="tf-lime">2026-07-17</span>  |  build: <span class="tf-lime">v3.0-premium</span></span>
 <span class="tf-line"><span class="tf-key">toolchain</span>   : HTML5 · CSS3 · JavaScript</span>
 <span class="tf-line"><span class="tf-key">status</span>      : <span class="tf-lime">[ ALL CHECKS PASSED ]</span></span>
 <span class="tf-line"><span class="tf-prompt">om@verif</span>:<span class="tf-path">~</span>$ <span class="tf-cursor"></span></span></pre>

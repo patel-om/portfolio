@@ -40,9 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 250);
     }
 
-    // Check if user already visited this session
-    let hasBooted = false;
-    try { hasBooted = sessionStorage.getItem('portfolio_booted') === 'true'; } catch(e) {}
+    // v3 premium: CRT boot sequence retired — content fades in immediately
+    let hasBooted = true;
 
     if (hasBooted) {
         // Skip boot entirely
@@ -125,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(0, 217, 255, 0.3)';
+                ctx.fillStyle = 'rgba(61, 155, 255, 0.3)';
                 ctx.fill();
             }
         }
@@ -148,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ctx.moveTo(this.n1.x, this.n1.y);
                 ctx.lineTo(this.midX, this.midY);
                 ctx.lineTo(this.n2.x, this.n2.y);
-                ctx.strokeStyle = 'rgba(0, 217, 255, 0.04)';
+                ctx.strokeStyle = 'rgba(61, 155, 255, 0.04)';
                 ctx.lineWidth = 0.5;
                 ctx.stroke();
             }
@@ -166,12 +165,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.targetX = endNode.x;
                 this.targetY = endNode.y;
                 this.progress = 0;
-                this.speed = Math.random() * 0.008 + 0.003;
+                this.speed = Math.random() * 0.003 + 0.0012;
                 this.color = Math.random() > 0.6
-                    ? 'rgba(0, 166, 196, 0.7)'
+                    ? 'rgba(30, 111, 217, 0.7)'
                     : Math.random() > 0.5
-                        ? 'rgba(0, 217, 255, 0.7)'
-                        : 'rgba(255, 107, 0, 0.7)';
+                        ? 'rgba(61, 155, 255, 0.7)'
+                        : 'rgba(138, 152, 172, 0.7)';
                 if (Math.random() > 0.5) {
                     this.midX = startNode.x;
                     this.midY = endNode.y;
@@ -403,7 +402,8 @@ document.addEventListener("DOMContentLoaded", () => {
        5. HACKER TEXT SCRAMBLE EFFECT
     ========================================= */
     const scrambleLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+{}|:<>?";
-    const scrambleElements = document.querySelectorAll('.scramble-text');
+    // v3 premium: hover-scramble retired for a calmer feel
+    const scrambleElements = [];
 
     scrambleElements.forEach(el => {
         el.addEventListener('mouseenter', event => {
@@ -734,7 +734,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const X_M = 90, X_S = 550;
         const LANE_Y = { AW: 90, W: 150, B: 210, AR: 290, R: 350 };
-        const LANE_COLOR = { AW: '#00d9ff', W: '#ff8a1e', B: '#a6ff00', AR: '#00d9ff', R: '#a6ff00' };
+        const LANE_COLOR = { AW: '#3D9BFF', W: '#9AA7BA', B: '#30D158', AR: '#3D9BFF', R: '#30D158' };
         let axiBusy = false;
 
         const wait = ms => new Promise(r => setTimeout(r, ms));
@@ -837,7 +837,7 @@ document.addEventListener("DOMContentLoaded", () => {
             toggle.setAttribute('aria-expanded', 'true');
             if (!welcomed) {
                 welcomed = true;
-                print('Om Patel — verification shell <span class="t-dim">(build v2.1-verdi)</span>', 't-cyan');
+                print('Om Patel — verification shell <span class="t-dim">(build v3.0-premium)</span>', 't-cyan');
                 print('Type <span class="t-lime">help</span> to list commands.', 't-dim');
             }
             input.focus();
@@ -848,7 +848,7 @@ document.addEventListener("DOMContentLoaded", () => {
             toggle.setAttribute('aria-expanded', 'false');
         }
 
-        const SECTIONS = ['about', 'now', 'experience', 'architecture', 'projects', 'skills', 'education'];
+        const SECTIONS = ['about', 'now', 'experience', 'architecture', 'projects', 'skills', 'education', 'achievements'];
 
         function gotoSection(id) {
             const target = document.getElementById(id);
@@ -887,7 +887,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 print('  <span class="t-lime">resume</span>        open resume PDF');
                 print('  <span class="t-lime">contact</span>       reach me');
                 print('  <span class="t-lime">clear</span>         clear terminal');
-                print('Hint: DV engineers also try <span class="t-orange">make regression</span>, <span class="t-orange">coverage</span>, <span class="t-orange">promotion</span>', 't-dim');
+                print('Hint: DV engineers also try <span class="t-orange">make regression</span>, <span class="t-orange">coverage</span>, <span class="t-orange">promotion</span>, <span class="t-orange">version</span>', 't-dim');
             },
             whoami() {
                 print('Om Patel', 't-cyan');
@@ -940,6 +940,12 @@ document.addEventListener("DOMContentLoaded", () => {
             promotion() {
                 print('Checking promotion.status ...', 't-dim');
                 print('Current status: waiting for next review :)', 't-orange');
+            },
+            version() {
+                print('portfolio <span class="t-cyan">v3.0-premium</span>');
+                print('theme      : near-black · electric blue · glass', 't-dim');
+                print('toolchain  : HTML5 · CSS3 · vanilla JS — zero build step', 't-dim');
+                print('regression : <span class="t-lime">ALL CHECKS PASSED</span>');
             }
         };
 
@@ -999,5 +1005,72 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     })();
+
+
+    /* =========================================
+       15. KONAMI CODE — CPU DIE EASTER EGG
+    ========================================= */
+    (function initKonami() {
+        const SEQ = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let pos = 0;
+        let dieOverlay = null;
+
+        function showDie() {
+            if (dieOverlay) return;
+            dieOverlay = document.createElement('div');
+            dieOverlay.id = 'die-overlay';
+            dieOverlay.setAttribute('role', 'presentation');
+            let cells = '';
+            for (let r = 0; r < 6; r++) {
+                for (let c = 0; c < 8; c++) {
+                    const delay = ((r + c) * 0.12).toFixed(2);
+                    cells += `<div class="die-cell" style="animation-delay:${delay}s"></div>`;
+                }
+            }
+            dieOverlay.innerHTML =
+                '<div class="die-package">' +
+                    '<div class="die-grid">' + cells + '</div>' +
+                    '<div class="die-caption">RISC-V CORE COMPLEX — you found the die shot. Verified. ✓</div>' +
+                '</div>';
+            document.body.appendChild(dieOverlay);
+            const dismiss = () => {
+                if (!dieOverlay) return;
+                dieOverlay.classList.add('fading');
+                setTimeout(() => { if (dieOverlay) { dieOverlay.remove(); dieOverlay = null; } }, 500);
+            };
+            dieOverlay.addEventListener('click', dismiss);
+            setTimeout(dismiss, 6000);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            const t = e.target;
+            if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+            const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+            if (key === SEQ[pos]) {
+                pos++;
+                if (pos === SEQ.length) { pos = 0; showDie(); }
+            } else {
+                pos = (key === SEQ[0]) ? 1 : 0;
+            }
+        });
+    })();
+
+
+    /* =========================================
+       16. BUTTON RIPPLE MICRO-INTERACTION
+    ========================================= */
+    document.querySelectorAll('.contact-btn, .axi-btn, #terminal-toggle').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const span = document.createElement('span');
+            span.className = 'ripple';
+            span.style.width = span.style.height = size + 'px';
+            span.style.left = (e.clientX - rect.left - size / 2) + 'px';
+            span.style.top = (e.clientY - rect.top - size / 2) + 'px';
+            btn.appendChild(span);
+            setTimeout(() => span.remove(), 650);
+        });
+    });
 
 });
