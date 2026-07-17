@@ -41,10 +41,10 @@
     <!-- Mobile Nav Overlay -->
     <div class="mobile-nav-overlay" id="mobile-nav" aria-label="Mobile navigation">
         <a href="#about" class="mobile-nav-link">About</a>
+        <a href="#skills" class="mobile-nav-link">Skills</a>
         <a href="#experience" class="mobile-nav-link">Experience</a>
         <a href="#architecture" class="mobile-nav-link">Architecture</a>
         <a href="#projects" class="mobile-nav-link">Projects</a>
-        <a href="#skills" class="mobile-nav-link">Skills</a>
         <a href="#education" class="mobile-nav-link">Education</a>
     </div>
 
@@ -56,10 +56,10 @@
                     <a href="#about" class="logo scramble-text" data-value="patel_om.v">patel_om.v</a>
                     <ul class="nav-links" id="nav-links">
                         <li><a href="#about" class="magnetic scramble-text" data-value="About" data-strength="20" data-section="about">About</a></li>
+                        <li><a href="#skills" class="magnetic scramble-text" data-value="Skills" data-strength="20" data-section="skills">Skills</a></li>
                         <li><a href="#experience" class="magnetic scramble-text" data-value="Experience" data-strength="20" data-section="experience">Experience</a></li>
                         <li><a href="#architecture" class="magnetic scramble-text" data-value="Architecture" data-strength="20" data-section="architecture">Architecture</a></li>
                         <li><a href="#projects" class="magnetic scramble-text" data-value="Projects" data-strength="20" data-section="projects">Projects</a></li>
-                        <li><a href="#skills" class="magnetic scramble-text" data-value="Skills" data-strength="20" data-section="skills">Skills</a></li>
                         <li><a href="#education" class="magnetic scramble-text" data-value="Education" data-strength="20" data-section="education">Education</a></li>
                     </ul>
                     <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -74,6 +74,7 @@
         <main>
             <!-- HERO SECTION -->
             <section id="about" class="hero-section" aria-label="About Om Patel">
+                <div class="stage-tag-wrap"><span class="stage-tag">IF &middot; FETCH &mdash; pc &rarr; instruction</span></div>
                 <!-- Animated Waveform Hero (Verdi Trace Inspector style) -->
                 <div class="waveform-hero" aria-hidden="true">
                     <div class="waveform-toolbar">
@@ -222,6 +223,7 @@
 
             <!-- CURRENTLY BUILDING -->
             <section id="now" class="content-section" aria-label="Currently building">
+                <div class="stage-tag-wrap"><span class="stage-tag">ID &middot; DECODE &mdash; control signals generated</span></div>
                 <h2 class="section-title scramble-text" data-value="Currently Building">Currently Building</h2>
                 <div class="now-grid stagger-children">
                     <article class="now-card spotlight-card gradient-border">
@@ -262,8 +264,107 @@
 
             <div class="section-divider" aria-hidden="true"></div>
 
+            <!-- SKILLS -->
+            <section id="skills" class="content-section" aria-label="Technical skills">
+                <h2 class="section-title scramble-text" data-value="Skills">Skills</h2>
+
+                <!-- Proficiency legend -->
+                <div class="skill-legend" aria-label="Proficiency legend">
+                    <span class="legend-item"><span class="legend-swatch lvl-expert"></span>Expert</span>
+                    <span class="legend-item"><span class="legend-swatch lvl-proficient"></span>Proficient</span>
+                    <span class="legend-item"><span class="legend-swatch lvl-learning"></span>Working knowledge</span>
+                    <span class="legend-hint">↳ hover any skill to see where I've used it</span>
+                </div>
+
+                <div class="register-map">
+                    <div class="register-group spotlight-card glitch-hover gradient-border">
+                        <h3 class="register-header scramble-text" data-value="Verification & VLSI">Verification &amp; VLSI</h3>
+                        <div class="register-bits skill-heatmap">
+                            <span class="bit" data-level="expert" data-tip="Control Port &amp; CLP verification @ SiFive">AXI4/APB Bus Protocols</span>
+                            <span class="bit" data-level="expert" data-tip="5 RTL bugs found via failure triage">RTL Debugging</span>
+                            <span class="bit" data-level="expert" data-tip="Drove CLP coverage 50% → 100%">Coverage Closure</span>
+                            <span class="bit" data-level="proficient" data-tip="RISC-V cores: Moray, Shark, Majestic">CPU Design Verification</span>
+                            <span class="bit" data-level="proficient" data-tip="Enhanced AXI4 GDI VIP driver in C++">VIP Development (C++)</span>
+                            <span class="bit" data-level="expert" data-tip="Built VDB→HTML coverage dashboard">Functional Coverage Reporting</span>
+                            <span class="bit" data-level="proficient" data-tip="Daily simulation &amp; regressions">Synopsys VCS</span>
+                            <span class="bit" data-level="expert" data-tip="Weekly &amp; nightly Moray / Shark regressions">Regression Management</span>
+                            <span class="bit" data-level="proficient" data-tip="Failure triage &amp; targeted release tickets">JIRA</span>
+                        </div>
+                    </div>
+
+                    <div class="register-group spotlight-card glitch-hover gradient-border">
+                        <h3 class="register-header scramble-text" data-value="Programming">Programming</h3>
+                        <div class="register-bits skill-heatmap">
+                            <span class="bit" data-level="expert" data-tip="VIP development &amp; functional tests">C/C++</span>
+                            <span class="bit" data-level="expert" data-tip="Automation, AI tooling &amp; ML research">Python</span>
+                            <span class="bit" data-level="proficient" data-tip="Android app development">Java</span>
+                            <span class="bit" data-level="proficient" data-tip="Test infrastructure scripting @ SiFive">Ruby</span>
+                            <span class="bit" data-level="proficient" data-tip="Test &amp; config definitions">YAML</span>
+                            <span class="bit" data-level="proficient" data-tip="Data modeling &amp; queries">SQL</span>
+                            <span class="bit" data-level="proficient" data-tip="This portfolio &amp; coverage dashboards">JavaScript</span>
+                            <span class="bit" data-level="proficient" data-tip="HTML reporting pipelines &amp; UI">HTML/CSS</span>
+                        </div>
+                    </div>
+
+                    <div class="register-group spotlight-card glitch-hover gradient-border">
+                        <h3 class="register-header scramble-text" data-value="Developer Tools">Developer Tools</h3>
+                        <div class="register-bits skill-heatmap">
+                            <span class="bit" data-level="expert" data-tip="Daily version control workflow">Git</span>
+                            <span class="bit" data-level="expert" data-tip="Project hosting &amp; collaboration">GitHub</span>
+                            <span class="bit" data-level="proficient" data-tip="C/C++ development">Visual Studio</span>
+                            <span class="bit" data-level="proficient" data-tip="Python development">PyCharm</span>
+                            <span class="bit" data-level="proficient" data-tip="Java development">IntelliJ</span>
+                            <span class="bit" data-level="learning" data-tip="Cloud compute basics">AWS</span>
+                            <span class="bit" data-level="learning" data-tip="Packet analysis">Wireshark</span>
+                            <span class="bit" data-level="proficient" data-tip="ML experimentation">Google Colab</span>
+                            <span class="bit" data-level="proficient" data-tip="Research notebooks">Jupyter Notebook</span>
+                            <span class="bit" data-level="proficient" data-tip="Silent On Location app">Android Studio</span>
+                        </div>
+                    </div>
+
+                    <div class="register-group spotlight-card glitch-hover gradient-border">
+                        <h3 class="register-header scramble-text" data-value="ML & Data Science">ML &amp; Data Science</h3>
+                        <div class="register-bits skill-heatmap">
+                            <span class="bit" data-level="proficient" data-tip="Liquid NN &amp; stock prediction models">TensorFlow</span>
+                            <span class="bit" data-level="proficient" data-tip="Deep learning experiments">PyTorch</span>
+                            <span class="bit" data-level="proficient" data-tip="LSTM model prototyping">Keras</span>
+                            <span class="bit" data-level="expert" data-tip="Core numerical workflows">NumPy</span>
+                            <span class="bit" data-level="expert" data-tip="Data wrangling &amp; analysis">Pandas</span>
+                            <span class="bit" data-level="proficient" data-tip="Classical ML &amp; evaluation">Scikit-learn</span>
+                            <span class="bit" data-level="proficient" data-tip="Stock trend prediction research">LSTM</span>
+                            <span class="bit" data-level="proficient" data-tip="Liquid NN vision models">CNN</span>
+                            <span class="bit" data-level="proficient" data-tip="Sequence modeling">RNN</span>
+                            <span class="bit" data-level="proficient" data-tip="M.Tech research focus">Deep Learning</span>
+                            <span class="bit" data-level="proficient" data-tip="Bollinger-band initialization">Feature Engineering</span>
+                            <span class="bit" data-level="proficient" data-tip="Accuracy &amp; error metrics">Model Evaluation</span>
+                        </div>
+                    </div>
+
+                    <div class="register-group spotlight-card glitch-hover gradient-border">
+                        <h3 class="register-header scramble-text" data-value="Business Intelligence & CS">Business Intelligence &amp; CS</h3>
+                        <div class="register-bits skill-heatmap">
+                            <span class="bit" data-level="proficient" data-tip="Microsoft Power BI certified">Microsoft Power BI</span>
+                            <span class="bit" data-level="proficient" data-tip="Star schema &amp; relationships">Data Modeling</span>
+                            <span class="bit" data-level="proficient" data-tip="Extract / transform / load flows">ETL</span>
+                            <span class="bit" data-level="proficient" data-tip="Management-facing dashboards">Dashboard Design</span>
+                            <span class="bit" data-level="expert" data-tip="GATE CS qualified">Data Structures</span>
+                            <span class="bit" data-level="expert" data-tip="GATE CS qualified">Algorithms</span>
+                            <span class="bit" data-level="expert" data-tip="Core CS fundamentals">OOP</span>
+                            <span class="bit" data-level="proficient" data-tip="Relational database systems">DBMS</span>
+                            <span class="bit" data-level="proficient" data-tip="Core CS fundamentals">Operating Systems</span>
+                            <span class="bit" data-level="proficient" data-tip="Protocols &amp; layers">Computer Networks</span>
+                            <span class="bit" data-level="proficient" data-tip="Pipelines, caches, ISA">Computer Architecture</span>
+                            <span class="bit" data-level="learning" data-tip="Parallel &amp; HPC concepts">High Performance Computing</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-divider" aria-hidden="true"></div>
+
             <!-- EXPERIENCE -->
             <section id="experience" class="content-section" aria-label="Professional experience">
+                <div class="stage-tag-wrap"><span class="stage-tag">EX &middot; EXECUTE &mdash; ALU fires</span></div>
                 <h2 class="section-title scramble-text" data-value="Experience">Experience</h2>
                 <div class="timeline">
                     <article class="timeline-item spotlight-card glitch-hover gradient-border">
@@ -545,106 +646,9 @@
 
             <div class="section-divider" aria-hidden="true"></div>
 
-            <!-- SKILLS -->
-            <section id="skills" class="content-section" aria-label="Technical skills">
-                <h2 class="section-title scramble-text" data-value="Skills">Skills</h2>
-
-                <!-- Proficiency legend -->
-                <div class="skill-legend" aria-label="Proficiency legend">
-                    <span class="legend-item"><span class="legend-swatch lvl-expert"></span>Expert</span>
-                    <span class="legend-item"><span class="legend-swatch lvl-proficient"></span>Proficient</span>
-                    <span class="legend-item"><span class="legend-swatch lvl-learning"></span>Working knowledge</span>
-                    <span class="legend-hint">↳ hover any skill to see where I've used it</span>
-                </div>
-
-                <div class="register-map">
-                    <div class="register-group spotlight-card glitch-hover gradient-border">
-                        <h3 class="register-header scramble-text" data-value="Verification & VLSI">Verification &amp; VLSI</h3>
-                        <div class="register-bits skill-heatmap">
-                            <span class="bit" data-level="expert" data-tip="Control Port &amp; CLP verification @ SiFive">AXI4/APB Bus Protocols</span>
-                            <span class="bit" data-level="expert" data-tip="5 RTL bugs found via failure triage">RTL Debugging</span>
-                            <span class="bit" data-level="expert" data-tip="Drove CLP coverage 50% → 100%">Coverage Closure</span>
-                            <span class="bit" data-level="proficient" data-tip="RISC-V cores: Moray, Shark, Majestic">CPU Design Verification</span>
-                            <span class="bit" data-level="proficient" data-tip="Enhanced AXI4 GDI VIP driver in C++">VIP Development (C++)</span>
-                            <span class="bit" data-level="expert" data-tip="Built VDB→HTML coverage dashboard">Functional Coverage Reporting</span>
-                            <span class="bit" data-level="proficient" data-tip="Daily simulation &amp; regressions">Synopsys VCS</span>
-                            <span class="bit" data-level="expert" data-tip="Weekly &amp; nightly Moray / Shark regressions">Regression Management</span>
-                            <span class="bit" data-level="proficient" data-tip="Failure triage &amp; targeted release tickets">JIRA</span>
-                        </div>
-                    </div>
-
-                    <div class="register-group spotlight-card glitch-hover gradient-border">
-                        <h3 class="register-header scramble-text" data-value="Programming">Programming</h3>
-                        <div class="register-bits skill-heatmap">
-                            <span class="bit" data-level="expert" data-tip="VIP development &amp; functional tests">C/C++</span>
-                            <span class="bit" data-level="expert" data-tip="Automation, AI tooling &amp; ML research">Python</span>
-                            <span class="bit" data-level="proficient" data-tip="Android app development">Java</span>
-                            <span class="bit" data-level="proficient" data-tip="Test infrastructure scripting @ SiFive">Ruby</span>
-                            <span class="bit" data-level="proficient" data-tip="Test &amp; config definitions">YAML</span>
-                            <span class="bit" data-level="proficient" data-tip="Data modeling &amp; queries">SQL</span>
-                            <span class="bit" data-level="proficient" data-tip="This portfolio &amp; coverage dashboards">JavaScript</span>
-                            <span class="bit" data-level="proficient" data-tip="HTML reporting pipelines &amp; UI">HTML/CSS</span>
-                        </div>
-                    </div>
-
-                    <div class="register-group spotlight-card glitch-hover gradient-border">
-                        <h3 class="register-header scramble-text" data-value="Developer Tools">Developer Tools</h3>
-                        <div class="register-bits skill-heatmap">
-                            <span class="bit" data-level="expert" data-tip="Daily version control workflow">Git</span>
-                            <span class="bit" data-level="expert" data-tip="Project hosting &amp; collaboration">GitHub</span>
-                            <span class="bit" data-level="proficient" data-tip="C/C++ development">Visual Studio</span>
-                            <span class="bit" data-level="proficient" data-tip="Python development">PyCharm</span>
-                            <span class="bit" data-level="proficient" data-tip="Java development">IntelliJ</span>
-                            <span class="bit" data-level="learning" data-tip="Cloud compute basics">AWS</span>
-                            <span class="bit" data-level="learning" data-tip="Packet analysis">Wireshark</span>
-                            <span class="bit" data-level="proficient" data-tip="ML experimentation">Google Colab</span>
-                            <span class="bit" data-level="proficient" data-tip="Research notebooks">Jupyter Notebook</span>
-                            <span class="bit" data-level="proficient" data-tip="Silent On Location app">Android Studio</span>
-                        </div>
-                    </div>
-
-                    <div class="register-group spotlight-card glitch-hover gradient-border">
-                        <h3 class="register-header scramble-text" data-value="ML & Data Science">ML &amp; Data Science</h3>
-                        <div class="register-bits skill-heatmap">
-                            <span class="bit" data-level="proficient" data-tip="Liquid NN &amp; stock prediction models">TensorFlow</span>
-                            <span class="bit" data-level="proficient" data-tip="Deep learning experiments">PyTorch</span>
-                            <span class="bit" data-level="proficient" data-tip="LSTM model prototyping">Keras</span>
-                            <span class="bit" data-level="expert" data-tip="Core numerical workflows">NumPy</span>
-                            <span class="bit" data-level="expert" data-tip="Data wrangling &amp; analysis">Pandas</span>
-                            <span class="bit" data-level="proficient" data-tip="Classical ML &amp; evaluation">Scikit-learn</span>
-                            <span class="bit" data-level="proficient" data-tip="Stock trend prediction research">LSTM</span>
-                            <span class="bit" data-level="proficient" data-tip="Liquid NN vision models">CNN</span>
-                            <span class="bit" data-level="proficient" data-tip="Sequence modeling">RNN</span>
-                            <span class="bit" data-level="proficient" data-tip="M.Tech research focus">Deep Learning</span>
-                            <span class="bit" data-level="proficient" data-tip="Bollinger-band initialization">Feature Engineering</span>
-                            <span class="bit" data-level="proficient" data-tip="Accuracy &amp; error metrics">Model Evaluation</span>
-                        </div>
-                    </div>
-
-                    <div class="register-group spotlight-card glitch-hover gradient-border">
-                        <h3 class="register-header scramble-text" data-value="Business Intelligence & CS">Business Intelligence &amp; CS</h3>
-                        <div class="register-bits skill-heatmap">
-                            <span class="bit" data-level="proficient" data-tip="Microsoft Power BI certified">Microsoft Power BI</span>
-                            <span class="bit" data-level="proficient" data-tip="Star schema &amp; relationships">Data Modeling</span>
-                            <span class="bit" data-level="proficient" data-tip="Extract / transform / load flows">ETL</span>
-                            <span class="bit" data-level="proficient" data-tip="Management-facing dashboards">Dashboard Design</span>
-                            <span class="bit" data-level="expert" data-tip="GATE CS qualified">Data Structures</span>
-                            <span class="bit" data-level="expert" data-tip="GATE CS qualified">Algorithms</span>
-                            <span class="bit" data-level="expert" data-tip="Core CS fundamentals">OOP</span>
-                            <span class="bit" data-level="proficient" data-tip="Relational database systems">DBMS</span>
-                            <span class="bit" data-level="proficient" data-tip="Core CS fundamentals">Operating Systems</span>
-                            <span class="bit" data-level="proficient" data-tip="Protocols &amp; layers">Computer Networks</span>
-                            <span class="bit" data-level="proficient" data-tip="Pipelines, caches, ISA">Computer Architecture</span>
-                            <span class="bit" data-level="learning" data-tip="Parallel &amp; HPC concepts">High Performance Computing</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <div class="section-divider" aria-hidden="true"></div>
-
             <!-- EDUCATION & CERTIFICATIONS & ACHIEVEMENTS -->
             <section id="education" class="content-section" aria-label="Education and certifications">
+                <div class="stage-tag-wrap"><span class="stage-tag">MEM &middot; MEMORY &mdash; cache hierarchy access</span></div>
                 <h2 class="section-title scramble-text" data-value="Education & Certifications">Education & Certifications</h2>
                 
                 <div class="two-col-grid">
@@ -697,6 +701,7 @@
 
             <!-- ACHIEVEMENT WALL -->
             <section id="achievements" class="content-section" aria-label="Achievements">
+                <div class="stage-tag-wrap"><span class="stage-tag">WB &middot; WRITEBACK &mdash; result committed</span></div>
                 <h2 class="section-title" data-value="Milestones">Milestones</h2>
                 <div class="ach-grid stagger-children">
                     <article class="ach-card spotlight-card gradient-border">
@@ -761,7 +766,7 @@
                     <pre class="tf-body"><span class="tf-line"><span class="tf-prompt">om@verif</span>:<span class="tf-path">~</span>$ cat build.info</span>
 <span class="tf-line"><span class="tf-key">author</span>      : Om Patel <span class="tf-c">© 2026</span></span>
 <span class="tf-line"><span class="tf-key">designed_by</span> : Om Patel &mdash; engineered end to end</span>
-<span class="tf-line"><span class="tf-key">last_verified</span>: <span class="tf-lime">2026-07-17</span>  |  build: <span class="tf-lime">v3.0-premium</span></span>
+<span class="tf-line"><span class="tf-key">last_verified</span>: <span class="tf-lime">2026-07-17</span>  |  build: <span class="tf-lime">v3.1-pipeline</span></span>
 <span class="tf-line"><span class="tf-key">toolchain</span>   : HTML5 · CSS3 · JavaScript</span>
 <span class="tf-line"><span class="tf-key">status</span>      : <span class="tf-lime">[ ALL CHECKS PASSED ]</span></span>
 <span class="tf-line"><span class="tf-prompt">om@verif</span>:<span class="tf-path">~</span>$ <span class="tf-cursor"></span></span></pre>
@@ -769,6 +774,35 @@
             </div>
         </footer>
     </div>
+
+    <!-- CPU Pipeline HUD -->
+    <nav id="pipeline-hud" aria-label="CPU pipeline scroll indicator">
+        <div class="phud-rail" aria-hidden="true">
+            <div class="phud-fill"></div>
+            <div class="phud-packet"></div>
+        </div>
+        <button type="button" class="phud-stage" data-target="about">
+            <span class="phud-dot"></span><span class="phud-label">FETCH</span>
+            <span class="phud-tip"><b>Instruction Fetch</b>The next instruction is retrieved using the Program Counter. Meet Om.</span>
+        </button>
+        <button type="button" class="phud-stage" data-target="now">
+            <span class="phud-dot"></span><span class="phud-label">DECODE</span>
+            <span class="phud-tip"><b>Instruction Decode</b>Control signals are generated, operands prepared — current work and skills.</span>
+        </button>
+        <button type="button" class="phud-stage" data-target="experience">
+            <span class="phud-dot"></span><span class="phud-label">EXECUTE</span>
+            <span class="phud-tip"><b>Execute</b>The ALU fires — experience, architecture, and verification projects.</span>
+        </button>
+        <button type="button" class="phud-stage" data-target="education">
+            <span class="phud-dot"></span><span class="phud-label">MEMORY</span>
+            <span class="phud-tip"><b>Memory Access</b>The cache hierarchy — where knowledge is stored and retrieved.</span>
+        </button>
+        <button type="button" class="phud-stage" data-target="achievements">
+            <span class="phud-dot"></span><span class="phud-label">WRITEBACK</span>
+            <span class="phud-tip"><b>Writeback</b>Results committed to the register file — milestones and contact.</span>
+        </button>
+        <div class="phud-retire" aria-hidden="true">inst retired &#10003;</div>
+    </nav>
 
     <!-- Interactive Terminal -->
     <button id="terminal-toggle" type="button" aria-label="Open interactive terminal" aria-expanded="false">&gt;_ terminal</button>

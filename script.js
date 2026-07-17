@@ -837,7 +837,7 @@ document.addEventListener("DOMContentLoaded", () => {
             toggle.setAttribute('aria-expanded', 'true');
             if (!welcomed) {
                 welcomed = true;
-                print('Om Patel — verification shell <span class="t-dim">(build v3.0-premium)</span>', 't-cyan');
+                print('Om Patel — verification shell <span class="t-dim">(build v3.1-pipeline)</span>', 't-cyan');
                 print('Type <span class="t-lime">help</span> to list commands.', 't-dim');
             }
             input.focus();
@@ -887,7 +887,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 print('  <span class="t-lime">resume</span>        open resume PDF');
                 print('  <span class="t-lime">contact</span>       reach me');
                 print('  <span class="t-lime">clear</span>         clear terminal');
-                print('Hint: DV engineers also try <span class="t-orange">make regression</span>, <span class="t-orange">coverage</span>, <span class="t-orange">promotion</span>, <span class="t-orange">version</span>', 't-dim');
+                print('Hint: DV engineers also try <span class="t-orange">make regression</span>, <span class="t-orange">coverage</span>, <span class="t-orange">promotion</span>, <span class="t-orange">pipeline</span>, <span class="t-orange">version</span>', 't-dim');
             },
             whoami() {
                 print('Om Patel', 't-cyan');
@@ -941,8 +941,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 print('Checking promotion.status ...', 't-dim');
                 print('Current status: waiting for next review :)', 't-orange');
             },
+            pipeline() {
+                const cur = document.body.dataset.stage || 'FETCH';
+                const names = ['FETCH', 'DECODE', 'EXECUTE', 'MEMORY', 'WRITEBACK'];
+                const row = names.map(nm => (nm === cur ? '<span class="t-cyan">◉</span>' : '○')).join('────');
+                print('IF ─ ID ─ EX ─ MEM ─ WB', 't-dim');
+                print(row);
+                print('instruction currently in: <span class="t-cyan">' + cur + '</span> stage');
+                print('Scroll the page — you are the instruction.', 't-dim');
+            },
             version() {
-                print('portfolio <span class="t-cyan">v3.0-premium</span>');
+                print('portfolio <span class="t-cyan">v3.1-pipeline</span>');
                 print('theme      : near-black · electric blue · glass', 't-dim');
                 print('toolchain  : HTML5 · CSS3 · vanilla JS — zero build step', 't-dim');
                 print('regression : <span class="t-lime">ALL CHECKS PASSED</span>');
@@ -1072,5 +1081,90 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => span.remove(), 650);
         });
     });
+
+
+    /* =========================================
+       17. CPU PIPELINE HUD (Signature Feature)
+       Scroll = one instruction flowing through
+       IF → ID → EX → MEM → WB
+    ========================================= */
+    (function initPipelineHUD() {
+        const hud = document.getElementById('pipeline-hud');
+        if (!hud) return;
+        const stages = Array.from(hud.querySelectorAll('.phud-stage'));
+        const packet = hud.querySelector('.phud-packet');
+        const fill = hud.querySelector('.phud-fill');
+        const anchors = stages.map(s => document.getElementById(s.dataset.target));
+        if (anchors.some(a => !a) || !packet || !fill) return;
+
+        const STAGE_NAMES = ['FETCH', 'DECODE', 'EXECUTE', 'MEMORY', 'WRITEBACK'];
+        let lastActive = -1;
+        let hudRAF;
+
+        function update() {
+            const ref = window.scrollY + window.innerHeight * 0.35;
+            const tops = anchors.map(a => a.getBoundingClientRect().top + window.scrollY);
+            const n = tops.length;
+
+            // piecewise-linear progress between stage anchors
+            let overall;
+            if (ref <= tops[0]) {
+                overall = 0;
+            } else if (ref >= tops[n - 1]) {
+                overall = 1;
+            } else {
+                let i = 0;
+                while (i < n - 2 && ref >= tops[i + 1]) i++;
+                const frac = (ref - tops[i]) / Math.max(tops[i + 1] - tops[i], 1);
+                overall = (i + Math.min(frac, 1)) / (n - 1);
+            }
+
+            // fully retire the instruction at the very bottom of the page
+            const atEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 60;
+            if (atEnd) overall = 1;
+            hud.classList.toggle('retired', atEnd);
+
+            const pct = (overall * 100).toFixed(2);
+            packet.style.top = `calc(${pct}% - 5px)`;
+            fill.style.height = pct + '%';
+
+            const active = Math.min(Math.floor(overall * (n - 1) + 0.5), n - 1);
+            stages.forEach((s, i) => {
+                s.classList.toggle('done', i < active || (i === active && atEnd));
+                s.classList.toggle('active', i === active);
+            });
+            if (active !== lastActive) {
+                lastActive = active;
+                document.body.dataset.stage = STAGE_NAMES[active];
+                const dot = stages[active].querySelector('.phud-dot');
+                if (dot) {
+                    // restart the pipeline-register glow pulse
+                    dot.classList.remove('pulse');
+                    void dot.offsetWidth;
+                    dot.classList.add('pulse');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            if (hudRAF) cancelAnimationFrame(hudRAF);
+            hudRAF = requestAnimationFrame(update);
+        }, { passive: true });
+        window.addEventListener('resize', () => {
+            if (hudRAF) cancelAnimationFrame(hudRAF);
+            hudRAF = requestAnimationFrame(update);
+        });
+
+        stages.forEach(s => {
+            s.addEventListener('click', () => {
+                const target = document.getElementById(s.dataset.target);
+                if (!target) return;
+                const top = target.getBoundingClientRect().top + window.scrollY - 80;
+                window.scrollTo({ top: top, behavior: 'smooth' });
+            });
+        });
+
+        update();
+    })();
 
 });
