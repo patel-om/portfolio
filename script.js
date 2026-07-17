@@ -848,7 +848,7 @@ document.addEventListener("DOMContentLoaded", () => {
             toggle.setAttribute('aria-expanded', 'true');
             if (!welcomed) {
                 welcomed = true;
-                print('Om Patel — verification shell <span class="t-dim">(build v3.2-experience)</span>', 't-cyan');
+                print('Om Patel — verification shell <span class="t-dim">(build v3.3-immersive)</span>', 't-cyan');
                 print('Type <span class="t-lime">help</span> to list commands.', 't-dim');
             }
             input.focus();
@@ -984,9 +984,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 setTimeout(() => print('...just kidding. This site is verified.', 't-dim'), 600);
             },
             version() {
-                print('portfolio <span class="t-cyan">v3.2-experience</span>');
+                print('portfolio <span class="t-cyan">v3.3-immersive</span>');
                 print('theme      : near-black · electric blue · glass', 't-dim');
-                print('toolchain  : HTML5 · CSS3 · vanilla JS — zero build step', 't-dim');
+                print('toolchain  : HTML5 · CSS3 · vanilla JS · Three.js — zero build step', 't-dim');
                 print('regression : <span class="t-lime">ALL CHECKS PASSED</span>');
             }
         };
@@ -1176,6 +1176,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     void dot.offsetWidth;
                     dot.classList.add('pulse');
                 }
+                if (window.omBlip) window.omBlip(920, 0.05, 0.02);
             }
         }
 
@@ -1303,6 +1304,262 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }, { threshold: 0.35 });
         obs.observe(finale);
+    })();
+
+
+    /* =========================================
+       19. SCROLL DEPTH MORPHING + CURSOR STATES
+       Sections leaving the viewport recede with
+       scale / opacity / blur — travelling deeper.
+    ========================================= */
+    (function initDepthMorph() {
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const sections = Array.from(document.querySelectorAll('main > section'));
+        if (!sections.length) return;
+        let raf;
+
+        function clear(sec) {
+            sec.style.transform = '';
+            sec.style.opacity = '';
+            sec.style.filter = '';
+        }
+
+        function apply() {
+            if (reduced.matches || document.body.classList.contains('recruiter-mode')) {
+                sections.forEach(clear);
+                return;
+            }
+            const vh = window.innerHeight;
+            sections.forEach(sec => {
+                const r = sec.getBoundingClientRect();
+                if (r.bottom < -100 || r.top > vh) { clear(sec); return; }
+                const edge = vh * 0.42;
+                if (r.bottom < edge) {
+                    const exit = Math.min(1, (edge - r.bottom) / edge);
+                    sec.style.transform = `scale(${(1 - exit * 0.03).toFixed(4)}) translateY(${(exit * -12).toFixed(1)}px)`;
+                    sec.style.opacity = (1 - exit * 0.45).toFixed(3);
+                    sec.style.filter = `blur(${(exit * 1.6).toFixed(2)}px)`;
+                } else {
+                    clear(sec);
+                }
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            if (raf) cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(apply);
+        }, { passive: true });
+
+        // cursor becomes an electrical pulse over the architecture section
+        const archSec = document.getElementById('architecture');
+        if (archSec && window.matchMedia('(pointer: fine)').matches) {
+            archSec.addEventListener('mouseenter', () => document.body.classList.add('cursor-pulse'));
+            archSec.addEventListener('mouseleave', () => document.body.classList.remove('cursor-pulse'));
+        }
+    })();
+
+
+    /* =========================================
+       20. 3D CPU DIE (Three.js, lazy-loaded)
+       Idle rotation, mouse tilt, project-hover
+       block highlights, double-click explode.
+    ========================================= */
+    (function initDie3D() {
+        const wrap = document.getElementById('die3d-wrap');
+        const canvas = document.getElementById('die3d');
+        const hint = document.getElementById('die3d-hint');
+        if (!wrap || !canvas) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+            document.body.classList.contains('recruiter-mode')) {
+            wrap.style.display = 'none';
+            return;
+        }
+
+        const HINT_DEFAULT = hint ? hint.textContent : '';
+        let started = false;
+
+        const startObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !started) {
+                    started = true;
+                    startObs.disconnect();
+                    boot().catch(() => { wrap.style.display = 'none'; });
+                }
+            });
+        }, { rootMargin: '300px' });
+        startObs.observe(wrap);
+
+        async function boot() {
+            const THREE = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js');
+
+            const W = () => wrap.clientWidth;
+            const H = 340;
+            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setSize(W(), H);
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(38, W() / H, 0.1, 100);
+            camera.position.set(0, 5.4, 8.2);
+            camera.lookAt(0, 0, 0);
+
+            scene.add(new THREE.AmbientLight(0x8fa8cc, 0.55));
+            const key = new THREE.DirectionalLight(0xffffff, 1.0);
+            key.position.set(5, 9, 4);
+            scene.add(key);
+            const rim = new THREE.PointLight(0x3d9bff, 0.7, 30);
+            rim.position.set(-5, 3, -3);
+            scene.add(rim);
+
+            const die = new THREE.Group();
+            scene.add(die);
+
+            const base = new THREE.Mesh(
+                new THREE.BoxGeometry(6.6, 0.35, 6.6),
+                new THREE.MeshStandardMaterial({ color: 0x0d0f14, metalness: 0.65, roughness: 0.35 })
+            );
+            die.add(base);
+
+            // regions: project card id → block cells on a 4×4 grid
+            const REGIONS = [
+                { id: 'project-riscv-alu', name: 'ALU / EXECUTION',  cells: [[0, 0], [1, 0], [0, 1], [1, 1]] },
+                { id: 'project-axi4-lite', name: 'AXI INTERCONNECT', cells: [[2, 0], [3, 0], [2, 1], [3, 1]] },
+                { id: 'project-sync-fifo', name: 'FIFO / QUEUES',    cells: [[0, 2], [1, 2]] },
+                { id: 'project-stock-prediction', name: 'NPU / ML',  cells: [[2, 2], [3, 2]] },
+                { id: 'project-liquid-nn', name: 'NEURAL FABRIC',    cells: [[0, 3], [1, 3]] },
+                { id: 'project-silent-location', name: 'I/O & PERIPHERALS', cells: [[2, 3], [3, 3]] }
+            ];
+            const PITCH = 1.55;
+            let exploded = false;
+
+            const blocks = [];
+            REGIONS.forEach(region => {
+                region.blocks = [];
+                region.target = 0.08; // emissive target
+                region.cells.forEach(([cx, cz]) => {
+                    const h = 0.35 + Math.random() * 0.4;
+                    const mat = new THREE.MeshStandardMaterial({
+                        color: 0x141924,
+                        metalness: 0.4,
+                        roughness: 0.5,
+                        emissive: 0x3d9bff,
+                        emissiveIntensity: 0.08
+                    });
+                    const mesh = new THREE.Mesh(new THREE.BoxGeometry(1.35, h, 1.35), mat);
+                    const px = (cx - 1.5) * PITCH;
+                    const pz = (cz - 1.5) * PITCH;
+                    const py = 0.175 + h / 2;
+                    mesh.position.set(px, py, pz);
+                    mesh.userData.home = new THREE.Vector3(px, py, pz);
+                    mesh.userData.away = new THREE.Vector3(px * 1.65, py + 0.9 + Math.random() * 0.5, pz * 1.65);
+                    die.add(mesh);
+                    region.blocks.push(mesh);
+                    blocks.push(mesh);
+                });
+
+                const card = document.getElementById(region.id);
+                if (card) {
+                    card.addEventListener('mouseenter', () => {
+                        REGIONS.forEach(r => { r.target = (r === region) ? 0.95 : 0.03; });
+                        if (hint) hint.textContent = '▣ ' + region.name;
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        REGIONS.forEach(r => { r.target = 0.08; });
+                        if (hint) hint.textContent = HINT_DEFAULT;
+                    });
+                }
+            });
+
+            // mouse tilt
+            let tiltX = 0, tiltZ = 0;
+            wrap.addEventListener('mousemove', (e) => {
+                const r = wrap.getBoundingClientRect();
+                tiltZ = ((e.clientX - r.left) / r.width - 0.5) * 0.3;
+                tiltX = ((e.clientY - r.top) / r.height - 0.5) * 0.25;
+            });
+            wrap.addEventListener('mouseleave', () => { tiltX = 0; tiltZ = 0; });
+
+            canvas.addEventListener('dblclick', () => {
+                exploded = !exploded;
+                if (hint) hint.textContent = exploded ? '▣ exploded view — double-click to reassemble' : HINT_DEFAULT;
+            });
+
+            let visible = true;
+            new IntersectionObserver((entries) => {
+                entries.forEach(e => { visible = e.isIntersecting; });
+            }, { threshold: 0 }).observe(wrap);
+
+            window.addEventListener('resize', () => {
+                renderer.setSize(W(), H);
+                camera.aspect = W() / H;
+                camera.updateProjectionMatrix();
+            });
+
+            function frame() {
+                requestAnimationFrame(frame);
+                if (!visible || document.hidden) return;
+                die.rotation.y += 0.0025;
+                die.rotation.x += (tiltX - die.rotation.x) * 0.06;
+                die.rotation.z += (tiltZ - die.rotation.z) * 0.06;
+                REGIONS.forEach(r => {
+                    r.blocks.forEach(b => {
+                        b.material.emissiveIntensity += (r.target - b.material.emissiveIntensity) * 0.1;
+                        const dest = exploded ? b.userData.away : b.userData.home;
+                        b.position.lerp(dest, 0.08);
+                    });
+                });
+                renderer.render(scene, camera);
+            }
+            frame();
+        }
+    })();
+
+
+    /* =========================================
+       21. UI SOUND DESIGN (off by default)
+       Tiny WebAudio blips — no audio assets.
+    ========================================= */
+    (function initSound() {
+        const btn = document.getElementById('sound-toggle');
+        if (!btn) return;
+        let on = false;
+        try { on = localStorage.getItem('om_sound') === '1'; } catch(e) {}
+        let actx = null;
+
+        function blip(freq, dur, vol) {
+            if (!on || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            try {
+                actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+                const osc = actx.createOscillator();
+                const gain = actx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(vol, actx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + dur);
+                osc.connect(gain).connect(actx.destination);
+                osc.start();
+                osc.stop(actx.currentTime + dur);
+            } catch(e) {}
+        }
+        window.omBlip = blip;
+
+        function render() {
+            btn.textContent = on ? '♪ on' : '♪ off';
+            btn.classList.toggle('sound-on', on);
+            btn.setAttribute('aria-pressed', String(on));
+        }
+        btn.addEventListener('click', () => {
+            on = !on;
+            try { localStorage.setItem('om_sound', on ? '1' : '0'); } catch(e) {}
+            render();
+            blip(880, 0.09, 0.05);
+        });
+        render();
+
+        document.addEventListener('click', (e) => {
+            const t = e.target.closest('a, button');
+            if (t && t !== btn) blip(640, 0.05, 0.03);
+        });
     })();
 
 });

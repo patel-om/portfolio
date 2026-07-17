@@ -538,6 +538,10 @@
             <!-- PROJECTS -->
             <section id="projects" class="content-section" aria-label="Projects">
                 <h2 class="section-title scramble-text" data-value="Projects">Projects</h2>
+                <div id="die3d-wrap" aria-label="Interactive 3D CPU die">
+                    <canvas id="die3d"></canvas>
+                    <div class="die3d-hint" id="die3d-hint">hover a project card to light its block &middot; double-click the die to explode it</div>
+                </div>
                 <div class="projects-grid">
                     <article class="project-card spotlight-card glitch-hover gradient-border" id="project-riscv-alu">
                         <div class="project-header">
@@ -833,8 +837,8 @@
                     <pre class="tf-body"><span class="tf-line"><span class="tf-prompt">om@verif</span>:<span class="tf-path">~</span>$ cat build.info</span>
 <span class="tf-line"><span class="tf-key">author</span>      : Om Patel <span class="tf-c">© 2026</span></span>
 <span class="tf-line"><span class="tf-key">designed_by</span> : Om Patel &mdash; engineered end to end</span>
-<span class="tf-line"><span class="tf-key">last_verified</span>: <span class="tf-lime">2026-07-17</span>  |  build: <span class="tf-lime">v3.2-experience</span></span>
-<span class="tf-line"><span class="tf-key">toolchain</span>   : HTML5 · CSS3 · JavaScript</span>
+<span class="tf-line"><span class="tf-key">last_verified</span>: <span class="tf-lime">2026-07-17</span>  |  build: <span class="tf-lime">v3.3-immersive</span></span>
+<span class="tf-line"><span class="tf-key">toolchain</span>   : HTML5 · CSS3 · JavaScript · Three.js</span>
 <span class="tf-line"><span class="tf-key">status</span>      : <span class="tf-lime">[ ALL CHECKS PASSED ]</span></span>
 <span class="tf-line"><span class="tf-prompt">om@verif</span>:<span class="tf-path">~</span>$ <span class="tf-cursor"></span></span></pre>
                 </div>
@@ -876,6 +880,7 @@
 
     <!-- Interactive Terminal -->
     <button id="terminal-toggle" type="button" aria-label="Open interactive terminal" aria-expanded="false">&gt;_ terminal</button>
+    <button id="sound-toggle" type="button" aria-pressed="false" aria-label="Toggle UI sounds (off by default)">&#9834; off</button>
     <div id="terminal-overlay" role="dialog" aria-modal="true" aria-label="Interactive terminal">
         <div class="term-window">
             <div class="tf-bar">
