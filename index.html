@@ -556,11 +556,11 @@
                             <h3 class="scramble-text" data-value="TraceIQ - Verification Intelligence Platform">TraceIQ - Verification Intelligence Platform</h3>
                         </div>
                         <div class="project-context">Automated Regression Failure Triage</div>
-                        <p class="typewriter-para">Built an open-source Python platform that turns raw simulation logs (UVM, VCS, Questa, Xcelium) into evidence-backed root-cause reports. A deterministic rule engine classifies failures - timeout, assertion, scoreboard mismatch, compile - with confidence scores, exact log-line evidence, and suggested next debug steps, rendered as structured JSON and an EDA-style HTML dashboard. Optional AI summary layer grounded strictly in extracted evidence.</p>
+                        <p class="typewriter-para">Built an open-source Python platform that turns verification artifacts (UVM/VCS/Questa/Xcelium logs, compile logs, coverage, test metadata) into a normalized Evidence Graph: typed nodes with content-hash IDs linked by causal, temporal, and cross-artifact relationships. A deterministic rule engine classifies failures over the graph with confidence scores and exact log-line evidence; the optional AI layer reasons only over the graph and cites node IDs, never raw files.</p>
                         <div class="project-metrics">
-                            <span class="metric-badge mb-cyan">Rule Engine</span>
-                            <span class="metric-badge mb-lime">Evidence-Backed RCA</span>
-                            <span class="metric-badge mb-orange">Multi-Simulator Parsing</span>
+                            <span class="metric-badge mb-cyan">Evidence Graph</span>
+                            <span class="metric-badge mb-lime">Deterministic RCA</span>
+                            <span class="metric-badge mb-orange">Multi-Artifact Correlation</span>
                         </div>
                         <div class="tech-tags">
                             <span class="hl-keyword">Python</span>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TraceIQ - dma_stress_test</title>
+<title>TraceIQ - axi_random_test</title>
 <style>
   :root {
     color-scheme: light;
@@ -142,19 +142,48 @@
     <div class="brand">TraceIQ<small>verification intelligence</small></div>
   </header>
   <p class="meta">
-Test <code>dma_stress_test</code> ·Cadence Xcelium ·    <code>tests/fixtures/uvm_timeout.log</code> ·
-    generated 2026-07-18 08:29 UTC ·
-    parser <code>simulation_log</code>
+Test <code>axi_random_test</code> ·Synopsys VCS ·<code>tests/fixtures/uvm_scoreboard.log</code> + <code>tests/fixtures/coverage.txt</code> + <code>tests/fixtures/test_metadata.json</code> ·
+    generated 2026-07-18 08:54 UTC ·
+    parsers <code>simulation_log, coverage, test_metadata</code>
   </p>
 
   <section>
     <h2>Regression Summary</h2>
     <div class="tiles">
-      <div class="tile"><div class="label"><span class="dot critical"></span>Fatals</div><div class="value">1</div></div>
-      <div class="tile"><div class="label"><span class="dot serious"></span>Errors</div><div class="value">1</div></div>
+      <div class="tile"><div class="label"><span class="dot critical"></span>Fatals</div><div class="value">0</div></div>
+      <div class="tile"><div class="label"><span class="dot serious"></span>Errors</div><div class="value">2</div></div>
       <div class="tile"><div class="label"><span class="dot warning"></span>Warnings</div><div class="value">0</div></div>
       <div class="tile"><div class="label"><span class="dot muted"></span>Failed assertions</div><div class="value">0</div></div>
-      <div class="tile"><div class="label"><span class="dot muted"></span>Log lines</div><div class="value">6</div></div>
+      <div class="tile"><div class="label"><span class="dot muted"></span>Log lines</div><div class="value">20</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Evidence Graph</h2>
+    <div class="card">
+      <p style="margin: 0 0 12px; color: var(--ink-2);">
+        7 evidence nodes and 5
+        relationships extracted from 3 artifacts.
+        Full graph in <code>evidence_graph.json</code>; every conclusion below cites node IDs from it.
+      </p>
+      <table>
+        <thead><tr><th>Artifact type</th><th>Nodes</th></tr></thead>
+        <tbody>
+          <tr><td>simulation log</td><td class="num">2</td></tr>
+          <tr><td>coverage</td><td class="num">4</td></tr>
+          <tr><td>test metadata</td><td class="num">1</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top: 14px;">
+        <table>
+          <thead><tr><th>Relationship</th><th>Edges</th></tr></thead>
+          <tbody>
+            <tr><td>precedes</td><td class="num">1</td></tr>
+            <tr><td>part of</td><td class="num">2</td></tr>
+            <tr><td>correlates with</td><td class="num">2</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
@@ -162,21 +191,13 @@ Test <code>dma_stress_test</code> ·Cadence Xcelium ·    <code>tests/fixtures/u
     <h2>Failure Classification</h2>
     <div class="card">
       <div class="verdict">
-        <span class="chip"><span class="dot serious"></span>Timeout</span>
-        <span class="rule-name">rule: timeout</span>
+        <span class="chip"><span class="dot serious"></span>Testbench Failure</span>
+        <span class="rule-name">rule: testbench-failure</span>
       </div>
-      <p class="verdict-summary">Timeout - the test hung and was killed by a watchdog/phase timeout</p>
+      <p class="verdict-summary">Likely testbench issue - scoreboard or comparison mismatch</p>
       <div class="meter">
-        <div class="meter-head"><span>Confidence</span><b>85%</b></div>
-        <div class="track"><div class="fill" style="width: 85%"></div></div>
-      </div>
-      <div style="margin-top: 18px;">
-        <table>
-          <thead><tr><th>Alternative classification</th><th>Confidence</th><th>Rule</th></tr></thead>
-          <tbody>
-            <tr><td>Fatal Error</td><td class="num">70%</td><td>fatal-error</td></tr>
-          </tbody>
-        </table>
+        <div class="meter-head"><span>Confidence</span><b>80%</b></div>
+        <div class="track"><div class="fill" style="width: 80%"></div></div>
       </div>
     </div>
   </section>
@@ -187,13 +208,13 @@ Test <code>dma_stress_test</code> ·Cadence Xcelium ·    <code>tests/fixtures/u
       <ol class="timeline">
         <li>
           <div class="ev-when">
-t = 10000000 · log line 5          </div>
-          <p class="ev-desc">ERROR: Default timeout of 10000000 hit, indicating a probable testbench issue</p>
+t = 55000 · log line 4 · <code>ev-a41d70dcb11b</code>          </div>
+          <p class="ev-desc">ERROR: Scoreboard mismatch: expected data 0xDEAD got 0xBEEF for addr 0x1000</p>
         </li>
         <li>
           <div class="ev-when">
-t = 10000000 · log line 6          </div>
-          <p class="ev-desc">FATAL: Phase timeout, ending simulation</p>
+t = 56000 · log line 5 · <code>ev-65a5c0f3003c</code>          </div>
+          <p class="ev-desc">ERROR: Scoreboard mismatch: expected data 0xCAFE got 0xF00D for addr 0x1004</p>
         </li>
       </ol>
     </div>
@@ -201,8 +222,8 @@ t = 10000000 · log line 6          </div>
 
   <section>
     <h2>Relevant Log Snippets</h2>
-    <pre class="snippet"><span class="ln">     5 │ </span>UVM_ERROR /tools/uvm/src/base/uvm_phase.svh(1491) @ 10000000: reporter [PH_TIMEOUT] Default timeout of 10000000 hit, indicating a probable testbench issue
-<span class="ln">     6 │ </span>UVM_FATAL /tools/uvm/src/base/uvm_phase.svh(1493) @ 10000000: reporter [PH_TIMEOUT] Phase timeout, ending simulation
+    <pre class="snippet"><span class="ln">     4 │ </span>UVM_ERROR /tb/scoreboard.sv(142) @ 55000: uvm_test_top.env.scb [SCBD] Scoreboard mismatch: expected data 0xDEAD got 0xBEEF for addr 0x1000
+<span class="ln">     5 │ </span>UVM_ERROR /tb/scoreboard.sv(142) @ 56000: uvm_test_top.env.scb [SCBD] Scoreboard mismatch: expected data 0xCAFE got 0xF00D for addr 0x1004
 </pre>
   </section>
 
@@ -210,8 +231,8 @@ t = 10000000 · log line 6          </div>
     <h2>Suggested Next Steps</h2>
     <div class="card">
       <ol class="steps">
-        <li>Check for a raised objection that is never dropped, or a stalled handshake.<span class="why">UVM phase timeouts almost always mean forward progress stopped.</span></li>
-        <li>Look at the last simulation activity before the timeout fired.<span class="why">The stall point is usually just before the final reported time.</span></li>
+        <li>Inspect the scoreboard prediction logic for the first mismatching transaction.<span class="why">Expected-vs-actual mismatches begin either in the DUT or in the predictor; check the predictor first when DUT outputs follow the protocol.</span></li>
+        <li>Compare the first mismatching transaction against the specification.<span class="why">Determines whether the DUT or the reference model is wrong.</span></li>
       </ol>
     </div>
   </section>
