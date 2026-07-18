@@ -1,4 +1,4 @@
-// Single source of truth for the build tag — shown in the footer and the terminal
+// Single source of truth for the build tag - shown in the footer and the terminal
 const BUILD_VERSION = 'v3.5-refined';
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         isBooting = false;
         clearTimeout(typeTimeout);
 
-        // First visit only — subsequent visits skip straight to content
+        // First visit only - subsequent visits skip straight to content
         try { localStorage.setItem('om_booted', '1'); } catch(e) {}
 
         document.body.classList.add('power-on-flash');
@@ -333,7 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =========================================
        3. AMBIENT GLOW, MAGNETIC BUTTONS & SPOTLIGHT CARDS
-       (native cursor — no custom cursor overlay)
+       (native cursor - no custom cursor overlay)
     ========================================= */
     const ambientGlow = document.querySelector('.ambient-glow');
 
@@ -548,7 +548,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       9b. TYPOGRAPHY — PER-CHARACTER STAGGER
+       9b. TYPOGRAPHY - PER-CHARACTER STAGGER
        Wrap each section-title's text in spans so
        CSS can cascade a line-reveal per character.
     ========================================= */
@@ -805,20 +805,20 @@ document.addEventListener("DOMContentLoaded", () => {
             btnRead.disabled = true;
             btnWrite.disabled = true;
             if (kind === 'write') {
-                setLog('<span class="t-cyan">AWVALID ↑ … AWREADY ↑</span> — write address <span class="t-cyan">0x0200_1000</span> accepted');
+                setLog('<span class="t-cyan">AWVALID ↑ … AWREADY ↑</span> - write address <span class="t-cyan">0x0200_1000</span> accepted');
                 await sendPacket('AW', false);
-                setLog('<span class="t-orange">WVALID ↑ … WLAST</span> — data beat transferred');
+                setLog('<span class="t-orange">WVALID ↑ … WLAST</span> - data beat transferred');
                 await sendPacket('W', false);
-                setLog('<span class="t-lime">BVALID ↑</span> — BRESP = <span class="t-lime">OKAY ✓</span> write complete');
+                setLog('<span class="t-lime">BVALID ↑</span> - BRESP = <span class="t-lime">OKAY ✓</span> write complete');
                 await sendPacket('B', true);
             } else {
-                setLog('<span class="t-cyan">ARVALID ↑ … ARREADY ↑</span> — read address <span class="t-cyan">0x0200_1000</span> accepted');
+                setLog('<span class="t-cyan">ARVALID ↑ … ARREADY ↑</span> - read address <span class="t-cyan">0x0200_1000</span> accepted');
                 await sendPacket('AR', false);
-                setLog('<span class="t-lime">RVALID ↑</span> — RDATA returned, RRESP = <span class="t-lime">OKAY ✓</span>');
+                setLog('<span class="t-lime">RVALID ↑</span> - RDATA returned, RRESP = <span class="t-lime">OKAY ✓</span>');
                 await sendPacket('R', true);
             }
             await wait(300);
-            setLog('idle — fire a READ or WRITE to watch the handshake');
+            setLog('idle - fire a READ or WRITE to watch the handshake');
             btnRead.disabled = false;
             btnWrite.disabled = false;
             axiBusy = false;
@@ -862,7 +862,7 @@ document.addEventListener("DOMContentLoaded", () => {
             toggle.setAttribute('aria-expanded', 'true');
             if (!welcomed) {
                 welcomed = true;
-                print(`Om Patel — verification shell <span class="t-dim">(build ${BUILD_VERSION})</span>`, 't-cyan');
+                print(`Om Patel - verification shell <span class="t-dim">(build ${BUILD_VERSION})</span>`, 't-cyan');
                 print('Type <span class="t-lime">help</span> to list commands.', 't-dim');
             }
             input.focus();
@@ -890,7 +890,7 @@ document.addEventListener("DOMContentLoaded", () => {
             regBusy = true;
             print('[VCS] Compiling RTL + testbench ...', 't-dim');
             await wait(450);
-            print('[VCS] Elaboration complete — 0 errors, 0 warnings', 't-dim');
+            print('[VCS] Elaboration complete - 0 errors, 0 warnings', 't-dim');
             print('[SIM] Dispatching 17 tests to Slurm ...', 't-dim');
             const bar = print('', 't-lime');
             for (let i = 0; i <= 20; i++) {
@@ -922,13 +922,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 print('Ahmedabad, India', 't-dim');
             },
             experience() {
-                print('SiFive — Design Verification Engineer <span class="t-dim">(Jul 2024 → present)</span>', 't-cyan');
-                print('· Control Port & CLP owner — 17 functional tests, 100% coverage closure');
+                print('SiFive - Design Verification Engineer <span class="t-dim">(Jul 2024 → present)</span>', 't-cyan');
+                print('· Control Port & CLP owner - 17 functional tests, 100% coverage closure');
                 print('· CLP coverage driven <span class="t-orange">50%</span> → <span class="t-lime">100%</span>');
                 print('· 5 RTL bugs found via regression analysis & triage');
-                print('· SiFive Intelligence™ vertical — 2 FR programs, 10+ core configs');
+                print('· SiFive Intelligence™ vertical - 2 FR programs, 10+ core configs');
                 print('· VDB→HTML coverage pipeline (self-built, in production)');
-                print('· NoC verification — <span class="t-cyan">ongoing</span>');
+                print('· NoC verification - <span class="t-cyan">ongoing</span>');
             },
             projects() {
                 print('Control Port / CLP Verification   <span class="t-dim">AXI4 · SiFive</span>');
@@ -974,7 +974,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 print('IF ─ ID ─ EX ─ MEM ─ WB', 't-dim');
                 print(row);
                 print('instruction currently in: <span class="t-cyan">' + cur + '</span> stage');
-                print('Scroll the page — you are the instruction.', 't-dim');
+                print('Scroll the page - you are the instruction.', 't-dim');
             },
             waveform() {
                 print('── waveform viewer ───────────────────', 't-dim');
@@ -982,7 +982,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 print('awvalid: <span class="t-orange">▁▁▔▔▔▔▁▁▁▁▁▁▁▁▁▁</span>');
                 print('awready: <span class="t-orange">▁▁▁▁▔▔▁▁▁▁▁▁▁▁▁▁</span>');
                 print('bvalid : <span class="t-lime">▁▁▁▁▁▁▁▁▔▔▁▁▁▁▁▁</span>  BRESP=OKAY');
-                print('For the real trace: <span class="t-lime">goto about</span> — the hero is a live waveform.', 't-dim');
+                print('For the real trace: <span class="t-lime">goto about</span> - the hero is a live waveform.', 't-dim');
             },
             assert() {
                 print('── assertion monitor ─────────────────', 't-dim');
@@ -990,7 +990,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 print('[SVA] wlast_before_bvalid   : <span class="t-lime">PASS</span>');
                 print('[SVA] no_resp_without_req   : <span class="t-lime">PASS</span>');
                 print('[SVA] reset_clears_state    : <span class="t-lime">PASS</span>');
-                print('assertion monitor: <span class="t-lime">all green ✓</span> — 0 failures');
+                print('assertion monitor: <span class="t-lime">all green ✓</span> - 0 failures');
             },
             panic() {
                 print('Segmentation fault (core dumped)', 't-rose');
@@ -1001,7 +1001,7 @@ document.addEventListener("DOMContentLoaded", () => {
             version() {
                 print(`portfolio <span class="t-cyan">${BUILD_VERSION}</span>`);
                 print('theme      : near-black · electric blue · glass', 't-dim');
-                print('toolchain  : HTML5 · CSS3 · vanilla JS — zero build step', 't-dim');
+                print('toolchain  : HTML5 · CSS3 · vanilla JS - zero build step', 't-dim');
                 print('regression : <span class="t-lime">ALL CHECKS PASSED</span>');
             }
         };
@@ -1026,7 +1026,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else if (COMMANDS[name]) {
                 COMMANDS[name]();
             } else {
-                print('command not found: ' + esc(name) + ' — try <span class="t-lime">help</span>', 't-rose');
+                print('command not found: ' + esc(name) + ' - try <span class="t-lime">help</span>', 't-rose');
             }
         }
 
@@ -1065,7 +1065,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       15. KONAMI CODE — CPU DIE EASTER EGG
+       15. KONAMI CODE - CPU DIE EASTER EGG
     ========================================= */
     (function initKonami() {
         const SEQ = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
@@ -1087,7 +1087,7 @@ document.addEventListener("DOMContentLoaded", () => {
             dieOverlay.innerHTML =
                 '<div class="die-package">' +
                     '<div class="die-grid">' + cells + '</div>' +
-                    '<div class="die-caption">RISC-V CORE COMPLEX — you found the die shot. Verified. ✓</div>' +
+                    '<div class="die-caption">RISC-V CORE COMPLEX - you found the die shot. Verified. ✓</div>' +
                 '</div>';
             document.body.appendChild(dieOverlay);
             const dismiss = () => {
@@ -1338,7 +1338,7 @@ document.addEventListener("DOMContentLoaded", () => {
     /* =========================================
        19. SCROLL DEPTH MORPHING + CURSOR STATES
        Sections leaving the viewport recede with
-       scale / opacity / blur — travelling deeper.
+       scale / opacity / blur - travelling deeper.
     ========================================= */
     (function initDepthMorph() {
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -1382,7 +1382,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =========================================
        21. UI SOUND DESIGN (off by default)
-       Tiny WebAudio blips — no audio assets.
+       Tiny WebAudio blips - no audio assets.
     ========================================= */
     (function initSound() {
         const btn = document.getElementById('sound-toggle');

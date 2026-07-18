@@ -1,5 +1,5 @@
 /* ==========================================
-   Om Patel — Portfolio Styles (Redesigned)
+   Om Patel - Portfolio Styles (Redesigned)
    ========================================== */
 
 :root {
@@ -15,13 +15,13 @@
     --grid-line: #2A2E36;
 
     --accent-cyan: #3D9BFF;   /* active signal / links / CTAs */
-    --accent-green: #30D158;  /* lime — high state / verified / 100% */
-    --accent-amber: #8A98AC;  /* orange — emphasis / infra wins */
-    --accent-copper: #9AA7BA; /* orange (warm) — secondary emphasis */
-    --accent-rose: #FF3B47;   /* hot pink — bugs / failures / risk */
-    --accent-purple: #1E6FD9; /* deep cyan — gradient depth (no off-palette purple) */
+    --accent-green: #30D158;  /* lime - high state / verified / 100% */
+    --accent-amber: #8A98AC;  /* orange - emphasis / infra wins */
+    --accent-copper: #9AA7BA; /* orange (warm) - secondary emphasis */
+    --accent-rose: #FF3B47;   /* hot pink - bugs / failures / risk */
+    --accent-purple: #1E6FD9; /* deep cyan - gradient depth (no off-palette purple) */
 
-    /* RGB triplets for alpha-variant rgba() usage — single source of truth,
+    /* RGB triplets for alpha-variant rgba() usage - single source of truth,
        so the two accent hues above only ever need to change in one place */
     --accent-cyan-rgb: 61, 155, 255;
     --accent-green-rgb: 48, 209, 88;
@@ -45,7 +45,7 @@
     padding: 0;
 }
 
-/* Native cursor throughout — interactive elements get a plain pointer */
+/* Native cursor throughout - interactive elements get a plain pointer */
 a, button, .magnetic, .project-card, .timeline-item, .bit, .stat-card { cursor: pointer; }
 
 html {
@@ -1557,7 +1557,7 @@ footer {
     transform: none;
 }
 
-/* Stagger children — JS sets transition-delay dynamically */
+/* Stagger children - JS sets transition-delay dynamically */
 .stagger-children > * {
     opacity: 0;
     transform: translateY(15px);
@@ -1634,7 +1634,7 @@ footer {
 }
 
 /* ==========================================
-   v2.1 — CURRENTLY BUILDING
+   v2.1 - CURRENTLY BUILDING
    ========================================== */
 .now-grid {
     display: grid;
@@ -1713,7 +1713,7 @@ footer {
 }
 
 /* ==========================================
-   v2.1 — INTERACTIVE ARCHITECTURE
+   v2.1 - INTERACTIVE ARCHITECTURE
    ========================================== */
 .arch-lede {
     color: var(--text-muted);
@@ -1821,7 +1821,7 @@ footer {
 }
 
 /* ==========================================
-   v2.1 — INTERACTIVE TERMINAL
+   v2.1 - INTERACTIVE TERMINAL
    ========================================== */
 #terminal-toggle {
     position: fixed;
@@ -1915,7 +1915,7 @@ body.is-booting #terminal-toggle { display: none; }
 }
 
 /* ==========================================
-   v3.0 — PREMIUM LAYER
+   v3.0 - PREMIUM LAYER
    near-black · electric blue · glass · calm
    ========================================== */
 
@@ -2156,7 +2156,7 @@ body.is-booting #terminal-toggle { display: none; }
 }
 
 /* ==========================================
-   v3.1 — CPU PIPELINE HUD (Signature Feature)
+   v3.1 - CPU PIPELINE HUD (Signature Feature)
    ========================================== */
 .stage-tag-wrap { text-align: center; margin-bottom: 1.4rem; }
 .hero-section .stage-tag-wrap { margin-bottom: 2rem; }
@@ -2314,7 +2314,7 @@ body.is-booting #terminal-toggle { display: none; }
 }
 
 /* ==========================================
-   v3.2 — EXPERIENCE LAYER
+   v3.2 - EXPERIENCE LAYER
    boot · dashboard · finale · recruiter mode
    ========================================== */
 
@@ -2598,7 +2598,7 @@ body.recruiter-mode .ach-card:hover, body.recruiter-mode .dash-tile:hover { tran
 }
 
 /* ==========================================
-   v3.3 — IMMERSIVE LAYER
+   v3.3 - IMMERSIVE LAYER
    depth morph · sound
    ========================================== */
 
@@ -2643,11 +2643,11 @@ main > section { will-change: transform, opacity; }
 }
 
 /* ==========================================
-   v3.4 — CINEMATIC LAYER
+   v3.4 - CINEMATIC LAYER
    morphing backgrounds · clock sync
    ========================================== */
 
-/* section morphing: a faint veil that crossfades per pipeline stage —
+/* section morphing: a faint veil that crossfades per pipeline stage -
    blueprint grid in decode, ALU warmth in execute, SRAM array in memory,
    commit wash in writeback. Always subtle; never a hard cut. */
 #stage-veil {
@@ -2700,7 +2700,7 @@ body.recruiter-mode #stage-veil { opacity: 0 !important; }
 }
 body.recruiter-mode #clock-flash { display: none; }
 
-/* pipeline: the active stage breathes gently — a stage that's "live" */
+/* pipeline: the active stage breathes gently - a stage that's "live" */
 .phud-stage.active .phud-dot { animation: phud-idle 2.4s ease-in-out infinite; }
 @keyframes phud-idle {
     0%, 100% { transform: scale(1); }
