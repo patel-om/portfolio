@@ -1582,7 +1582,7 @@ footer {
    ========================================== */
 .fade-in-section {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(30px) scale(0.985);
     transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
     will-change: opacity, transform;
 }
@@ -2054,13 +2054,20 @@ body.is-booting #terminal-toggle { display: none; }
 .fade-in-section.is-visible .projects-grid .project-card:nth-child(5) { transition-delay: 0.32s; }
 .fade-in-section.is-visible .projects-grid .project-card:nth-child(6) { transition-delay: 0.40s; }
 
-/* headings scale slightly while entering */
+/* headings scale slightly while entering, characters cascade in beneath */
 .fade-in-section .section-title {
-    opacity: 0;
-    transform: scale(0.96) translateY(14px);
-    transition: opacity 0.8s var(--ease-out-expo) 0.05s, transform 0.8s var(--ease-out-expo) 0.05s;
+    transform: scale(0.96);
+    transition: transform 0.8s var(--ease-out-expo) 0.05s;
 }
-.fade-in-section.is-visible .section-title { opacity: 1; transform: none; }
+.fade-in-section.is-visible .section-title { transform: none; }
+.section-title .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.55s var(--ease-out-expo), transform 0.55s var(--ease-out-expo);
+    transition-delay: calc(var(--i) * 22ms);
+}
+.fade-in-section.is-visible .section-title .char { opacity: 1; transform: none; }
 
 /* underline animation for text links */
 .footer-links a, .project-link {
@@ -2608,6 +2615,7 @@ body.recruiter-mode .wf-now-line { animation: none; }
 body.recruiter-mode .hero-tag { animation: none; opacity: 1; }
 body.recruiter-mode .fade-in-section,
 body.recruiter-mode .fade-in-section .section-title,
+body.recruiter-mode .section-title .char,
 body.recruiter-mode .fade-in-section .projects-grid .project-card,
 body.recruiter-mode .stagger-children > * {
     opacity: 1 !important;
@@ -2668,9 +2676,85 @@ main > section { will-change: transform, opacity; }
 @media (prefers-reduced-motion: reduce) {
     .section-divider::after, .die-cell, .hero-tag, .st-active .led, .phud-dot.pulse,
     .phud-packet, .fd-cell, #finale.assembled .finale-die,
-    body.cursor-pulse .cursor-dot { animation: none; }
+    body.cursor-pulse .cursor-dot, .phud-stage.active .phud-dot, #clock-flash.tick,
+    #stage-veil { animation: none; transition: none; }
     .hero-tag { opacity: 1; }
     .fade-in-section .projects-grid .project-card,
-    .fade-in-section .section-title { opacity: 1; transform: none; transition: none; }
+    .fade-in-section .section-title, .section-title .char { opacity: 1; transform: none; transition: none; }
     .fd-cell, .finale-msg, .finale-sig { opacity: 1; transform: none; transition: none; }
 }
+
+/* ==========================================
+   v3.4 — CINEMATIC LAYER
+   morphing backgrounds · clock sync · packet cursor
+   ========================================== */
+
+/* section morphing: a faint veil that crossfades per pipeline stage —
+   blueprint grid in decode, ALU warmth in execute, SRAM array in memory,
+   commit wash in writeback. Always subtle; never a hard cut. */
+#stage-veil {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.55;
+    background: radial-gradient(ellipse at 50% 0%, rgba(61, 155, 255, 0.05), transparent 60%);
+    transition: background 1.4s ease, opacity 1.4s ease;
+}
+body[data-stage="DECODE"] #stage-veil {
+    opacity: 0.5;
+    background:
+        linear-gradient(rgba(61, 155, 255, 0.035) 1px, transparent 1px) 0 0 / 48px 48px,
+        linear-gradient(90deg, rgba(61, 155, 255, 0.035) 1px, transparent 1px) 0 0 / 48px 48px;
+}
+body[data-stage="EXECUTE"] #stage-veil {
+    opacity: 0.6;
+    background: radial-gradient(ellipse at 50% 35%, rgba(61, 155, 255, 0.06), transparent 55%),
+                radial-gradient(ellipse at 50% 35%, rgba(255, 59, 71, 0.025), transparent 70%);
+}
+body[data-stage="MEMORY"] #stage-veil {
+    opacity: 0.45;
+    background:
+        repeating-linear-gradient(0deg, rgba(61, 155, 255, 0.03) 0 2px, transparent 2px 34px),
+        repeating-linear-gradient(90deg, rgba(61, 155, 255, 0.03) 0 2px, transparent 2px 34px);
+}
+body[data-stage="WRITEBACK"] #stage-veil {
+    opacity: 0.6;
+    background: radial-gradient(ellipse at 50% 100%, rgba(48, 209, 88, 0.06), transparent 60%);
+}
+body.recruiter-mode #stage-veil { opacity: 0 !important; }
+
+/* clock synchronization pulse: brief sweep on every pipeline stage change */
+#clock-flash {
+    position: fixed;
+    left: 0; right: 0; top: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(61, 155, 255, 0.85), transparent);
+    z-index: 925;
+    pointer-events: none;
+    opacity: 0;
+}
+#clock-flash.tick { animation: clock-sweep 0.6s ease-out; }
+@keyframes clock-sweep {
+    0%   { top: 0; opacity: 0; }
+    12%  { opacity: 0.75; }
+    100% { top: 100%; opacity: 0; }
+}
+body.recruiter-mode #clock-flash { display: none; }
+
+/* pipeline: the active stage breathes gently — a stage that's "live" */
+.phud-stage.active .phud-dot { animation: phud-idle 2.4s ease-in-out infinite; }
+@keyframes phud-idle {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.18); }
+}
+body.recruiter-mode .phud-stage.active .phud-dot { animation: none; }
+
+/* cursor: hovering the pipeline HUD turns the dot into a travelling instruction packet */
+body.cursor-packet .cursor-dot {
+    border-radius: 3px;
+    width: 8px; height: 8px;
+    background: var(--accent-green);
+    box-shadow: 0 0 8px var(--accent-green), 0 0 18px rgba(48, 209, 88, 0.4);
+}
+body.cursor-packet .cursor-outline { opacity: 0; }

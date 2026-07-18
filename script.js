@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let nodes = [];
         let lines = [];
         let packets = [];
+        let reflections = [];
         let mouse = { x: null, y: null };
         let animationId;
         let lastFrameTime = 0;
@@ -156,9 +157,26 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
+        class Reflection {
+            constructor(x, y, color) {
+                this.x = x; this.y = y; this.color = color;
+                this.r = 2; this.alpha = 0.45;
+            }
+            update() { this.r += 0.8; this.alpha -= 0.022; }
+            draw() {
+                if (this.alpha <= 0) return;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                ctx.strokeStyle = this.color.replace(/[\d.]+\)$/, this.alpha.toFixed(3) + ')');
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+        }
+
         class Packet {
             constructor() { this.reset(); }
-            reset() {
+            reset(arrived) {
+                if (arrived) reflections.push(new Reflection(this.x, this.y, this.color));
                 const startNode = nodes[Math.floor(Math.random() * nodes.length)];
                 const endNode = nodes[Math.floor(Math.random() * nodes.length)];
                 this.startX = startNode.x;
@@ -184,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             update() {
                 this.progress += this.speed;
-                if (this.progress >= 1) { this.reset(); return; }
+                if (this.progress >= 1) { this.reset(true); return; }
                 if (this.progress < 0.5) {
                     const p = this.progress * 2;
                     this.x = this.startX + (this.midX - this.startX) * p;
@@ -220,6 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
             nodes = [];
             lines = [];
             packets = [];
+            reflections = [];
             const gridSize = 120; // Reduced density for performance
             const cols = Math.floor(width / gridSize);
             const rows = Math.floor(height / gridSize);
@@ -251,6 +270,19 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
+        function drawClockWave(t) {
+            const amp = 5;
+            const baseY = height * 0.14;
+            ctx.beginPath();
+            for (let x = 0; x <= width; x += 28) {
+                const y = baseY + Math.sin(x * 0.01 + t * 0.0006) * amp;
+                if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+            }
+            ctx.strokeStyle = 'rgba(61, 155, 255, 0.05)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        }
+
         function animateCircuit(timestamp) {
             // Skip frames when tab is hidden
             if (document.hidden) {
@@ -270,7 +302,10 @@ document.addEventListener("DOMContentLoaded", () => {
             lines.forEach(l => l.draw());
             nodes.forEach(n => n.draw());
             if (!document.body.classList.contains('recruiter-mode')) {
+                drawClockWave(timestamp);
                 packets.forEach(p => { p.update(); p.draw(); });
+                reflections = reflections.filter(r => r.alpha > 0);
+                reflections.forEach(r => { r.update(); r.draw(); });
             }
             animationId = requestAnimationFrame(animateCircuit);
         }
@@ -549,6 +584,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
         sections.forEach(s => navObserver.observe(s.el));
     }
+
+
+    /* =========================================
+       9b. TYPOGRAPHY — PER-CHARACTER STAGGER
+       Wrap each section-title's text in spans so
+       CSS can cascade a line-reveal per character.
+    ========================================= */
+    document.querySelectorAll('.section-title').forEach(el => {
+        const text = el.textContent;
+        el.textContent = '';
+        Array.from(text).forEach((ch, i) => {
+            const span = document.createElement('span');
+            span.className = 'char';
+            span.style.setProperty('--i', i);
+            span.textContent = ch === ' ' ? ' ' : ch;
+            el.appendChild(span);
+        });
+    });
 
 
     /* =========================================
@@ -848,7 +901,7 @@ document.addEventListener("DOMContentLoaded", () => {
             toggle.setAttribute('aria-expanded', 'true');
             if (!welcomed) {
                 welcomed = true;
-                print('Om Patel — verification shell <span class="t-dim">(build v3.3-immersive)</span>', 't-cyan');
+                print('Om Patel — verification shell <span class="t-dim">(build v3.4-cinematic)</span>', 't-cyan');
                 print('Type <span class="t-lime">help</span> to list commands.', 't-dim');
             }
             input.focus();
@@ -984,7 +1037,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 setTimeout(() => print('...just kidding. This site is verified.', 't-dim'), 600);
             },
             version() {
-                print('portfolio <span class="t-cyan">v3.3-immersive</span>');
+                print('portfolio <span class="t-cyan">v3.4-cinematic</span>');
                 print('theme      : near-black · electric blue · glass', 't-dim');
                 print('toolchain  : HTML5 · CSS3 · vanilla JS — zero build step', 't-dim');
                 print('regression : <span class="t-lime">ALL CHECKS PASSED</span>');
@@ -1133,6 +1186,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const STAGE_NAMES = ['FETCH', 'DECODE', 'EXECUTE', 'MEMORY', 'WRITEBACK'];
         let lastActive = -1;
         let hudRAF;
+        let firstRun = true;
 
         function update() {
             const ref = window.scrollY + window.innerHeight * 0.35;
@@ -1176,7 +1230,19 @@ document.addEventListener("DOMContentLoaded", () => {
                     void dot.offsetWidth;
                     dot.classList.add('pulse');
                 }
-                if (window.omBlip) window.omBlip(920, 0.05, 0.02);
+                if (!firstRun) {
+                    if (window.omBlip) window.omBlip(920, 0.05, 0.02);
+                    // clock synchronization pulse: a brief sweep marks every stage transition
+                    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                        const flash = document.getElementById('clock-flash');
+                        if (flash) {
+                            flash.classList.remove('tick');
+                            void flash.offsetWidth;
+                            flash.classList.add('tick');
+                        }
+                    }
+                }
+                firstRun = false;
             }
         }
 
@@ -1197,6 +1263,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 window.scrollTo({ top: top, behavior: 'smooth' });
             });
         });
+
+        // cursor becomes a tiny travelling instruction packet over the HUD itself
+        if (window.matchMedia('(pointer: fine)').matches) {
+            hud.addEventListener('mouseenter', () => document.body.classList.add('cursor-packet'));
+            hud.addEventListener('mouseleave', () => document.body.classList.remove('cursor-packet'));
+        }
 
         update();
     })();
