@@ -1202,6 +1202,11 @@ body:not(.is-booting) .waveform-svg .wf-now-label { animation: wfFade 0.5s ease-
 .project-link:hover::after {
     transform: translateX(4px);
 }
+.project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1.5rem;
+}
 
 /* ==========================================
    SKILLS
