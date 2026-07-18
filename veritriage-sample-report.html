@@ -133,6 +133,28 @@
 
   .placeholder { border-style: dashed; color: var(--muted); }
   footer { margin-top: 40px; color: var(--muted); font-size: 12px; }
+
+  /* Investigation */
+  p.lead { color: var(--ink-2); margin: 0 0 14px; }
+  .hyp-card { margin-bottom: 14px; }
+  .ev-refs { margin: 12px 0 0; font-size: 12.5px; color: var(--muted); }
+  .ev-refs code { color: var(--ink-2); }
+  .ai-note { margin: 10px 0 0; color: var(--ink-2); font-size: 13.5px; border-left: 3px solid var(--meter); padding-left: 10px; }
+  details { margin-top: 12px; }
+  details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; }
+  details[open] summary { margin-bottom: 8px; }
+
+  /* Evidence graph drawing */
+  .graph-scroll { overflow-x: auto; margin-top: 14px; }
+  svg.evgraph { display: block; }
+  svg.evgraph text { font: 11px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--ink-2); }
+  svg.evgraph text.col-label { font: 600 11px system-ui, sans-serif; fill: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  svg.evgraph line.edge { stroke: var(--muted); stroke-width: 1.2; opacity: 0.55; }
+  svg.evgraph circle { stroke: var(--surface); stroke-width: 2; }
+  svg.evgraph circle.critical { fill: var(--critical); }
+  svg.evgraph circle.serious { fill: var(--serious); }
+  svg.evgraph circle.warning { fill: var(--warning); }
+  svg.evgraph circle.muted { fill: var(--muted); }
 </style>
 </head>
 <body>
@@ -143,7 +165,7 @@
   </header>
   <p class="meta">
 Test <code>axi_random_test</code> ·Synopsys VCS ·<code>tests/fixtures/uvm_scoreboard.log</code> + <code>tests/fixtures/coverage.txt</code> + <code>tests/fixtures/test_metadata.json</code> ·
-    generated 2026-07-18 09:14 UTC ·
+    generated 2026-07-18 13:36 UTC ·
     parsers <code>simulation_log, coverage, test_metadata</code>
   </p>
 
@@ -165,6 +187,53 @@ Test <code>axi_random_test</code> ·Synopsys VCS ·<code>tests/fixtures/uvm_scor
         7 evidence nodes and 5
         relationships extracted from 3 artifacts.
         Full graph in <code>evidence_graph.json</code>; every conclusion below cites node IDs from it.
+      </p>
+      <div class="graph-scroll">
+        <svg class="evgraph" width="630" height="240"
+             viewBox="0 0 630 240"
+             role="img" aria-label="Working-set evidence graph: nodes by artifact type with relationships">
+          <text class="col-label" x="30" y="18">simulation log</text>
+          <text class="col-label" x="230" y="18">coverage</text>
+          <text class="col-label" x="430" y="18">test metadata</text>
+          <line class="edge" x1="44" y1="46" x2="44" y2="104"
+><title>precedes: Earlier failing message in the same artifact.</title></line>
+          <line class="edge" x1="44" y1="46" x2="444" y2="46"
+><title>part_of: Failure occurred in the run described by this test metadata.</title></line>
+          <line class="edge" x1="44" y1="104" x2="444" y2="46"
+><title>part_of: Failure occurred in the run described by this test metadata.</title></line>
+          <line class="edge" x1="244" y1="46" x2="44" y2="46"
+stroke-dasharray="4 3"><title>correlates_with: Coverage hole in scope &#39;scoreboard&#39; matches the scope of this failure.</title></line>
+          <line class="edge" x1="244" y1="46" x2="44" y2="104"
+stroke-dasharray="4 3"><title>correlates_with: Coverage hole in scope &#39;scoreboard&#39; matches the scope of this failure.</title></line>
+          <g>
+            <circle class="serious" cx="44" cy="46" r="7"><title>[ev-a41d70dcb11b] line 4: Scoreboard mismatch: expected data 0xDEAD got 0xBEEF for addr 0x1000</title></circle>
+            <text x="57" y="50">a41d70dcb11b</text>
+          </g>
+          <g>
+            <circle class="serious" cx="44" cy="104" r="7"><title>[ev-65a5c0f3003c] line 5: Scoreboard mismatch: expected data 0xCAFE got 0xF00D for addr 0x1004</title></circle>
+            <text x="57" y="108">65a5c0f3003c</text>
+          </g>
+          <g>
+            <circle class="muted" cx="444" cy="46" r="7"><title>[ev-364c3a30ad8e]: Test run axi_random_test (seed=987654321, status=failed, simulator=vcs, duration_s=412)</title></circle>
+            <text x="457" y="50">364c3a30ad8e</text>
+          </g>
+          <g>
+            <circle class="muted" cx="244" cy="46" r="7"><title>[ev-7daee269d121] line 3: module scoreboard coverage at 55%</title></circle>
+            <text x="257" y="50">7daee269d121</text>
+          </g>
+          <g>
+            <circle class="muted" cx="244" cy="104" r="7"><title>[ev-8aa058333a5f] line 1: covergroup cg_axi_burst coverage at 72.5%</title></circle>
+            <text x="257" y="108">8aa058333a5f</text>
+          </g>
+          <g>
+            <circle class="muted" cx="244" cy="162" r="7"><title>[ev-07e7e472bfbd] line 4: module dma_engine coverage at 91.25%</title></circle>
+            <text x="257" y="166">07e7e472bfbd</text>
+          </g>
+        </svg>
+      </div>
+      <p style="margin: 8px 0 0; font-size: 12px; color: var(--muted);">
+        Working-set nodes only; hover a node or edge for details. Dashed edges are
+        cross-artifact correlations.
       </p>
       <table>
         <thead><tr><th>Artifact type</th><th>Nodes</th></tr></thead>
@@ -199,6 +268,139 @@ Test <code>axi_random_test</code> ·Synopsys VCS ·<code>tests/fixtures/uvm_scor
         <div class="meter-head"><span>Confidence</span><b>80%</b></div>
         <div class="track"><div class="fill" style="width: 80%"></div></div>
       </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Investigation - Competing Hypotheses</h2>
+    <p class="lead">
+      <b>What happened:</b> Likely testbench issue - scoreboard or comparison mismatch.
+      <b>Why we believe this:</b> 2 deterministic
+      signals evaluated over
+      6 selected evidence nodes rank the
+      explanations below. Alternatives are shown so nothing is concluded without contrast.
+    </p>
+    <div class="card hyp-card">
+      <div class="verdict">
+        <span class="chip"><span class="dot serious"></span>Likely testbench issue</span>
+        <span class="rule-name">Testbench Issue · generator: testbench-issue</span>
+      </div>
+      <p class="verdict-summary">The checking environment (uvm_test_top.env.scb) may be flagging correct DUT behavior: a stale reference model, a mispredicted transaction, or an incorrectly encoded assertion would produce exactly this failure evidence.</p>
+      <div class="meter">
+        <div class="meter-head"><span>Confidence</span><b>58%</b></div>
+        <div class="track"><div class="fill" style="width: 58.0%"></div></div>
+      </div>
+      <p class="ev-refs">Supporting evidence:
+<code>ev-a41d70dcb11b</code> <code>ev-65a5c0f3003c</code>      </p>
+      <details>
+        <summary>Confidence trace</summary>
+        <table>
+          <thead><tr><th>Step</th><th>Value</th><th>Reason</th></tr></thead>
+          <tbody>
+            <tr><td>base (testbench-issue)</td><td class="num">0.25</td><td>prior plausibility</td></tr>
+            <tr><td>signal: scoreboard-mismatch</td><td class="num">+0.30</td><td>Scoreboard expected-vs-actual mismatches with no protocol assertion fired: the DUT followed the protocol while the checker disagreed on data, which points first at the prediction/reference model.</td></tr>
+            <tr><td>signal: coverage-hole-near-failure</td><td class="num">+0.04</td><td>Coverage holes overlap the failing scope: the logic around the failure is under-exercised, so a latent design bug there is plausible and the stimulus may also be missing scenarios.</td></tr>
+            <tr><td>evidence factor</td><td class="num">x1.00</td><td>mean extraction confidence of cited nodes</td></tr>
+            <tr><td><b>final</b></td><td class="num"><b>0.58</b></td><td></td></tr>
+          </tbody>
+        </table>
+      </details>
+    </div>
+    <div class="card hyp-card">
+      <div class="verdict">
+        <span class="chip"><span class="dot critical"></span>Likely RTL bug</span>
+        <span class="rule-name">RTL Bug · generator: rtl-bug</span>
+      </div>
+      <p class="verdict-summary">The design deviated from intended behavior in uvm_test_top.env.scb around t=55000. The failing evidence is consistent with a logic, FSM, or protocol implementation error in the DUT rather than in the checking environment.</p>
+      <div class="meter">
+        <div class="meter-head"><span>Confidence</span><b>42%</b></div>
+        <div class="track"><div class="fill" style="width: 42.0%"></div></div>
+      </div>
+      <p class="ev-refs">Supporting evidence:
+<code>ev-a41d70dcb11b</code> <code>ev-65a5c0f3003c</code>      </p>
+      <details>
+        <summary>Confidence trace</summary>
+        <table>
+          <thead><tr><th>Step</th><th>Value</th><th>Reason</th></tr></thead>
+          <tbody>
+            <tr><td>base (rtl-bug)</td><td class="num">0.25</td><td>prior plausibility</td></tr>
+            <tr><td>signal: scoreboard-mismatch</td><td class="num">+0.10</td><td>Scoreboard expected-vs-actual mismatches with no protocol assertion fired: the DUT followed the protocol while the checker disagreed on data, which points first at the prediction/reference model.</td></tr>
+            <tr><td>signal: coverage-hole-near-failure</td><td class="num">+0.07</td><td>Coverage holes overlap the failing scope: the logic around the failure is under-exercised, so a latent design bug there is plausible and the stimulus may also be missing scenarios.</td></tr>
+            <tr><td>evidence factor</td><td class="num">x1.00</td><td>mean extraction confidence of cited nodes</td></tr>
+            <tr><td><b>final</b></td><td class="num"><b>0.42</b></td><td></td></tr>
+          </tbody>
+        </table>
+      </details>
+    </div>
+    <div class="card hyp-card">
+      <div class="verdict">
+        <span class="chip"><span class="dot muted"></span>Infrastructure issue</span>
+        <span class="rule-name">Infrastructure Issue · generator: infrastructure-issue</span>
+      </div>
+      <p class="verdict-summary">The run may have been disturbed by its environment (license drop, disk or memory exhaustion, host problem) rather than by the design or the testbench; a clean re-run on a different host would discriminate.</p>
+      <div class="meter">
+        <div class="meter-head"><span>Confidence</span><b>8%</b></div>
+        <div class="track"><div class="fill" style="width: 8.0%"></div></div>
+      </div>
+      <p class="ev-refs">Supporting evidence:
+<code>ev-a41d70dcb11b</code> <code>ev-65a5c0f3003c</code> <code>ev-364c3a30ad8e</code>      </p>
+      <details>
+        <summary>Confidence trace</summary>
+        <table>
+          <thead><tr><th>Step</th><th>Value</th><th>Reason</th></tr></thead>
+          <tbody>
+            <tr><td>base (infrastructure-issue)</td><td class="num">0.08</td><td>prior plausibility</td></tr>
+            <tr><td>evidence factor</td><td class="num">x1.00</td><td>mean extraction confidence of cited nodes</td></tr>
+            <tr><td><b>final</b></td><td class="num"><b>0.08</b></td><td></td></tr>
+          </tbody>
+        </table>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <h2>Recommended Debugging Steps</h2>
+    <div class="card">
+      <table>
+        <thead><tr><th>#</th><th>Action</th><th>Module</th><th>Effort</th><th>Confidence</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="num">1</td>
+            <td>Review the scoreboard/reference-model prediction for the first mismatching transaction.<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">If the DUT follows the protocol, the checker&#39;s expectation is the prime suspect.</span></td>
+            <td>uvm_test_top.env.scb</td>
+            <td>medium</td>
+            <td class="num">53%</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>Compare the first mismatching transaction against the specification by hand.<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">A manual spec check settles whether the DUT or the predictor is wrong.</span></td>
+            <td>uvm_test_top.env.scb</td>
+            <td>low</td>
+            <td class="num">53%</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>Inspect the waveform around t=55000 at uvm_test_top.env.scb, working backward from the first failure.<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">The first failing evidence marks where behavior diverged; upstream of it is the cause.</span></td>
+            <td>uvm_test_top.env.scb</td>
+            <td>medium</td>
+            <td class="num">38%</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>Review recent RTL changes touching the failing scope.<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">New failures usually track recent edits; a diff review is the cheapest first filter.</span></td>
+            <td>uvm_test_top.env.scb</td>
+            <td>low</td>
+            <td class="num">38%</td>
+          </tr>
+          <tr>
+            <td class="num">5</td>
+            <td>Check the logic at /tb/scoreboard.sv:142 against the specification.<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">The failing message points directly at this source location.</span></td>
+            <td>uvm_test_top.env.scb</td>
+            <td>medium</td>
+            <td class="num">38%</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
