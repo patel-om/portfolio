@@ -1,4 +1,10 @@
+// Single source of truth for the build tag — shown in the footer and the terminal
+const BUILD_VERSION = 'v3.5-refined';
+
 document.addEventListener("DOMContentLoaded", () => {
+
+    const buildTagEl = document.getElementById('build-tag');
+    if (buildTagEl) buildTagEl.textContent = BUILD_VERSION;
 
     /* =========================================
        1. TERMINAL BOOT SEQUENCE (Session-aware)
@@ -326,45 +332,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       3. CUSTOM MAGNETIC CURSOR & INTERACTIONS
+       3. AMBIENT GLOW, MAGNETIC BUTTONS & SPOTLIGHT CARDS
+       (native cursor — no custom cursor overlay)
     ========================================= */
-    const cursorDot = document.querySelector('.cursor-dot');
-    const cursorOutline = document.querySelector('.cursor-outline');
     const ambientGlow = document.querySelector('.ambient-glow');
 
     if (window.matchMedia("(pointer: fine)").matches) {
         window.addEventListener('mousemove', (e) => {
-            if (cursorDot) {
-                cursorDot.style.left = `${e.clientX}px`;
-                cursorDot.style.top = `${e.clientY}px`;
-            }
             if (ambientGlow) {
                 ambientGlow.style.left = `${e.clientX}px`;
                 ambientGlow.style.top = `${e.clientY}px`;
             }
-            if (cursorOutline && !document.body.classList.contains('cursor-magnetic')) {
-                cursorOutline.animate({
-                    left: `${e.clientX}px`,
-                    top: `${e.clientY}px`,
-                    width: '32px', height: '32px', borderRadius: '50%'
-                }, { duration: 120, fill: "forwards" });
-            }
-        });
-
-        if (cursorOutline) {
-            window.addEventListener('mousedown', () => {
-                cursorOutline.animate([
-                    { transform: 'translate(-50%, -50%) scale(1)' },
-                    { transform: 'translate(-50%, -50%) scale(0.6)' },
-                    { transform: 'translate(-50%, -50%) scale(1)' }
-                ], { duration: 250 });
-            });
-        }
-
-        const clickables = document.querySelectorAll('a:not(.magnetic), button:not(.magnetic), .project-card, .timeline-item');
-        clickables.forEach(el => {
-            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
         });
 
         const magnetics = document.querySelectorAll('.magnetic');
@@ -374,24 +352,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 const strength = btn.dataset.strength || 20;
                 const x = e.clientX - (rect.left + rect.width / 2);
                 const y = e.clientY - (rect.top + rect.height / 2);
-
                 btn.style.transform = `translate(${x * (strength / 100)}px, ${y * (strength / 100)}px)`;
-
-                document.body.classList.add('cursor-magnetic');
-                if (cursorOutline) {
-                    cursorOutline.animate({
-                        left: `${rect.left + rect.width / 2}px`,
-                        top: `${rect.top + rect.height / 2}px`,
-                        width: `${rect.width + 10}px`,
-                        height: `${rect.height + 10}px`,
-                        borderRadius: '8px'
-                    }, { duration: 80, fill: "forwards" });
-                }
             });
-
             btn.addEventListener('mouseleave', () => {
                 btn.style.transform = `translate(0px, 0px)`;
-                document.body.classList.remove('cursor-magnetic');
             });
         });
 
@@ -404,9 +368,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
             });
         });
-    } else {
-        if (cursorDot) cursorDot.style.display = 'none';
-        if (cursorOutline) cursorOutline.style.display = 'none';
     }
 
 
@@ -901,7 +862,7 @@ document.addEventListener("DOMContentLoaded", () => {
             toggle.setAttribute('aria-expanded', 'true');
             if (!welcomed) {
                 welcomed = true;
-                print('Om Patel — verification shell <span class="t-dim">(build v3.4-cinematic)</span>', 't-cyan');
+                print(`Om Patel — verification shell <span class="t-dim">(build ${BUILD_VERSION})</span>`, 't-cyan');
                 print('Type <span class="t-lime">help</span> to list commands.', 't-dim');
             }
             input.focus();
@@ -912,7 +873,8 @@ document.addEventListener("DOMContentLoaded", () => {
             toggle.setAttribute('aria-expanded', 'false');
         }
 
-        const SECTIONS = ['about', 'now', 'skills', 'experience', 'architecture', 'projects', 'dashboard', 'education', 'achievements', 'finale'];
+        // Derived from the DOM so it can never drift from the real page structure
+        const SECTIONS = Array.from(document.querySelectorAll('main > section[id]')).map(s => s.id);
 
         function gotoSection(id) {
             const target = document.getElementById(id);
@@ -1037,7 +999,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 setTimeout(() => print('...just kidding. This site is verified.', 't-dim'), 600);
             },
             version() {
-                print('portfolio <span class="t-cyan">v3.4-cinematic</span>');
+                print(`portfolio <span class="t-cyan">${BUILD_VERSION}</span>`);
                 print('theme      : near-black · electric blue · glass', 't-dim');
                 print('toolchain  : HTML5 · CSS3 · vanilla JS — zero build step', 't-dim');
                 print('regression : <span class="t-lime">ALL CHECKS PASSED</span>');
@@ -1264,12 +1226,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        // cursor becomes a tiny travelling instruction packet over the HUD itself
-        if (window.matchMedia('(pointer: fine)').matches) {
-            hud.addEventListener('mouseenter', () => document.body.classList.add('cursor-packet'));
-            hud.addEventListener('mouseleave', () => document.body.classList.remove('cursor-packet'));
-        }
-
         update();
     })();
 
@@ -1421,13 +1377,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (raf) cancelAnimationFrame(raf);
             raf = requestAnimationFrame(apply);
         }, { passive: true });
-
-        // cursor becomes an electrical pulse over the architecture section
-        const archSec = document.getElementById('architecture');
-        if (archSec && window.matchMedia('(pointer: fine)').matches) {
-            archSec.addEventListener('mouseenter', () => document.body.classList.add('cursor-pulse'));
-            archSec.addEventListener('mouseleave', () => document.body.classList.remove('cursor-pulse'));
-        }
     })();
 
 

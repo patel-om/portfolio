@@ -8,6 +8,20 @@
     <meta name="keywords" content="Om Patel, Design Verification, RISC-V, SystemVerilog, UVM, SiFive, CPU Verification, AXI4">
     <meta name="author" content="Om Patel">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Open Graph / Twitter Card -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Om Patel | Design Verification Engineer">
+    <meta property="og:description" content="CPU Design Verification Engineer at SiFive — RISC-V, SystemVerilog, UVM, AXI4, and verification automation.">
+    <meta property="og:image" content="https://patel-om.github.io/portfolio/profile.jpg">
+    <meta property="og:url" content="https://patel-om.github.io/portfolio/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Om Patel | Design Verification Engineer">
+    <meta name="twitter:description" content="CPU Design Verification Engineer at SiFive — RISC-V, SystemVerilog, UVM, AXI4, and verification automation.">
+    <meta name="twitter:image" content="https://patel-om.github.io/portfolio/profile.jpg">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,10 +40,6 @@
         </div>
         <button id="skip-boot" class="skip-btn" aria-label="Skip boot animation">[ Skip Boot Sequence ]</button>
     </div>
-
-    <!-- Custom Cursor -->
-    <div class="cursor-dot" aria-hidden="true"></div>
-    <div class="cursor-outline" aria-hidden="true"></div>
 
     <!-- Interactive Canvas Background -->
     <canvas id="circuit-canvas" aria-hidden="true"></canvas>
@@ -166,7 +176,7 @@
                         <div class="pins right-pins"></div>
                         <div class="chip-label">
                             <div class="profile-photo-wrapper">
-                                <img src="IMG_5643 2.jpeg" alt="Om Patel — Design Verification Engineer" class="profile-photo" width="160" height="160" loading="eager">
+                                <img src="profile.jpg" alt="Om Patel — Design Verification Engineer" class="profile-photo" width="160" height="160" loading="eager">
                             </div>
                             <h1 class="name scramble-text gradient-text" data-value="Om Patel">Om Patel</h1>
                             <h2 class="title">Design Verification Engineer</h2>
@@ -835,7 +845,7 @@
                     <pre class="tf-body"><span class="tf-line"><span class="tf-prompt">om@verif</span>:<span class="tf-path">~</span>$ cat build.info</span>
 <span class="tf-line"><span class="tf-key">author</span>      : Om Patel <span class="tf-c">© 2026</span></span>
 <span class="tf-line"><span class="tf-key">designed_by</span> : Om Patel &mdash; engineered end to end</span>
-<span class="tf-line"><span class="tf-key">last_verified</span>: <span class="tf-lime">2026-07-18</span>  |  build: <span class="tf-lime">v3.4-cinematic</span></span>
+<span class="tf-line"><span class="tf-key">last_verified</span>: <span class="tf-lime">2026-07-18</span>  |  build: <span class="tf-lime" id="build-tag">v3.5-refined</span></span>
 <span class="tf-line"><span class="tf-key">toolchain</span>   : HTML5 · CSS3 · JavaScript</span>
 <span class="tf-line"><span class="tf-key">status</span>      : <span class="tf-lime">[ ALL CHECKS PASSED ]</span></span>
 <span class="tf-line"><span class="tf-prompt">om@verif</span>:<span class="tf-path">~</span>$ <span class="tf-cursor"></span></span></pre>
@@ -896,6 +906,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
