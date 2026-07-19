@@ -165,7 +165,7 @@
   </header>
   <p class="meta">
 Test <code>axi_random_test</code> ·Synopsys VCS ·<code>tests/fixtures/uvm_scoreboard.log</code> + <code>tests/fixtures/coverage.txt</code> + <code>tests/fixtures/test_metadata.json</code> ·
-    generated 2026-07-18 13:36 UTC ·
+    generated 2026-07-19 04:26 UTC ·
     parsers <code>simulation_log, coverage, test_metadata</code>
   </p>
 
@@ -398,6 +398,38 @@ stroke-dasharray="4 3"><title>correlates_with: Coverage hole in scope &#39;score
             <td>uvm_test_top.env.scb</td>
             <td>medium</td>
             <td class="num">38%</td>
+          </tr>
+          <tr>
+            <td class="num">6</td>
+            <td>Compare against regression reg-27ec198e0127-20260719042616824197 (test axi_random_test): historically diagnosed as &#39;Likely testbench issue&#39;<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">Regression database precedent: identical failure signature (1 prior occurrence).</span></td>
+            <td>-</td>
+            <td>low</td>
+            <td class="num">85%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Historical Context</h2>
+    <div class="card">
+      <p class="lead">
+        <span class="chip"><span class="dot serious"></span>Seen before</span>
+        This exact failure signature (<code>sig-27ec198e0127</code>) appears in
+        1 prior regression
+        in the database.
+      </p>
+      <table>
+        <thead><tr><th>Regression</th><th>When</th><th>Test</th><th>Classification</th><th>Historical root cause</th><th>Similarity</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>reg-27ec198e0127-20260719042616824197</code></td>
+            <td class="num">2026-07-19 04:26</td>
+            <td>axi_random_test</td>
+            <td>Testbench Failure</td>
+            <td>Likely testbench issue</td>
+            <td class="num">exact</td>
           </tr>
         </tbody>
       </table>

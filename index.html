@@ -556,20 +556,22 @@
                             <h3 class="scramble-text" data-value="VeriTriage - Verification Intelligence Platform">VeriTriage - Verification Intelligence Platform</h3>
                         </div>
                         <div class="project-context">Automated Regression Failure Triage</div>
-                        <p class="typewriter-para">Built an open-source Python platform that turns verification artifacts (UVM/VCS/Questa/Xcelium logs, compile logs, coverage, test metadata) into a normalized Evidence Graph, then reasons over it like a DV engineer: a multi-stage pipeline selects relevant evidence, fires deterministic signals, and ranks competing hypotheses (RTL bug vs testbench vs infrastructure) with fully traceable confidence propagation and categorized debug steps. The optional AI layer reviews only selected evidence and cites node IDs, never raw files.</p>
+                        <p class="typewriter-para">Built an open-source Python platform that turns verification artifacts (UVM/VCS/Questa/Xcelium logs, compile logs, coverage, test metadata) into a normalized Evidence Graph, then reasons over it like a DV engineer: a multi-stage pipeline ranks competing hypotheses (RTL bug vs testbench vs infrastructure) with fully traceable confidence and categorized debug steps. Every analysis is recorded into a persistent regression database with deterministic failure signatures and similarity search, so the platform answers "have we seen this before?", surfaces historical root causes, and renders team-level analytics (failure clusters, module hotspots, trends) as an engineering dashboard. The optional AI layer reviews only selected evidence and cites node IDs, never raw files.</p>
                         <div class="project-metrics">
                             <span class="metric-badge mb-cyan">Evidence Graph</span>
                             <span class="metric-badge mb-lime">Competing Hypotheses</span>
-                            <span class="metric-badge mb-orange">Traceable Confidence</span>
+                            <span class="metric-badge mb-orange">Regression Intelligence</span>
                         </div>
                         <div class="tech-tags">
                             <span class="hl-keyword">Python</span>
                             <span class="hl-function">Pydantic</span>
                             <span class="hl-string">UVM Log Analysis</span>
+                            <span class="hl-number">SQLite</span>
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/patel-om/veritriage" target="_blank" rel="noopener noreferrer" class="project-link magnetic">View Source on GitHub</a>
                             <a href="veritriage-sample-report.html" target="_blank" rel="noopener noreferrer" class="project-link magnetic">View Sample Report</a>
+                            <a href="veritriage-sample-dashboard.html" target="_blank" rel="noopener noreferrer" class="project-link magnetic">View Sample Dashboard</a>
                         </div>
                     </article>
 
