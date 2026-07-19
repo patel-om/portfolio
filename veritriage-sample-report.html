@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VeriTriage - axi_random_test</title>
+<title>VeriTriage - axi_read_stress_test</title>
 <style>
   :root {
     color-scheme: light;
@@ -144,6 +144,22 @@
   details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; }
   details[open] summary { margin-bottom: 8px; }
 
+  /* Knowledge: protocol sequence stepper */
+  .kseq { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 6px 4px; }
+  .kstate {
+    display: flex; flex-direction: column; gap: 3px;
+    border: 1px solid var(--hairline); border-radius: 8px;
+    padding: 7px 12px; font-size: 12.5px; font-weight: 600; color: var(--ink);
+  }
+  .kstate .kdot { width: 9px; height: 9px; border-radius: 50%; background: var(--meter); }
+  .kstate.unreached { color: var(--muted); border-style: dashed; font-weight: 400; }
+  .kstate.unreached .kdot { background: var(--meter-track); }
+  .kstate.stall { border-color: var(--serious); }
+  .kstate.stall .kdot { background: var(--serious); }
+  .kstate .kev { font-weight: 400; font-size: 11px; color: var(--muted); }
+  .kstate .kev code { color: var(--ink-2); }
+  .karrow { color: var(--muted); align-self: center; }
+
   /* Evidence graph drawing */
   .graph-scroll { overflow-x: auto; margin-top: 14px; }
   svg.evgraph { display: block; }
@@ -164,19 +180,19 @@
     <div class="brand">VeriTriage<small>verification intelligence</small></div>
   </header>
   <p class="meta">
-Test <code>axi_random_test</code> ·Synopsys VCS ·<code>tests/fixtures/uvm_scoreboard.log</code> + <code>tests/fixtures/coverage.txt</code> + <code>tests/fixtures/test_metadata.json</code> ·
-    generated 2026-07-19 04:26 UTC ·
-    parsers <code>simulation_log, coverage, test_metadata</code>
+Test <code>axi_read_stress_test</code> ·Synopsys VCS ·<code>tests/fixtures/axi_timeout.log</code> ·
+    generated 2026-07-19 04:43 UTC ·
+    parsers <code>simulation_log</code>
   </p>
 
   <section>
     <h2>Regression Summary</h2>
     <div class="tiles">
-      <div class="tile"><div class="label"><span class="dot critical"></span>Fatals</div><div class="value">0</div></div>
-      <div class="tile"><div class="label"><span class="dot serious"></span>Errors</div><div class="value">2</div></div>
-      <div class="tile"><div class="label"><span class="dot warning"></span>Warnings</div><div class="value">0</div></div>
+      <div class="tile"><div class="label"><span class="dot critical"></span>Fatals</div><div class="value">1</div></div>
+      <div class="tile"><div class="label"><span class="dot serious"></span>Errors</div><div class="value">1</div></div>
+      <div class="tile"><div class="label"><span class="dot warning"></span>Warnings</div><div class="value">3</div></div>
       <div class="tile"><div class="label"><span class="dot muted"></span>Failed assertions</div><div class="value">0</div></div>
-      <div class="tile"><div class="label"><span class="dot muted"></span>Log lines</div><div class="value">20</div></div>
+      <div class="tile"><div class="label"><span class="dot muted"></span>Log lines</div><div class="value">11</div></div>
     </div>
   </section>
 
@@ -184,50 +200,24 @@ Test <code>axi_random_test</code> ·Synopsys VCS ·<code>tests/fixtures/uvm_scor
     <h2>Evidence Graph</h2>
     <div class="card">
       <p style="margin: 0 0 12px; color: var(--ink-2);">
-        7 evidence nodes and 5
-        relationships extracted from 3 artifacts.
+        5 evidence nodes and 1
+        relationships extracted from 1 artifact.
         Full graph in <code>evidence_graph.json</code>; every conclusion below cites node IDs from it.
       </p>
       <div class="graph-scroll">
-        <svg class="evgraph" width="630" height="240"
-             viewBox="0 0 630 240"
+        <svg class="evgraph" width="230" height="182"
+             viewBox="0 0 230 182"
              role="img" aria-label="Working-set evidence graph: nodes by artifact type with relationships">
           <text class="col-label" x="30" y="18">simulation log</text>
-          <text class="col-label" x="230" y="18">coverage</text>
-          <text class="col-label" x="430" y="18">test metadata</text>
           <line class="edge" x1="44" y1="46" x2="44" y2="104"
 ><title>precedes: Earlier failing message in the same artifact.</title></line>
-          <line class="edge" x1="44" y1="46" x2="444" y2="46"
-><title>part_of: Failure occurred in the run described by this test metadata.</title></line>
-          <line class="edge" x1="44" y1="104" x2="444" y2="46"
-><title>part_of: Failure occurred in the run described by this test metadata.</title></line>
-          <line class="edge" x1="244" y1="46" x2="44" y2="46"
-stroke-dasharray="4 3"><title>correlates_with: Coverage hole in scope &#39;scoreboard&#39; matches the scope of this failure.</title></line>
-          <line class="edge" x1="244" y1="46" x2="44" y2="104"
-stroke-dasharray="4 3"><title>correlates_with: Coverage hole in scope &#39;scoreboard&#39; matches the scope of this failure.</title></line>
           <g>
-            <circle class="serious" cx="44" cy="46" r="7"><title>[ev-a41d70dcb11b] line 4: Scoreboard mismatch: expected data 0xDEAD got 0xBEEF for addr 0x1000</title></circle>
-            <text x="57" y="50">a41d70dcb11b</text>
+            <circle class="serious" cx="44" cy="46" r="7"><title>[ev-8107973e67ec] line 7: Watchdog timeout hit while read response outstanding for addr 0x40</title></circle>
+            <text x="57" y="50">8107973e67ec</text>
           </g>
           <g>
-            <circle class="serious" cx="44" cy="104" r="7"><title>[ev-65a5c0f3003c] line 5: Scoreboard mismatch: expected data 0xCAFE got 0xF00D for addr 0x1004</title></circle>
-            <text x="57" y="108">65a5c0f3003c</text>
-          </g>
-          <g>
-            <circle class="muted" cx="444" cy="46" r="7"><title>[ev-364c3a30ad8e]: Test run axi_random_test (seed=987654321, status=failed, simulator=vcs, duration_s=412)</title></circle>
-            <text x="457" y="50">364c3a30ad8e</text>
-          </g>
-          <g>
-            <circle class="muted" cx="244" cy="46" r="7"><title>[ev-7daee269d121] line 3: module scoreboard coverage at 55%</title></circle>
-            <text x="257" y="50">7daee269d121</text>
-          </g>
-          <g>
-            <circle class="muted" cx="244" cy="104" r="7"><title>[ev-8aa058333a5f] line 1: covergroup cg_axi_burst coverage at 72.5%</title></circle>
-            <text x="257" y="108">8aa058333a5f</text>
-          </g>
-          <g>
-            <circle class="muted" cx="244" cy="162" r="7"><title>[ev-07e7e472bfbd] line 4: module dma_engine coverage at 91.25%</title></circle>
-            <text x="257" y="166">07e7e472bfbd</text>
+            <circle class="critical" cx="44" cy="104" r="7"><title>[ev-d61d8c4f98f1] line 8: Timeout, ending simulation</title></circle>
+            <text x="57" y="108">d61d8c4f98f1</text>
           </g>
         </svg>
       </div>
@@ -238,9 +228,7 @@ stroke-dasharray="4 3"><title>correlates_with: Coverage hole in scope &#39;score
       <table>
         <thead><tr><th>Artifact type</th><th>Nodes</th></tr></thead>
         <tbody>
-          <tr><td>simulation log</td><td class="num">2</td></tr>
-          <tr><td>coverage</td><td class="num">4</td></tr>
-          <tr><td>test metadata</td><td class="num">1</td></tr>
+          <tr><td>simulation log</td><td class="num">5</td></tr>
         </tbody>
       </table>
       <div style="margin-top: 14px;">
@@ -248,8 +236,6 @@ stroke-dasharray="4 3"><title>correlates_with: Coverage hole in scope &#39;score
           <thead><tr><th>Relationship</th><th>Edges</th></tr></thead>
           <tbody>
             <tr><td>precedes</td><td class="num">1</td></tr>
-            <tr><td>part of</td><td class="num">2</td></tr>
-            <tr><td>correlates with</td><td class="num">2</td></tr>
           </tbody>
         </table>
       </div>
@@ -260,13 +246,21 @@ stroke-dasharray="4 3"><title>correlates_with: Coverage hole in scope &#39;score
     <h2>Failure Classification</h2>
     <div class="card">
       <div class="verdict">
-        <span class="chip"><span class="dot serious"></span>Testbench Failure</span>
-        <span class="rule-name">rule: testbench-failure</span>
+        <span class="chip"><span class="dot serious"></span>Timeout</span>
+        <span class="rule-name">rule: timeout</span>
       </div>
-      <p class="verdict-summary">Likely testbench issue - scoreboard or comparison mismatch</p>
+      <p class="verdict-summary">Timeout - the test hung and was killed by a watchdog/phase timeout</p>
       <div class="meter">
-        <div class="meter-head"><span>Confidence</span><b>80%</b></div>
-        <div class="track"><div class="fill" style="width: 80%"></div></div>
+        <div class="meter-head"><span>Confidence</span><b>85%</b></div>
+        <div class="track"><div class="fill" style="width: 85%"></div></div>
+      </div>
+      <div style="margin-top: 18px;">
+        <table>
+          <thead><tr><th>Alternative classification</th><th>Confidence</th><th>Rule</th></tr></thead>
+          <tbody>
+            <tr><td>Fatal Error</td><td class="num">70%</td><td>fatal-error</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -274,60 +268,60 @@ stroke-dasharray="4 3"><title>correlates_with: Coverage hole in scope &#39;score
   <section>
     <h2>Investigation - Competing Hypotheses</h2>
     <p class="lead">
-      <b>What happened:</b> Likely testbench issue - scoreboard or comparison mismatch.
+      <b>What happened:</b> Timeout - the test hung and was killed by a watchdog/phase timeout.
       <b>Why we believe this:</b> 2 deterministic
       signals evaluated over
-      6 selected evidence nodes rank the
+      2 selected evidence nodes rank the
       explanations below. Alternatives are shown so nothing is concluded without contrast.
     </p>
-    <div class="card hyp-card">
-      <div class="verdict">
-        <span class="chip"><span class="dot serious"></span>Likely testbench issue</span>
-        <span class="rule-name">Testbench Issue · generator: testbench-issue</span>
-      </div>
-      <p class="verdict-summary">The checking environment (uvm_test_top.env.scb) may be flagging correct DUT behavior: a stale reference model, a mispredicted transaction, or an incorrectly encoded assertion would produce exactly this failure evidence.</p>
-      <div class="meter">
-        <div class="meter-head"><span>Confidence</span><b>58%</b></div>
-        <div class="track"><div class="fill" style="width: 58.0%"></div></div>
-      </div>
-      <p class="ev-refs">Supporting evidence:
-<code>ev-a41d70dcb11b</code> <code>ev-65a5c0f3003c</code>      </p>
-      <details>
-        <summary>Confidence trace</summary>
-        <table>
-          <thead><tr><th>Step</th><th>Value</th><th>Reason</th></tr></thead>
-          <tbody>
-            <tr><td>base (testbench-issue)</td><td class="num">0.25</td><td>prior plausibility</td></tr>
-            <tr><td>signal: scoreboard-mismatch</td><td class="num">+0.30</td><td>Scoreboard expected-vs-actual mismatches with no protocol assertion fired: the DUT followed the protocol while the checker disagreed on data, which points first at the prediction/reference model.</td></tr>
-            <tr><td>signal: coverage-hole-near-failure</td><td class="num">+0.04</td><td>Coverage holes overlap the failing scope: the logic around the failure is under-exercised, so a latent design bug there is plausible and the stimulus may also be missing scenarios.</td></tr>
-            <tr><td>evidence factor</td><td class="num">x1.00</td><td>mean extraction confidence of cited nodes</td></tr>
-            <tr><td><b>final</b></td><td class="num"><b>0.58</b></td><td></td></tr>
-          </tbody>
-        </table>
-      </details>
-    </div>
     <div class="card hyp-card">
       <div class="verdict">
         <span class="chip"><span class="dot critical"></span>Likely RTL bug</span>
         <span class="rule-name">RTL Bug · generator: rtl-bug</span>
       </div>
-      <p class="verdict-summary">The design deviated from intended behavior in uvm_test_top.env.scb around t=55000. The failing evidence is consistent with a logic, FSM, or protocol implementation error in the DUT rather than in the checking environment.</p>
+      <p class="verdict-summary">The design deviated from intended behavior in uvm_test_top.env.wdog around t=10000000. The failing evidence is consistent with a logic, FSM, or protocol implementation error in the DUT rather than in the checking environment.</p>
       <div class="meter">
-        <div class="meter-head"><span>Confidence</span><b>42%</b></div>
-        <div class="track"><div class="fill" style="width: 42.0%"></div></div>
+        <div class="meter-head"><span>Confidence</span><b>67%</b></div>
+        <div class="track"><div class="fill" style="width: 67.0%"></div></div>
       </div>
       <p class="ev-refs">Supporting evidence:
-<code>ev-a41d70dcb11b</code> <code>ev-65a5c0f3003c</code>      </p>
+<code>ev-8107973e67ec</code> <code>ev-d61d8c4f98f1</code>      </p>
       <details>
         <summary>Confidence trace</summary>
         <table>
           <thead><tr><th>Step</th><th>Value</th><th>Reason</th></tr></thead>
           <tbody>
             <tr><td>base (rtl-bug)</td><td class="num">0.25</td><td>prior plausibility</td></tr>
-            <tr><td>signal: scoreboard-mismatch</td><td class="num">+0.10</td><td>Scoreboard expected-vs-actual mismatches with no protocol assertion fired: the DUT followed the protocol while the checker disagreed on data, which points first at the prediction/reference model.</td></tr>
-            <tr><td>signal: coverage-hole-near-failure</td><td class="num">+0.07</td><td>Coverage holes overlap the failing scope: the logic around the failure is under-exercised, so a latent design bug there is plausible and the stimulus may also be missing scenarios.</td></tr>
+            <tr><td>signal: timeout-deadlock</td><td class="num">+0.30</td><td>The run timed out with transactions still in flight and no protocol assertion fired: forward progress stopped without a detected protocol violation, which fits a design-side deadlock or stall more than a checking error.</td></tr>
+            <tr><td>signal: knowledge:axi.no-response-after-accept</td><td class="num">+0.12</td><td>Known verification pattern &#39;No response after accepted address&#39; (AMBA AXI pack): An address handshake completed but no response beat ever arrived; the run timed out with the transaction still outstanding.</td></tr>
             <tr><td>evidence factor</td><td class="num">x1.00</td><td>mean extraction confidence of cited nodes</td></tr>
-            <tr><td><b>final</b></td><td class="num"><b>0.42</b></td><td></td></tr>
+            <tr><td><b>final</b></td><td class="num"><b>0.67</b></td><td></td></tr>
+          </tbody>
+        </table>
+      </details>
+    </div>
+    <div class="card hyp-card">
+      <div class="verdict">
+        <span class="chip"><span class="dot serious"></span>Likely testbench issue</span>
+        <span class="rule-name">Testbench Issue · generator: testbench-issue</span>
+      </div>
+      <p class="verdict-summary">The checking environment (uvm_test_top.env.wdog) may be flagging correct DUT behavior: a stale reference model, a mispredicted transaction, or an incorrectly encoded assertion would produce exactly this failure evidence.</p>
+      <div class="meter">
+        <div class="meter-head"><span>Confidence</span><b>27%</b></div>
+        <div class="track"><div class="fill" style="width: 27.0%"></div></div>
+      </div>
+      <p class="ev-refs">Supporting evidence:
+<code>ev-8107973e67ec</code> <code>ev-d61d8c4f98f1</code>      </p>
+      <details>
+        <summary>Confidence trace</summary>
+        <table>
+          <thead><tr><th>Step</th><th>Value</th><th>Reason</th></tr></thead>
+          <tbody>
+            <tr><td>base (testbench-issue)</td><td class="num">0.25</td><td>prior plausibility</td></tr>
+            <tr><td>signal: timeout-deadlock</td><td class="num">+0.05</td><td>The run timed out with transactions still in flight and no protocol assertion fired: forward progress stopped without a detected protocol violation, which fits a design-side deadlock or stall more than a checking error.</td></tr>
+            <tr><td>signal: knowledge:axi.no-response-after-accept</td><td class="num">-0.03</td><td>Known verification pattern &#39;No response after accepted address&#39; (AMBA AXI pack): An address handshake completed but no response beat ever arrived; the run timed out with the transaction still outstanding.</td></tr>
+            <tr><td>evidence factor</td><td class="num">x1.00</td><td>mean extraction confidence of cited nodes</td></tr>
+            <tr><td><b>final</b></td><td class="num"><b>0.27</b></td><td></td></tr>
           </tbody>
         </table>
       </details>
@@ -343,7 +337,7 @@ stroke-dasharray="4 3"><title>correlates_with: Coverage hole in scope &#39;score
         <div class="track"><div class="fill" style="width: 8.0%"></div></div>
       </div>
       <p class="ev-refs">Supporting evidence:
-<code>ev-a41d70dcb11b</code> <code>ev-65a5c0f3003c</code> <code>ev-364c3a30ad8e</code>      </p>
+<code>ev-8107973e67ec</code> <code>ev-d61d8c4f98f1</code>      </p>
       <details>
         <summary>Confidence trace</summary>
         <table>
@@ -366,42 +360,42 @@ stroke-dasharray="4 3"><title>correlates_with: Coverage hole in scope &#39;score
         <tbody>
           <tr>
             <td class="num">1</td>
-            <td>Review the scoreboard/reference-model prediction for the first mismatching transaction.<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">If the DUT follows the protocol, the checker&#39;s expectation is the prime suspect.</span></td>
-            <td>uvm_test_top.env.scb</td>
+            <td>Inspect the waveform around t=10000000 at uvm_test_top.env.wdog, working backward from the first failure.<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">The first failing evidence marks where behavior diverged; upstream of it is the cause.</span></td>
+            <td>uvm_test_top.env.wdog</td>
             <td>medium</td>
-            <td class="num">53%</td>
+            <td class="num">60%</td>
           </tr>
           <tr>
             <td class="num">2</td>
-            <td>Compare the first mismatching transaction against the specification by hand.<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">A manual spec check settles whether the DUT or the predictor is wrong.</span></td>
-            <td>uvm_test_top.env.scb</td>
+            <td>Review recent RTL changes touching the failing scope.<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">New failures usually track recent edits; a diff review is the cheapest first filter.</span></td>
+            <td>uvm_test_top.env.wdog</td>
             <td>low</td>
-            <td class="num">53%</td>
+            <td class="num">60%</td>
           </tr>
           <tr>
             <td class="num">3</td>
-            <td>Inspect the waveform around t=55000 at uvm_test_top.env.scb, working backward from the first failure.<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">The first failing evidence marks where behavior diverged; upstream of it is the cause.</span></td>
-            <td>uvm_test_top.env.scb</td>
+            <td>Check the logic at /tb/watchdog.sv:31 against the specification.<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">The failing message points directly at this source location.</span></td>
+            <td>uvm_test_top.env.wdog</td>
             <td>medium</td>
-            <td class="num">38%</td>
+            <td class="num">60%</td>
           </tr>
           <tr>
             <td class="num">4</td>
-            <td>Review recent RTL changes touching the failing scope.<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">New failures usually track recent edits; a diff review is the cheapest first filter.</span></td>
-            <td>uvm_test_top.env.scb</td>
-            <td>low</td>
-            <td class="num">38%</td>
+            <td>Review the scoreboard/reference-model prediction for the first mismatching transaction.<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">If the DUT follows the protocol, the checker&#39;s expectation is the prime suspect.</span></td>
+            <td>uvm_test_top.env.wdog</td>
+            <td>medium</td>
+            <td class="num">24%</td>
           </tr>
           <tr>
             <td class="num">5</td>
-            <td>Check the logic at /tb/scoreboard.sv:142 against the specification.<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">The failing message points directly at this source location.</span></td>
-            <td>uvm_test_top.env.scb</td>
-            <td>medium</td>
-            <td class="num">38%</td>
+            <td>Compare the first mismatching transaction against the specification by hand.<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">A manual spec check settles whether the DUT or the predictor is wrong.</span></td>
+            <td>uvm_test_top.env.wdog</td>
+            <td>low</td>
+            <td class="num">24%</td>
           </tr>
           <tr>
             <td class="num">6</td>
-            <td>Compare against regression reg-27ec198e0127-20260719042616824197 (test axi_random_test): historically diagnosed as &#39;Likely testbench issue&#39;<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">Regression database precedent: identical failure signature (1 prior occurrence).</span></td>
+            <td>Compare against regression reg-01d1cd5cffa0-20260719044324267539 (test axi_read_stress_test): historically diagnosed as &#39;Likely RTL bug&#39;<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">Regression database precedent: identical failure signature (1 prior occurrence).</span></td>
             <td>-</td>
             <td>low</td>
             <td class="num">85%</td>
@@ -412,11 +406,106 @@ stroke-dasharray="4 3"><title>correlates_with: Coverage hole in scope &#39;score
   </section>
 
   <section>
+    <h2>Verification Knowledge</h2>
+    <p class="lead">
+      The evidence matches 1 known verification
+      pattern from the knowledge base
+      (packs: <code>axi v1.0.0</code>, <code>coverage v1.0.0</code>, <code>reset-clocking v1.0.0</code>, <code>uvm v1.0.0</code>).
+    </p>
+    <div class="card hyp-card">
+      <div class="verdict">
+        <span class="chip"><span class="dot critical"></span>No response after accepted address</span>
+        <span class="rule-name">axi pack v1.0.0 · usually owned by design (RTL)</span>
+      </div>
+      <div class="meter">
+        <div class="meter-head"><span>Pattern match</span><b>100%</b></div>
+        <div class="track"><div class="fill" style="width: 100.0%"></div></div>
+      </div>
+      <p class="verdict-summary">An address handshake completed but no response beat ever arrived; the run timed out with the transaction still outstanding.</p>
+      <p class="ev-refs" style="margin-top: 10px;"><b>Typical causes:</b></p>
+      <ul style="margin: 4px 0 0; color: var(--ink-2); font-size: 13.5px;">
+<li>Response FSM stuck (missing arc back to a ready state)</li><li>Outstanding-transaction counter overflow or leak</li><li>Response multiplexer never selects the completing source</li><li>Credit/token starvation between clock domains</li>      </ul>
+      <p class="ev-refs"><b>Signals to inspect:</b>
+<code>ARVALID</code>, <code>ARREADY</code>, <code>RVALID</code>, <code>RREADY</code>, <code>RLAST</code>      </p>
+      <p class="ev-refs"><b>Matched evidence:</b>
+        timeout observed (<code>ev-8107973e67ec</code>, <code>ev-d61d8c4f98f1</code>);         transaction outstanding (<code>ev-50f542e1219c</code>, <code>ev-6b9e3dd65182</code>, <code>ev-f0d089afd5a4</code>, <code>ev-8107973e67ec</code>);         AXI context (<code>ev-50f542e1219c</code>, <code>ev-f0d089afd5a4</code>)      </p>
+      <p class="ev-refs"><b>References:</b>
+AMBA AXI Protocol Specification §A3.4.1 (Read response dependency: RVALID must eventually follow an accepted AR.)      </p>
+      <details>
+        <summary>Debug playbook: AXI read timeout (7 deterministic steps)</summary>
+        <ol class="steps">
+          <li>Check ARVALID at the master boundary
+<span class="why">Confirm the master actually issued the read.</span><span class="why">signals: <code>ARVALID</code></span>          </li>
+          <li>Check ARREADY from the slave
+<span class="why">Did the address handshake complete, or is the slave back-pressuring forever?</span><span class="why">signals: <code>ARREADY</code></span>          </li>
+          <li>Inspect the outstanding counter
+<span class="why">Compare issued vs retired counts; a leak here explains a hang without a violation.</span><span class="why">signals: <code>outstanding_cnt</code></span>          </li>
+          <li>Walk the response FSM state
+<span class="why">Find the state it parked in and which arc should have fired.</span><span class="why">signals: <code>resp_fsm_state</code></span>          </li>
+          <li>Check the response multiplexer select
+<span class="why">A mis-selected source returns no beats to the waiting master.</span><span class="why">signals: <code>rresp_mux_sel</code></span>          </li>
+          <li>Re-run with protocol assertions enabled
+<span class="why">A handshake assertion may localize the stall to one channel.</span>          </li>
+          <li>Pull waveforms for the R channel
+<span class="why">Confirm whether RVALID ever pulsed anywhere in the fabric.</span><span class="why">signals: <code>RVALID</code>, <code>RREADY</code>, <code>RLAST</code></span>          </li>
+        </ol>
+      </details>
+    </div>
+
+    <div class="card hyp-card">
+      <p style="margin: 0 0 12px; color: var(--ink-2);">
+        <b style="color: var(--ink);">Expected sequence: AXI read lifecycle</b>
+        (axi pack). Evidence projected onto the protocol state machine
+ shows progress stopped before <b style="color: var(--ink);">Response</b>.      </p>
+      <div class="kseq">
+        <div class="kstate reached"
+title="Master drives ARVALID with the read address.">
+          <span class="kdot"></span>Address issued
+<span class="kev"><code>ev-50f542e1219c</code></span>        </div>
+<div class="karrow">&#8594;</div>        <div class="kstate reached"
+title="ARREADY seen: the address handshake completed.">
+          <span class="kdot"></span>Address accepted
+<span class="kev"><code>ev-6b9e3dd65182</code></span>        </div>
+<div class="karrow">&#8594;</div>        <div class="kstate reached"
+title="Transaction in flight, awaiting response data.">
+          <span class="kdot"></span>Outstanding
+<span class="kev"><code>ev-6b9e3dd65182</code><code>ev-f0d089afd5a4</code></span>        </div>
+<div class="karrow">&#8594;</div>        <div class="kstate unreached stall"
+title="RVALID data beats returning to the master.">
+          <span class="kdot"></span>Response
+        </div>
+<div class="karrow">&#8594;</div>        <div class="kstate unreached"
+title="Last beat accepted; transaction retires.">
+          <span class="kdot"></span>Complete
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="ev-refs" style="margin: 0 0 8px;"><b>Verification concepts in play</b></p>
+      <p style="margin: 6px 0 0; color: var(--ink-2); font-size: 13.5px;">
+        <b style="color: var(--ink);">Outstanding transactions</b> <span class="rule-name">(axi pack)</span> · Accepted addresses without completed responses are outstanding. A DUT that accepts addresses but never responds deadlocks the master; outstanding counters are the first thing to check on an AXI hang.
+      </p>
+      <p style="margin: 6px 0 0; color: var(--ink-2); font-size: 13.5px;">
+        <b style="color: var(--ink);">AXI read transaction</b> <span class="rule-name">(axi pack)</span> · A read is an AR-channel address handshake followed by one or more R-channel data beats; the transaction stays outstanding until the last beat (RLAST) is accepted.
+      </p>
+      <p style="margin: 6px 0 0; color: var(--ink-2); font-size: 13.5px;">
+        <b style="color: var(--ink);">VALID/READY handshake</b> <span class="rule-name">(axi pack)</span> · Every AXI channel transfers when VALID and READY are high in the same cycle. A source must keep VALID asserted (with stable payload) until the handshake completes; dropping VALID early is a protocol violation.
+      </p>
+      <p class="ev-refs" style="margin-top: 12px;">
+        <b>Historical support:</b> the regression database holds
+        1 prior occurrence
+        of this exact failure signature.
+      </p>
+    </div>
+  </section>
+
+  <section>
     <h2>Historical Context</h2>
     <div class="card">
       <p class="lead">
         <span class="chip"><span class="dot serious"></span>Seen before</span>
-        This exact failure signature (<code>sig-27ec198e0127</code>) appears in
+        This exact failure signature (<code>sig-01d1cd5cffa0</code>) appears in
         1 prior regression
         in the database.
       </p>
@@ -424,11 +513,11 @@ stroke-dasharray="4 3"><title>correlates_with: Coverage hole in scope &#39;score
         <thead><tr><th>Regression</th><th>When</th><th>Test</th><th>Classification</th><th>Historical root cause</th><th>Similarity</th></tr></thead>
         <tbody>
           <tr>
-            <td><code>reg-27ec198e0127-20260719042616824197</code></td>
-            <td class="num">2026-07-19 04:26</td>
-            <td>axi_random_test</td>
-            <td>Testbench Failure</td>
-            <td>Likely testbench issue</td>
+            <td><code>reg-01d1cd5cffa0-20260719044324267539</code></td>
+            <td class="num">2026-07-19 04:43</td>
+            <td>axi_read_stress_test</td>
+            <td>Timeout</td>
+            <td>Likely RTL bug</td>
             <td class="num">exact</td>
           </tr>
         </tbody>
@@ -442,13 +531,13 @@ stroke-dasharray="4 3"><title>correlates_with: Coverage hole in scope &#39;score
       <ol class="timeline">
         <li>
           <div class="ev-when">
-t = 55000 · log line 4 · <code>ev-a41d70dcb11b</code>          </div>
-          <p class="ev-desc">ERROR: Scoreboard mismatch: expected data 0xDEAD got 0xBEEF for addr 0x1000</p>
+t = 10000000 · log line 7 · <code>ev-8107973e67ec</code>          </div>
+          <p class="ev-desc">ERROR: Watchdog timeout hit while read response outstanding for addr 0x40</p>
         </li>
         <li>
           <div class="ev-when">
-t = 56000 · log line 5 · <code>ev-65a5c0f3003c</code>          </div>
-          <p class="ev-desc">ERROR: Scoreboard mismatch: expected data 0xCAFE got 0xF00D for addr 0x1004</p>
+t = 10000000 · log line 8 · <code>ev-d61d8c4f98f1</code>          </div>
+          <p class="ev-desc">FATAL: Timeout, ending simulation</p>
         </li>
       </ol>
     </div>
@@ -456,8 +545,8 @@ t = 56000 · log line 5 · <code>ev-65a5c0f3003c</code>          </div>
 
   <section>
     <h2>Relevant Log Snippets</h2>
-    <pre class="snippet"><span class="ln">     4 │ </span>UVM_ERROR /tb/scoreboard.sv(142) @ 55000: uvm_test_top.env.scb [SCBD] Scoreboard mismatch: expected data 0xDEAD got 0xBEEF for addr 0x1000
-<span class="ln">     5 │ </span>UVM_ERROR /tb/scoreboard.sv(142) @ 56000: uvm_test_top.env.scb [SCBD] Scoreboard mismatch: expected data 0xCAFE got 0xF00D for addr 0x1004
+    <pre class="snippet"><span class="ln">     7 │ </span>UVM_ERROR /tb/watchdog.sv(31) @ 10000000: uvm_test_top.env.wdog [WDOG] Watchdog timeout hit while read response outstanding for addr 0x40
+<span class="ln">     8 │ </span>UVM_FATAL /tb/watchdog.sv(35) @ 10000000: uvm_test_top.env.wdog [WDOG] Timeout, ending simulation
 </pre>
   </section>
 
@@ -465,8 +554,8 @@ t = 56000 · log line 5 · <code>ev-65a5c0f3003c</code>          </div>
     <h2>Suggested Next Steps</h2>
     <div class="card">
       <ol class="steps">
-        <li>Inspect the scoreboard prediction logic for the first mismatching transaction.<span class="why">Expected-vs-actual mismatches begin either in the DUT or in the predictor; check the predictor first when DUT outputs follow the protocol.</span></li>
-        <li>Compare the first mismatching transaction against the specification.<span class="why">Determines whether the DUT or the reference model is wrong.</span></li>
+        <li>Check for a raised objection that is never dropped, or a stalled handshake.<span class="why">UVM phase timeouts almost always mean forward progress stopped.</span></li>
+        <li>Look at the last simulation activity before the timeout fired.<span class="why">The stall point is usually just before the final reported time.</span></li>
       </ol>
     </div>
   </section>
