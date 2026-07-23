@@ -124,17 +124,17 @@
     <div class="brand">VeriTriage<small>regression intelligence dashboard</small></div>
   </header>
   <p class="meta">
-    regression database <code>/private/tmp/claude-502/-Users-ompatel-Documents-Om-Portfolio/b22295c5-b901-4aaa-a870-01d1a8c142dc/scratchpad/demo6/regressions.db</code> · generated 2026-07-19 04:43 UTC
+    regression database <code>/private/tmp/claude-502/-Users-ompatel-Documents-Om-Portfolio/b22295c5-b901-4aaa-a870-01d1a8c142dc/scratchpad/demo7/regressions.db</code> · generated 2026-07-23 04:25 UTC
   </p>
 
   <section>
     <h2>Regression History</h2>
     <div class="tiles">
-      <div class="tile"><div class="label"><span class="dot meter"></span>Analyzed runs</div><div class="value">6</div></div>
-      <div class="tile"><div class="label"><span class="dot serious"></span>Failures</div><div class="value">5 <small>83%</small></div></div>
-      <div class="tile"><div class="label"><span class="dot muted"></span>Distinct signatures</div><div class="value">4</div></div>
+      <div class="tile"><div class="label"><span class="dot meter"></span>Analyzed runs</div><div class="value">8</div></div>
+      <div class="tile"><div class="label"><span class="dot serious"></span>Failures</div><div class="value">7 <small>88%</small></div></div>
+      <div class="tile"><div class="label"><span class="dot muted"></span>Distinct signatures</div><div class="value">5</div></div>
       <div class="tile"><div class="label"><span class="dot muted"></span>Failure clusters</div><div class="value">4</div></div>
-      <div class="tile"><div class="label"><span class="dot warning"></span>Unknown failures</div><div class="value">0 <small>0%</small></div></div>
+      <div class="tile"><div class="label"><span class="dot warning"></span>Unknown failures</div><div class="value">1 <small>14%</small></div></div>
     </div>
   </section>
 
@@ -145,58 +145,76 @@
         <thead><tr><th>When</th><th>Regression</th><th>Test</th><th>Classification</th><th>Conf.</th><th>Top hypothesis</th><th>Commit</th></tr></thead>
         <tbody>
           <tr>
-            <td class="num">2026-07-19 04:43</td>
-            <td><code>reg-01d1cd5cffa0-20260719044325217186</code></td>
+            <td class="num">2026-07-23 04:25</td>
+            <td><code>reg-01d1cd5cffa0-20260723042547742063</code></td>
             <td>axi_read_stress_test</td>
             <td><span class="chip"><span class="dot serious"></span>Timeout</span></td>
             <td class="num">85%</td>
             <td>Likely RTL bug</td>
-            <td class="num">8df1652a9</td>
+            <td class="num">261bc61b1</td>
           </tr>
           <tr>
-            <td class="num">2026-07-19 04:43</td>
-            <td><code>reg-c7f874a1b6ec-20260719044324986821</code></td>
+            <td class="num">2026-07-23 04:25</td>
+            <td><code>reg-01d1cd5cffa0-20260723042547392805</code></td>
+            <td>axi_read_stress_test</td>
+            <td><span class="chip"><span class="dot serious"></span>Timeout</span></td>
+            <td class="num">85%</td>
+            <td>Likely RTL bug</td>
+            <td class="num">261bc61b1</td>
+          </tr>
+          <tr>
+            <td class="num">2026-07-23 04:25</td>
+            <td><code>reg-c7f874a1b6ec-20260723042547134792</code></td>
             <td>axi_smoke_test</td>
             <td><span class="chip"><span class="dot good"></span>No Failure</span></td>
             <td class="num">95%</td>
             <td>-</td>
-            <td class="num">8df1652a9</td>
+            <td class="num">261bc61b1</td>
           </tr>
           <tr>
-            <td class="num">2026-07-19 04:43</td>
-            <td><code>reg-128396c6b583-20260719044324761258</code></td>
-            <td>-</td>
-            <td><span class="chip"><span class="dot critical"></span>Fatal Error</span></td>
-            <td class="num">70%</td>
+            <td class="num">2026-07-23 04:25</td>
+            <td><code>reg-439e82532b72-20260723042546895142</code></td>
+            <td>riscv_trap_test</td>
+            <td><span class="chip"><span class="dot warning"></span>Unknown Failure</span></td>
+            <td class="num">30%</td>
             <td>Likely RTL bug</td>
-            <td class="num">8df1652a9</td>
+            <td class="num">261bc61b1</td>
           </tr>
           <tr>
-            <td class="num">2026-07-19 04:43</td>
-            <td><code>reg-5c8964bf53a0-20260719044324531978</code></td>
-            <td>axi_burst_test</td>
-            <td><span class="chip"><span class="dot critical"></span>Assertion Failure</span></td>
-            <td class="num">90%</td>
-            <td>Likely RTL bug</td>
-            <td class="num">8df1652a9</td>
-          </tr>
-          <tr>
-            <td class="num">2026-07-19 04:43</td>
-            <td><code>reg-01d1cd5cffa0-20260719044324267539</code></td>
-            <td>axi_read_stress_test</td>
+            <td class="num">2026-07-23 04:25</td>
+            <td><code>reg-a1c1ab58f532-20260723042546653296</code></td>
+            <td>chi_stress_test</td>
             <td><span class="chip"><span class="dot serious"></span>Timeout</span></td>
             <td class="num">85%</td>
             <td>Likely RTL bug</td>
-            <td class="num">8df1652a9</td>
+            <td class="num">261bc61b1</td>
           </tr>
           <tr>
-            <td class="num">2026-07-19 04:43</td>
-            <td><code>reg-a30915f41262-20260719044324041850</code></td>
+            <td class="num">2026-07-23 04:25</td>
+            <td><code>reg-420a8f22f1ef-20260723042546340119</code></td>
+            <td>pcie_linkup_test</td>
+            <td><span class="chip"><span class="dot serious"></span>Timeout</span></td>
+            <td class="num">85%</td>
+            <td>Likely RTL bug</td>
+            <td class="num">261bc61b1</td>
+          </tr>
+          <tr>
+            <td class="num">2026-07-23 04:25</td>
+            <td><code>reg-a30915f41262-20260723042535717004</code></td>
             <td>axi_random_test</td>
             <td><span class="chip"><span class="dot serious"></span>Testbench Failure</span></td>
             <td class="num">80%</td>
             <td>Likely testbench issue</td>
-            <td class="num">8df1652a9</td>
+            <td class="num">261bc61b1</td>
+          </tr>
+          <tr>
+            <td class="num">2026-07-23 04:25</td>
+            <td><code>reg-a30915f41262-20260723042527098520</code></td>
+            <td>axi_random_test</td>
+            <td><span class="chip"><span class="dot serious"></span>Testbench Failure</span></td>
+            <td class="num">80%</td>
+            <td>Likely testbench issue</td>
+            <td class="num">261bc61b1</td>
           </tr>
         </tbody>
       </table>
@@ -209,38 +227,38 @@
       <div class="cluster">
         <div class="head">
           <span class="chip"><span class="dot serious"></span>Timeout in uvm_test_top.env.wdog</span>
-          <span style="color: var(--ink-2); font-size: 13px;">2 regressions</span>
+          <span style="color: var(--ink-2); font-size: 13px;">3 regressions</span>
         </div>
         <p class="detail">
-          tests: axi_read_stress_test
- · modules: uvm_test_top.env.wdog          · signatures: <code>sig-01d1cd5cffa0</code>        </p>
-      </div>
-      <div class="cluster">
-        <div class="head">
-          <span class="chip"><span class="dot serious"></span>Assertion Failure in uvm_test_top</span>
-          <span style="color: var(--ink-2); font-size: 13px;">1 regression</span>
-        </div>
-        <p class="detail">
-          tests: axi_burst_test
- · modules: uvm_test_top, uvm_test_top.env.mon          · signatures: <code>sig-5c8964bf53a0</code>        </p>
-      </div>
-      <div class="cluster">
-        <div class="head">
-          <span class="chip"><span class="dot serious"></span>Fatal Error</span>
-          <span style="color: var(--ink-2); font-size: 13px;">1 regression</span>
-        </div>
-        <p class="detail">
-          tests: n/a
-          · signatures: <code>sig-128396c6b583</code>        </p>
+          tests: axi_read_stress_test, chi_stress_test
+ · modules: uvm_test_top.env.wdog, uvm_test_top.env.rn          · signatures: <code>sig-01d1cd5cffa0</code>, <code>sig-a1c1ab58f532</code>        </p>
       </div>
       <div class="cluster">
         <div class="head">
           <span class="chip"><span class="dot serious"></span>Testbench Failure in uvm_test_top.env.scb</span>
-          <span style="color: var(--ink-2); font-size: 13px;">1 regression</span>
+          <span style="color: var(--ink-2); font-size: 13px;">2 regressions</span>
         </div>
         <p class="detail">
           tests: axi_random_test
  · modules: uvm_test_top.env.scb          · signatures: <code>sig-a30915f41262</code>        </p>
+      </div>
+      <div class="cluster">
+        <div class="head">
+          <span class="chip"><span class="dot serious"></span>Timeout in uvm_test_top.env.phy</span>
+          <span style="color: var(--ink-2); font-size: 13px;">1 regression</span>
+        </div>
+        <p class="detail">
+          tests: pcie_linkup_test
+ · modules: uvm_test_top.env.phy          · signatures: <code>sig-420a8f22f1ef</code>        </p>
+      </div>
+      <div class="cluster">
+        <div class="head">
+          <span class="chip"><span class="dot serious"></span>Unknown Failure in uvm_test_top.env.core</span>
+          <span style="color: var(--ink-2); font-size: 13px;">1 regression</span>
+        </div>
+        <p class="detail">
+          tests: riscv_trap_test
+ · modules: uvm_test_top.env.core          · signatures: <code>sig-439e82532b72</code>        </p>
       </div>
     </div>
   </section>
@@ -250,19 +268,11 @@
       <h2>Most Unstable Modules</h2>
       <div class="card">
         <div class="bars">
-          <div class="bar-row"><span class="label">uvm_test_top.env.wdog</span><span class="track"><span class="fill" style="width: 100.0%"></span></span><span class="count">2 <small>40%</small></span></div>
-          <div class="bar-row"><span class="label">uvm_test_top.env.scb</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">1 <small>20%</small></span></div>
-          <div class="bar-row"><span class="label">uvm_test_top</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">1 <small>20%</small></span></div>
-          <div class="bar-row"><span class="label">uvm_test_top.env.mon</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">1 <small>20%</small></span></div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <h2>Assertion Hotspots</h2>
-      <div class="card">
-        <div class="bars">
-          <div class="bar-row"><span class="label">a_valid_stable</span><span class="track"><span class="fill" style="width: 100.0%"></span></span><span class="count">1 <small>20%</small></span></div>
-          <div class="bar-row"><span class="label">failure</span><span class="track"><span class="fill" style="width: 100.0%"></span></span><span class="count">1 <small>20%</small></span></div>
+          <div class="bar-row"><span class="label">uvm_test_top.env.wdog</span><span class="track"><span class="fill" style="width: 100.0%"></span></span><span class="count">3 <small>43%</small></span></div>
+          <div class="bar-row"><span class="label">uvm_test_top.env.scb</span><span class="track"><span class="fill" style="width: 66.66666666666666%"></span></span><span class="count">2 <small>29%</small></span></div>
+          <div class="bar-row"><span class="label">uvm_test_top.env.phy</span><span class="track"><span class="fill" style="width: 33.33333333333333%"></span></span><span class="count">1 <small>14%</small></span></div>
+          <div class="bar-row"><span class="label">uvm_test_top.env.rn</span><span class="track"><span class="fill" style="width: 33.33333333333333%"></span></span><span class="count">1 <small>14%</small></span></div>
+          <div class="bar-row"><span class="label">uvm_test_top.env.core</span><span class="track"><span class="fill" style="width: 33.33333333333333%"></span></span><span class="count">1 <small>14%</small></span></div>
         </div>
       </div>
     </section>
@@ -270,10 +280,9 @@
       <h2>Failure Types</h2>
       <div class="card">
         <div class="bars">
-          <div class="bar-row"><span class="label">Timeout</span><span class="track"><span class="fill" style="width: 100.0%"></span></span><span class="count">2 <small>40%</small></span></div>
-          <div class="bar-row"><span class="label">Testbench Failure</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">1 <small>20%</small></span></div>
-          <div class="bar-row"><span class="label">Assertion Failure</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">1 <small>20%</small></span></div>
-          <div class="bar-row"><span class="label">Fatal Error</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">1 <small>20%</small></span></div>
+          <div class="bar-row"><span class="label">Timeout</span><span class="track"><span class="fill" style="width: 100.0%"></span></span><span class="count">4 <small>57%</small></span></div>
+          <div class="bar-row"><span class="label">Testbench Failure</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">2 <small>29%</small></span></div>
+          <div class="bar-row"><span class="label">Unknown Failure</span><span class="track"><span class="fill" style="width: 25.0%"></span></span><span class="count">1 <small>14%</small></span></div>
         </div>
       </div>
     </section>
@@ -281,15 +290,15 @@
       <h2>Reasoning Signal Frequency</h2>
       <div class="card">
         <div class="bars">
-          <div class="bar-row"><span class="label">timeout-deadlock</span><span class="track"><span class="fill" style="width: 100.0%"></span></span><span class="count">2 <small>40%</small></span></div>
-          <div class="bar-row"><span class="label">knowledge:axi.no-response-after-accept</span><span class="track"><span class="fill" style="width: 100.0%"></span></span><span class="count">2 <small>40%</small></span></div>
-          <div class="bar-row"><span class="label">scoreboard-mismatch</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">1 <small>20%</small></span></div>
-          <div class="bar-row"><span class="label">coverage-hole-near-failure</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">1 <small>20%</small></span></div>
-          <div class="bar-row"><span class="label">knowledge:coverage.hole-near-failure</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">1 <small>20%</small></span></div>
-          <div class="bar-row"><span class="label">knowledge:uvm.scoreboard-mismatch-after-protocol-success</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">1 <small>20%</small></span></div>
-          <div class="bar-row"><span class="label">protocol-violation</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">1 <small>20%</small></span></div>
-          <div class="bar-row"><span class="label">knowledge:axi.valid-drop-before-ready</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">1 <small>20%</small></span></div>
-          <div class="bar-row"><span class="label">knowledge:clock.oscillation-iteration-limit</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">1 <small>20%</small></span></div>
+          <div class="bar-row"><span class="label">timeout-deadlock</span><span class="track"><span class="fill" style="width: 100.0%"></span></span><span class="count">4 <small>57%</small></span></div>
+          <div class="bar-row"><span class="label">scoreboard-mismatch</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">2 <small>29%</small></span></div>
+          <div class="bar-row"><span class="label">coverage-hole-near-failure</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">2 <small>29%</small></span></div>
+          <div class="bar-row"><span class="label">knowledge:coverage.hole-near-failure</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">2 <small>29%</small></span></div>
+          <div class="bar-row"><span class="label">knowledge:uvm.scoreboard-mismatch-after-protocol-success</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">2 <small>29%</small></span></div>
+          <div class="bar-row"><span class="label">knowledge:axi.no-response-after-accept</span><span class="track"><span class="fill" style="width: 50.0%"></span></span><span class="count">2 <small>29%</small></span></div>
+          <div class="bar-row"><span class="label">knowledge:pcie.link-training-stuck</span><span class="track"><span class="fill" style="width: 25.0%"></span></span><span class="count">1 <small>14%</small></span></div>
+          <div class="bar-row"><span class="label">knowledge:chi.credit-starvation</span><span class="track"><span class="fill" style="width: 25.0%"></span></span><span class="count">1 <small>14%</small></span></div>
+          <div class="bar-row"><span class="label">knowledge:riscv.trap-wrong-mode</span><span class="track"><span class="fill" style="width: 25.0%"></span></span><span class="count">1 <small>14%</small></span></div>
         </div>
       </div>
     </section>
@@ -297,9 +306,8 @@
       <h2>Classification Confidence</h2>
       <div class="card">
         <div class="bars">
-          <div class="bar-row"><span class="label">70-79%</span><span class="track"><span class="fill" style="width: 33.33333333333333%"></span></span><span class="count">1 <small>20%</small></span></div>
-          <div class="bar-row"><span class="label">80-89%</span><span class="track"><span class="fill" style="width: 100.0%"></span></span><span class="count">3 <small>60%</small></span></div>
-          <div class="bar-row"><span class="label">90-99%</span><span class="track"><span class="fill" style="width: 33.33333333333333%"></span></span><span class="count">1 <small>20%</small></span></div>
+          <div class="bar-row"><span class="label">30-39%</span><span class="track"><span class="fill" style="width: 16.666666666666664%"></span></span><span class="count">1 <small>14%</small></span></div>
+          <div class="bar-row"><span class="label">80-89%</span><span class="track"><span class="fill" style="width: 100.0%"></span></span><span class="count">6 <small>86%</small></span></div>
         </div>
       </div>
     </section>
@@ -307,16 +315,16 @@
       <h2>Most Repeated Recommendations</h2>
       <div class="card">
         <div class="bars">
-          <div class="bar-row"><span class="label">Review the scoreboard/reference-model prediction for the first mismatching transaction.</span><span class="track"><span class="fill" style="width: 100.0%"></span></span><span class="count">5 <small>100%</small></span></div>
-          <div class="bar-row"><span class="label">Compare the first mismatching transaction against the specification by hand.</span><span class="track"><span class="fill" style="width: 100.0%"></span></span><span class="count">5 <small>100%</small></span></div>
-          <div class="bar-row"><span class="label">Review recent RTL changes touching the failing scope.</span><span class="track"><span class="fill" style="width: 100.0%"></span></span><span class="count">5 <small>100%</small></span></div>
-          <div class="bar-row"><span class="label">Inspect the waveform around t=10000000 at uvm_test_top.env.wdog, working backward from the first failure.</span><span class="track"><span class="fill" style="width: 40.0%"></span></span><span class="count">2 <small>40%</small></span></div>
-          <div class="bar-row"><span class="label">Check the logic at /tb/watchdog.sv:31 against the specification.</span><span class="track"><span class="fill" style="width: 40.0%"></span></span><span class="count">2 <small>40%</small></span></div>
-          <div class="bar-row"><span class="label">Inspect the waveform around t=55000 at uvm_test_top.env.scb, working backward from the first failure.</span><span class="track"><span class="fill" style="width: 20.0%"></span></span><span class="count">1 <small>20%</small></span></div>
-          <div class="bar-row"><span class="label">Check the logic at /tb/scoreboard.sv:142 against the specification.</span><span class="track"><span class="fill" style="width: 20.0%"></span></span><span class="count">1 <small>20%</small></span></div>
-          <div class="bar-row"><span class="label">Inspect the waveform around t=105000 at uvm_test_top.env.mon, working backward from the first failure.</span><span class="track"><span class="fill" style="width: 20.0%"></span></span><span class="count">1 <small>20%</small></span></div>
-          <div class="bar-row"><span class="label">Check the logic at /rtl/axi_monitor.sv:202 against the specification.</span><span class="track"><span class="fill" style="width: 20.0%"></span></span><span class="count">1 <small>20%</small></span></div>
-          <div class="bar-row"><span class="label">Inspect the waveform at the failing scope, working backward from the first failure.</span><span class="track"><span class="fill" style="width: 20.0%"></span></span><span class="count">1 <small>20%</small></span></div>
+          <div class="bar-row"><span class="label">Review the scoreboard/reference-model prediction for the first mismatching transaction.</span><span class="track"><span class="fill" style="width: 100.0%"></span></span><span class="count">7 <small>100%</small></span></div>
+          <div class="bar-row"><span class="label">Compare the first mismatching transaction against the specification by hand.</span><span class="track"><span class="fill" style="width: 100.0%"></span></span><span class="count">7 <small>100%</small></span></div>
+          <div class="bar-row"><span class="label">Review recent RTL changes touching the failing scope.</span><span class="track"><span class="fill" style="width: 100.0%"></span></span><span class="count">7 <small>100%</small></span></div>
+          <div class="bar-row"><span class="label">Inspect the waveform around t=55000 at uvm_test_top.env.scb, working backward from the first failure.</span><span class="track"><span class="fill" style="width: 28.57142857142857%"></span></span><span class="count">2 <small>29%</small></span></div>
+          <div class="bar-row"><span class="label">Check the logic at /tb/scoreboard.sv:142 against the specification.</span><span class="track"><span class="fill" style="width: 28.57142857142857%"></span></span><span class="count">2 <small>29%</small></span></div>
+          <div class="bar-row"><span class="label">Inspect the waveform around t=10000000 at uvm_test_top.env.wdog, working backward from the first failure.</span><span class="track"><span class="fill" style="width: 28.57142857142857%"></span></span><span class="count">2 <small>29%</small></span></div>
+          <div class="bar-row"><span class="label">Check the logic at /tb/watchdog.sv:31 against the specification.</span><span class="track"><span class="fill" style="width: 28.57142857142857%"></span></span><span class="count">2 <small>29%</small></span></div>
+          <div class="bar-row"><span class="label">Inspect the waveform around t=2000000 at uvm_test_top.env.phy, working backward from the first failure.</span><span class="track"><span class="fill" style="width: 14.285714285714285%"></span></span><span class="count">1 <small>14%</small></span></div>
+          <div class="bar-row"><span class="label">Check the logic at /tb/phy.sv:110 against the specification.</span><span class="track"><span class="fill" style="width: 14.285714285714285%"></span></span><span class="count">1 <small>14%</small></span></div>
+          <div class="bar-row"><span class="label">Re-run the same test and seed on a different host.</span><span class="track"><span class="fill" style="width: 14.285714285714285%"></span></span><span class="count">1 <small>14%</small></span></div>
         </div>
       </div>
     </section>
@@ -327,9 +335,9 @@
     <div class="card">
       <div class="trend">
         <div class="trend-row">
-          <span class="day">2026-07-19</span>
-          <span class="lane"><span class="runs" style="width: 100.0%"></span><span class="fails" style="width: 83.33333333333334%"></span></span>
-          <span class="n">5 / 6</span>
+          <span class="day">2026-07-23</span>
+          <span class="lane"><span class="runs" style="width: 100.0%"></span><span class="fails" style="width: 87.5%"></span></span>
+          <span class="n">7 / 8</span>
         </div>
       </div>
       <div class="legend">
@@ -345,32 +353,38 @@
     <div class="card scroll-x">
       <table class="heat">
         <thead>
-          <tr><th>Module</th><th class="rot">Assertion Failure</th><th class="rot">Testbench Failure</th><th class="rot">Timeout</th></tr>
+          <tr><th>Module</th><th class="rot">Testbench Failure</th><th class="rot">Timeout</th><th class="rot">Unknown Failure</th></tr>
         </thead>
         <tbody>
           <tr>
-            <td>uvm_test_top</td>
-            <td class="cell" style="background: rgba(var(--heat), 0.46);">1</td>
+            <td>uvm_test_top.env.core</td>
             <td class="cell" style="background: rgba(var(--heat), 0.0);"></td>
+            <td class="cell" style="background: rgba(var(--heat), 0.0);"></td>
+            <td class="cell" style="background: rgba(var(--heat), 0.3466666666666667);">1</td>
+          </tr>
+          <tr>
+            <td>uvm_test_top.env.phy</td>
+            <td class="cell" style="background: rgba(var(--heat), 0.0);"></td>
+            <td class="cell" style="background: rgba(var(--heat), 0.3466666666666667);">1</td>
             <td class="cell" style="background: rgba(var(--heat), 0.0);"></td>
           </tr>
           <tr>
-            <td>uvm_test_top.env.mon</td>
-            <td class="cell" style="background: rgba(var(--heat), 0.46);">1</td>
+            <td>uvm_test_top.env.rn</td>
             <td class="cell" style="background: rgba(var(--heat), 0.0);"></td>
+            <td class="cell" style="background: rgba(var(--heat), 0.3466666666666667);">1</td>
             <td class="cell" style="background: rgba(var(--heat), 0.0);"></td>
           </tr>
           <tr>
             <td>uvm_test_top.env.scb</td>
+            <td class="cell" style="background: rgba(var(--heat), 0.5733333333333334);">2</td>
             <td class="cell" style="background: rgba(var(--heat), 0.0);"></td>
-            <td class="cell" style="background: rgba(var(--heat), 0.46);">1</td>
             <td class="cell" style="background: rgba(var(--heat), 0.0);"></td>
           </tr>
           <tr>
             <td>uvm_test_top.env.wdog</td>
             <td class="cell" style="background: rgba(var(--heat), 0.0);"></td>
+            <td class="cell" style="background: rgba(var(--heat), 0.8);">3</td>
             <td class="cell" style="background: rgba(var(--heat), 0.0);"></td>
-            <td class="cell" style="background: rgba(var(--heat), 0.8);">2</td>
           </tr>
         </tbody>
       </table>

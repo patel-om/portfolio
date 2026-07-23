@@ -181,7 +181,7 @@
   </header>
   <p class="meta">
 Test <code>axi_read_stress_test</code> ·Synopsys VCS ·<code>tests/fixtures/axi_timeout.log</code> ·
-    generated 2026-07-19 04:43 UTC ·
+    generated 2026-07-23 04:25 UTC ·
     parsers <code>simulation_log</code>
   </p>
 
@@ -395,7 +395,7 @@ Test <code>axi_read_stress_test</code> ·Synopsys VCS ·<code>tests/fixtures/axi
           </tr>
           <tr>
             <td class="num">6</td>
-            <td>Compare against regression reg-01d1cd5cffa0-20260719044324267539 (test axi_read_stress_test): historically diagnosed as &#39;Likely RTL bug&#39;<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">Regression database precedent: identical failure signature (1 prior occurrence).</span></td>
+            <td>Compare against regression reg-01d1cd5cffa0-20260723042547392805 (test axi_read_stress_test): historically diagnosed as &#39;Likely RTL bug&#39;<span class="why" style="display:block; color: var(--muted); font-size: 12.5px;">Regression database precedent: identical failure signature (1 prior occurrence).</span></td>
             <td>-</td>
             <td>low</td>
             <td class="num">85%</td>
@@ -410,7 +410,7 @@ Test <code>axi_read_stress_test</code> ·Synopsys VCS ·<code>tests/fixtures/axi
     <p class="lead">
       The evidence matches 1 known verification
       pattern from the knowledge base
-      (packs: <code>axi v1.0.0</code>, <code>coverage v1.0.0</code>, <code>reset-clocking v1.0.0</code>, <code>uvm v1.0.0</code>).
+      (packs: <code>ahb v1.0.0</code>, <code>apb v1.0.0</code>, <code>axi v1.0.0</code>, <code>cdc v1.0.0</code>, <code>chi v1.0.0</code>, <code>coherency v1.0.0</code>, <code>coverage v1.0.0</code>, <code>pcie v1.0.0</code>, <code>reset-clocking v1.0.0</code>, <code>riscv-privilege v1.0.0</code>, <code>sva v1.0.0</code>, <code>tilelink v1.0.0</code>, <code>uvm v1.0.0</code>).
     </p>
     <div class="card hyp-card">
       <div class="verdict">
@@ -513,12 +513,28 @@ title="Last beat accepted; transaction retires.">
         <thead><tr><th>Regression</th><th>When</th><th>Test</th><th>Classification</th><th>Historical root cause</th><th>Similarity</th></tr></thead>
         <tbody>
           <tr>
-            <td><code>reg-01d1cd5cffa0-20260719044324267539</code></td>
-            <td class="num">2026-07-19 04:43</td>
+            <td><code>reg-01d1cd5cffa0-20260723042547392805</code></td>
+            <td class="num">2026-07-23 04:25</td>
             <td>axi_read_stress_test</td>
             <td>Timeout</td>
             <td>Likely RTL bug</td>
             <td class="num">exact</td>
+          </tr>
+          <tr>
+            <td><code>reg-a1c1ab58f532-20260723042546653296</code></td>
+            <td class="num">2026-07-23 04:25</td>
+            <td>chi_stress_test</td>
+            <td>Timeout</td>
+            <td>Likely RTL bug</td>
+            <td class="num">81%</td>
+          </tr>
+          <tr>
+            <td><code>reg-420a8f22f1ef-20260723042546340119</code></td>
+            <td class="num">2026-07-23 04:25</td>
+            <td>pcie_linkup_test</td>
+            <td>Timeout</td>
+            <td>Likely RTL bug</td>
+            <td class="num">69%</td>
           </tr>
         </tbody>
       </table>
